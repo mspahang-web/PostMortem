@@ -1,0 +1,191 @@
+/* Applicant and administrator views for equipment proposals. */
+.equipment-page {
+  min-width: 0;
+}
+
+.equipment-admin-view {
+  width: 100%;
+  min-width: 0;
+}
+
+.equipment-page .ewcc-admin-body {
+  min-width: 0;
+}
+
+.equipment-page .ewcc-section {
+  min-width: 0;
+}
+
+.equipment-page .ewcc-section-title {
+  align-items: center;
+}
+
+.equipment-page .ewcc-status-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.equipment-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.equipment-page .equipment-table {
+  width: 100%;
+  min-width: 1120px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.equipment-page .equipment-table th,
+.equipment-page .equipment-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ewcc-border-soft, #e8edf3);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.equipment-page .equipment-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f5f7fa;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.equipment-page .equipment-table td {
+  color: #34445c;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.equipment-page .equipment-table tbody tr:hover {
+  background: #fafbfd;
+}
+
+.equipment-page .equipment-table tfoot td {
+  background: #fbfcfe;
+  font-weight: 750;
+}
+
+.equipment-applicant .equipment-table th:first-child,
+.equipment-applicant .equipment-table td:first-child {
+  text-align: center;
+}
+
+.equipment-applicant .equipment-table td:last-child > div {
+  min-width: 120px;
+}
+
+.equipment-admin .equipment-table {
+  min-width: 1180px;
+}
+
+.equipment-admin .equipment-sport-card {
+  grid-template-columns: minmax(180px, 1fr) repeat(2, minmax(95px, auto)) auto !important;
+  border-color: var(--ewcc-border-soft, #e8edf3) !important;
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.equipment-admin .equipment-sport-card:hover {
+  border-color: #f1b36f !important;
+  box-shadow: 0 5px 18px rgba(23, 32, 51, 0.07);
+  transform: translateY(-1px);
+}
+
+.equipment-applicant [data-equipment-form="true"] {
+  width: min(850px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+.equipment-applicant [data-equipment-form="true"] .ewcc-modal-body {
+  min-width: 0;
+}
+
+.equipment-applicant .equipment-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px;
+}
+
+.equipment-applicant .equipment-form-grid-primary {
+  grid-template-columns: minmax(0, 2fr) minmax(150px, 1fr) !important;
+}
+
+.equipment-applicant .ewcc-form-group {
+  min-width: 0;
+}
+
+.equipment-applicant .ewcc-form-group input,
+.equipment-applicant .ewcc-form-group select,
+.equipment-applicant .ewcc-form-group textarea {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .equipment-page .ewcc-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .equipment-page .ewcc-section-title {
+    align-items: stretch;
+  }
+
+  .equipment-applicant .ewcc-section-title > div:last-child {
+    width: 100%;
+  }
+
+  .equipment-applicant .ewcc-section-title > div:last-child button {
+    flex: 1;
+  }
+
+  .equipment-admin .equipment-sport-card {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 12px !important;
+  }
+
+  .equipment-admin .equipment-sport-card > div:nth-child(2) {
+    text-align: right !important;
+  }
+
+  .equipment-admin .equipment-sport-card > div:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right !important;
+  }
+
+  .equipment-admin .equipment-sport-card > span:last-child {
+    display: none;
+  }
+
+  .equipment-applicant .equipment-form-grid,
+  .equipment-applicant .equipment-form-grid-primary {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipment-page .ewcc-kpi-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .equipment-applicant [data-equipment-form="true"] {
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+
+  .equipment-applicant .ewcc-modal-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: #fff;
+  }
+}

@@ -1,0 +1,1982 @@
+/* =========================================================
+   EWCC POST-MORTEM
+   ADMIN DASHBOARD OVERVIEW
+   VERSION 2 — BALANCED TYPOGRAPHY
+   ========================================================= */
+
+.ewcc-dashboard-overview {
+  width: 100%;
+  max-width: var(--ewcc-content-width);
+  margin: 0 auto;
+  padding: 6px 0 45px;
+  color: var(--ewcc-ink);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.ewcc-dashboard-overview *,
+.ewcc-dashboard-overview *::before,
+.ewcc-dashboard-overview *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HERO — EWCC ORANGE
+   ========================================================= */
+
+.ewcc-dashboard-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 205px;
+  padding: 36px 42px;
+  margin-bottom: 22px;
+
+  overflow: hidden;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at 88% 20%,
+      rgba(255, 255, 255, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      120deg,
+      #e85d16 0%,
+      #f26a21 52%,
+      #f47a32 100%
+    );
+
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(242, 106, 33, 0.18);
+}
+
+.ewcc-dashboard-hero::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -130px;
+
+  width: 350px;
+  height: 350px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 28px rgba(255, 255, 255, 0.035),
+    0 0 0 56px rgba(255, 255, 255, 0.025);
+
+  pointer-events: none;
+}
+
+.ewcc-dashboard-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.ewcc-dashboard-eyebrow {
+  display: block;
+  margin-bottom: 11px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.3;
+
+  letter-spacing: 1.8px;
+}
+
+.ewcc-dashboard-hero h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.ewcc-dashboard-hero p {
+  max-width: 650px;
+
+  margin: 13px 0 20px;
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.ewcc-dashboard-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ewcc-dashboard-hero-meta span {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 30px;
+  padding: 0 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.09);
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.6px;
+}
+
+.ewcc-dashboard-hero-mark {
+  position: relative;
+  z-index: 2;
+
+  width: 112px;
+  height: 112px;
+
+  margin-right: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ewcc-dashboard-hero-mark::before {
+  content: "";
+
+  position: absolute;
+  inset: 10px;
+
+  border: 1px dashed rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+}
+
+.ewcc-dashboard-hero-mark span {
+  color: #ffffff;
+
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.ewcc-dashboard-filter {
+  min-height: 82px;
+
+  margin-bottom: 22px;
+  padding: 16px 20px;
+
+  border: 1px solid #e1e6ed;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  box-shadow: 0 4px 16px rgba(22, 38, 63, 0.045);
+}
+
+.ewcc-dashboard-filter > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ewcc-dashboard-filter > div > span {
+  color: #8a97aa;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  letter-spacing: 1.5px;
+}
+
+.ewcc-dashboard-filter > div > strong {
+  color: #1d2d47;
+
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.ewcc-dashboard-filter select {
+  min-width: 260px;
+  height: 46px;
+
+  padding: 0 42px 0 15px;
+
+  border: 1.5px solid #ff6a21;
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #24344e;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 0 rgba(242, 106, 33, 0.07);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ewcc-dashboard-filter select:hover {
+  border-color: #e85d16;
+}
+
+.ewcc-dashboard-filter select:focus {
+  border-color: #e85d16;
+  box-shadow:
+    0 0 0 3px rgba(242, 106, 33, 0.10),
+    0 4px 0 rgba(242, 106, 33, 0.06);
+}
+
+
+/* =========================================================
+   KPI GRID
+   ========================================================= */
+
+.ewcc-dashboard-kpi-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.ewcc-dashboard-kpi {
+  position: relative;
+
+  min-width: 0;
+  min-height: 128px;
+
+  padding: 21px 20px;
+
+  overflow: hidden;
+
+  border: 1px solid #e0e6ee;
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+
+  gap: 17px;
+
+  box-shadow: 0 5px 16px rgba(22, 38, 63, 0.045);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ewcc-dashboard-kpi::after {
+  content: "";
+
+  position: absolute;
+
+  right: -30px;
+  bottom: -40px;
+
+  width: 112px;
+  height: 112px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  opacity: 0.035;
+
+  pointer-events: none;
+}
+
+.ewcc-dashboard-kpi:hover {
+  transform: translateY(-2px);
+
+  border-color: #d5dce6;
+
+  box-shadow:
+    0 10px 25px rgba(22, 38, 63, 0.075);
+}
+
+.ewcc-dashboard-kpi-icon {
+  position: relative;
+  z-index: 1;
+
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.ewcc-dashboard-kpi-content {
+  position: relative;
+  z-index: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ewcc-dashboard-kpi-content > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #6f7f96;
+
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.ewcc-dashboard-kpi-content > strong {
+  display: block;
+
+  color: #17243b;
+
+  font-size: 31px;
+  font-weight: 850;
+  line-height: 1.05;
+
+  letter-spacing: -0.7px;
+}
+
+.ewcc-dashboard-kpi-content > small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #96a2b3;
+
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   KPI COLOURS
+   ========================================================= */
+
+.ewcc-dashboard-kpi.blue {
+  color: #2864e8;
+}
+
+.ewcc-dashboard-kpi.blue .ewcc-dashboard-kpi-icon {
+  background: #e5edff;
+  color: #2864e8;
+}
+
+.ewcc-dashboard-kpi.green {
+  color: #15945d;
+}
+
+.ewcc-dashboard-kpi.green .ewcc-dashboard-kpi-icon {
+  background: #e1f7ed;
+  color: #15945d;
+}
+
+.ewcc-dashboard-kpi.orange {
+  color: #ed7b19;
+}
+
+.ewcc-dashboard-kpi.orange .ewcc-dashboard-kpi-icon {
+  background: #fff0dc;
+  color: #ed7b19;
+}
+
+.ewcc-dashboard-kpi.red {
+  color: #dc4141;
+}
+
+.ewcc-dashboard-kpi.red .ewcc-dashboard-kpi-icon {
+  background: #ffe5e5;
+  color: #dc4141;
+}
+
+.ewcc-dashboard-kpi.gold {
+  color: #c99100;
+}
+
+.ewcc-dashboard-kpi.gold .ewcc-dashboard-kpi-icon {
+  background: #fff5cf;
+  color: #b77d00;
+}
+
+.ewcc-dashboard-kpi.silver {
+  color: #738096;
+}
+
+.ewcc-dashboard-kpi.silver .ewcc-dashboard-kpi-icon {
+  background: #edf0f4;
+  color: #667388;
+}
+
+.ewcc-dashboard-kpi.bronze {
+  color: #a96935;
+}
+
+.ewcc-dashboard-kpi.bronze .ewcc-dashboard-kpi-icon {
+  background: #f8e9dc;
+  color: #9a5b29;
+}
+
+.ewcc-dashboard-kpi.purple {
+  color: #7956c9;
+}
+
+.ewcc-dashboard-kpi.purple .ewcc-dashboard-kpi-icon {
+  background: #eee8ff;
+  color: #7956c9;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+   ========================================================= */
+
+.ewcc-dashboard-chart-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 25px;
+}
+
+.ewcc-dashboard-panel {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #e0e6ee;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 5px 17px rgba(22, 38, 63, 0.045);
+}
+
+.ewcc-dashboard-panel.large {
+  grid-column: span 2;
+}
+
+.ewcc-dashboard-panel.full {
+  width: 100%;
+}
+
+.ewcc-dashboard-panel-header {
+  min-height: 98px;
+
+  padding: 22px 24px 18px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ewcc-dashboard-panel-header > div {
+  min-width: 0;
+}
+
+.ewcc-dashboard-panel-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #ff6a21;
+
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.2;
+
+  letter-spacing: 1.6px;
+}
+
+.ewcc-dashboard-panel-header h3 {
+  margin: 0;
+
+  color: #192941;
+
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+
+  letter-spacing: -0.3px;
+}
+
+.ewcc-dashboard-panel-header p {
+  max-width: 760px;
+
+  margin: 7px 0 0;
+
+  color: #8b98aa;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.ewcc-dashboard-panel-body {
+  min-height: 215px;
+
+  padding: 23px 24px;
+}
+
+
+/* =========================================================
+   EMPTY CHART
+   ========================================================= */
+
+.ewcc-dashboard-empty {
+  min-height: 170px;
+
+  padding: 30px;
+
+  border: 1px dashed #d8e0e9;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fafbfd 0%,
+      #f7f9fb 100%
+    );
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.ewcc-dashboard-empty-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 14px;
+
+  border-radius: 14px;
+
+  background: #edf1f6;
+  color: #718096;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.ewcc-dashboard-empty strong {
+  display: block;
+
+  color: #46566d;
+
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.ewcc-dashboard-empty span {
+  max-width: 500px;
+
+  margin-top: 6px;
+
+  color: #97a3b4;
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FINANCE
+   ========================================================= */
+
+.ewcc-finance-preview {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #e1e7ee;
+  border-radius: 11px;
+}
+
+.ewcc-finance-row {
+  min-width: 700px;
+  min-height: 54px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(270px, 1.6fr)
+    repeat(3, minmax(120px, 0.8fr));
+
+  align-items: center;
+
+  border-bottom: 1px solid #edf0f4;
+}
+
+.ewcc-finance-row:last-child {
+  border-bottom: none;
+}
+
+.ewcc-finance-row.header {
+  min-height: 54px;
+
+  background: #f6f8fb;
+}
+
+.ewcc-finance-row span {
+  padding: 0 15px;
+
+  color: #68768a;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 1.35;
+}
+
+.ewcc-finance-row.header span {
+  color: #7c899b;
+
+  font-size: 10px;
+  font-weight: 850;
+
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.ewcc-finance-row:not(.header) span:first-child {
+  color: #3c4c63;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.ewcc-finance-row:not(.header) span:not(:first-child) {
+  text-align: right;
+
+  color: #8793a4;
+
+  font-size: 12px;
+}
+
+.ewcc-finance-row:last-child {
+  background: #fbfcfe;
+}
+
+.ewcc-finance-row:last-child span {
+  color: #1d2d45;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   SECTION HEADING — SUKMA 2028
+   ========================================================= */
+
+.ewcc-dashboard-section-heading {
+  margin: 7px 0 16px;
+}
+
+.ewcc-dashboard-section-heading > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ewcc-dashboard-section-heading span {
+  color: #ff6a21;
+
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.2;
+
+  letter-spacing: 1.6px;
+}
+
+.ewcc-dashboard-section-heading h2 {
+  margin: 0;
+
+  color: #192941;
+
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.25;
+
+  letter-spacing: -0.35px;
+}
+
+
+/* =========================================================
+   2028 MODULE CARDS
+   ========================================================= */
+
+.ewcc-dashboard-module-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 26px;
+}
+
+.ewcc-dashboard-module-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 175px;
+
+  padding: 25px;
+
+  border: 1px solid #e0e6ee;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 19px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 5px 16px rgba(22, 38, 63, 0.045);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ewcc-dashboard-module-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  right: -48px;
+  bottom: -72px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  opacity: 0.035;
+}
+
+.ewcc-dashboard-module-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #d5dce6;
+
+  box-shadow:
+    0 11px 27px rgba(22, 38, 63, 0.08);
+}
+
+.ewcc-dashboard-module-card.equipment {
+  color: #e06c11;
+}
+
+.ewcc-dashboard-module-card.statistics {
+  color: #6750bd;
+}
+
+.ewcc-dashboard-module-icon {
+  position: relative;
+  z-index: 1;
+
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.ewcc-dashboard-module-card.equipment
+.ewcc-dashboard-module-icon {
+  background: #fff0dd;
+  color: #e06c11;
+}
+
+.ewcc-dashboard-module-card.statistics
+.ewcc-dashboard-module-icon {
+  background: #eee9ff;
+  color: #6750bd;
+}
+
+.ewcc-dashboard-module-card
+> div:not(.ewcc-dashboard-module-icon) {
+  position: relative;
+  z-index: 1;
+
+  min-width: 0;
+
+  padding-right: 38px;
+}
+
+.ewcc-dashboard-module-card
+> div:not(.ewcc-dashboard-module-icon)
+> span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.2;
+
+  letter-spacing: 1.3px;
+}
+
+.ewcc-dashboard-module-card.equipment
+> div:not(.ewcc-dashboard-module-icon)
+> span {
+  color: #df7b29;
+}
+
+.ewcc-dashboard-module-card.statistics
+> div:not(.ewcc-dashboard-module-icon)
+> span {
+  color: #7964c8;
+}
+
+.ewcc-dashboard-module-card h3 {
+  margin: 0 0 9px;
+
+  color: #1b2942;
+
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.ewcc-dashboard-module-card p {
+  margin: 0;
+
+  color: #7d8ba0;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.ewcc-dashboard-module-card > strong {
+  position: absolute;
+  z-index: 2;
+
+  top: 24px;
+  right: 22px;
+
+  color: #9aa5b5;
+
+  font-size: 23px;
+  font-weight: 400;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.ewcc-dashboard-module-card:hover > strong {
+  transform: translateX(4px);
+}
+
+.ewcc-dashboard-module-card.equipment:hover > strong {
+  color: #e06c11;
+}
+
+.ewcc-dashboard-module-card.statistics:hover > strong {
+  color: #6750bd;
+}
+
+
+/* =========================================================
+   SPORT STATUS
+   ========================================================= */
+
+.ewcc-dashboard-sport-status {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.ewcc-dashboard-sport-row {
+  min-width: 0;
+  min-height: 72px;
+
+  padding: 13px 15px;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 11px;
+
+  background: #fbfcfd;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ewcc-dashboard-sport-row:hover {
+  border-color: #dce3eb;
+  background: #ffffff;
+}
+
+.ewcc-dashboard-sport-row > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 5px;
+}
+
+.ewcc-dashboard-sport-row strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #34445c;
+
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.3;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ewcc-dashboard-sport-row
+> div
+> span {
+  display: block;
+
+  color: #9aa6b7;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ewcc-dashboard-status {
+  min-width: 105px;
+  height: 30px;
+
+  padding: 0 11px;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1;
+
+  letter-spacing: 0.45px;
+}
+
+.ewcc-dashboard-status.reviewed {
+  border: 1px solid #cbe9d8;
+  background: #e5f7ed;
+  color: #168653;
+}
+
+.ewcc-dashboard-status.submitted {
+  border: 1px solid #cfe0f7;
+  background: #e8f1ff;
+  color: #2864e8;
+}
+
+.ewcc-dashboard-status.draft {
+  border: 1px solid #f5dfbd;
+  background: #fff4e3;
+  color: #cf7514;
+}
+
+.ewcc-dashboard-status.not_started {
+  border: 1px solid #e1e5eb;
+  background: #f3f5f8;
+  color: #7c8797;
+}
+
+
+/* =========================================================
+   FOOTER NOTE
+   ========================================================= */
+
+.ewcc-dashboard-note {
+  margin-top: 22px;
+
+  padding: 18px 20px;
+
+  border: 1px solid #e2e7ee;
+  border-radius: 12px;
+
+  background: #fafbfd;
+}
+
+.ewcc-dashboard-note > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #ff6a21;
+
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.2;
+
+  letter-spacing: 1.5px;
+}
+
+.ewcc-dashboard-note p {
+  margin: 0;
+
+  color: #8996a8;
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .ewcc-dashboard-kpi-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .ewcc-dashboard-kpi {
+    min-height: 122px;
+  }
+
+  .ewcc-dashboard-sport-status {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1000px
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .ewcc-dashboard-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ewcc-dashboard-panel.large {
+    grid-column: span 1;
+  }
+
+  .ewcc-dashboard-module-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ewcc-dashboard-hero-mark {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .ewcc-dashboard-overview {
+    padding-bottom: 25px;
+  }
+
+  .ewcc-dashboard-hero {
+    min-height: auto;
+
+    padding: 28px 24px;
+
+    border-radius: 15px;
+  }
+
+  .ewcc-dashboard-hero h2 {
+    font-size: 29px;
+  }
+
+  .ewcc-dashboard-hero p {
+    font-size: 13px;
+  }
+
+  .ewcc-dashboard-filter {
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 17px;
+  }
+
+  .ewcc-dashboard-filter select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ewcc-dashboard-kpi-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .ewcc-dashboard-kpi {
+    min-height: 118px;
+
+    padding: 17px;
+  }
+
+  .ewcc-dashboard-kpi-icon {
+    width: 46px;
+    height: 46px;
+
+    font-size: 19px;
+  }
+
+  .ewcc-dashboard-kpi-content > span {
+    font-size: 11px;
+  }
+
+  .ewcc-dashboard-kpi-content > strong {
+    font-size: 27px;
+  }
+
+  .ewcc-dashboard-panel-header {
+    padding: 19px;
+  }
+
+  .ewcc-dashboard-panel-header h3 {
+    font-size: 18px;
+  }
+
+  .ewcc-dashboard-panel-header p {
+    font-size: 11px;
+  }
+
+  .ewcc-dashboard-panel-body {
+    padding: 18px;
+  }
+
+  .ewcc-dashboard-module-card {
+    min-height: 155px;
+    padding: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .ewcc-dashboard-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ewcc-dashboard-hero {
+    padding: 24px 20px;
+  }
+
+  .ewcc-dashboard-hero h2 {
+    font-size: 26px;
+  }
+
+  .ewcc-dashboard-hero-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ewcc-dashboard-panel-header h3 {
+    font-size: 17px;
+  }
+
+  .ewcc-dashboard-sport-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ewcc-dashboard-status {
+    width: 100%;
+  }
+
+  .ewcc-dashboard-module-card {
+    gap: 13px;
+  }
+
+  .ewcc-dashboard-module-icon {
+    width: 48px;
+    height: 48px;
+
+    font-size: 19px;
+  }
+
+  .ewcc-dashboard-module-card h3 {
+    font-size: 16px;
+  }
+
+}
+
+
+/* =====================================================
+   EWCC DASHBOARD — ALIGNMENT FIX
+   Letakkan di penghujung fail CSS
+   ===================================================== */
+
+/* Pastikan CSS global tidak mengubah alignment */
+.ewcc-dashboard-overview {
+  text-align: left;
+}
+
+.ewcc-dashboard-overview h2,
+.ewcc-dashboard-overview h3,
+.ewcc-dashboard-overview p,
+.ewcc-dashboard-overview span,
+.ewcc-dashboard-overview strong,
+.ewcc-dashboard-overview small {
+  text-align: left;
+}
+
+/* FILTER — label dan tajuk berada dalam satu kumpulan */
+.ewcc-dashboard-overview .ewcc-dashboard-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-filter > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-filter > div > span,
+.ewcc-dashboard-overview .ewcc-dashboard-filter > div > strong {
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* KPI — ikon di kiri, semua teks sejajar di kanan */
+.ewcc-dashboard-overview .ewcc-dashboard-kpi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi-icon {
+  flex: 0 0 54px;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi-content > span,
+.ewcc-dashboard-overview .ewcc-dashboard-kpi-content > strong,
+.ewcc-dashboard-overview .ewcc-dashboard-kpi-content > small {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* PANEL — eyebrow, tajuk dan penerangan sejajar */
+.ewcc-dashboard-overview .ewcc-dashboard-panel-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-panel-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-panel-eyebrow,
+.ewcc-dashboard-overview .ewcc-dashboard-panel-header h3,
+.ewcc-dashboard-overview .ewcc-dashboard-panel-header p {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* MODUL 2028 — teks berkumpul dan sejajar */
+.ewcc-dashboard-overview .ewcc-dashboard-module-card {
+  align-items: center;
+}
+
+.ewcc-dashboard-overview
+.ewcc-dashboard-module-card
+> div:not(.ewcc-dashboard-module-icon) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-module-card h3,
+.ewcc-dashboard-overview .ewcc-dashboard-module-card p {
+  margin: 0;
+  text-align: left;
+}
+
+/* STATUS SUKAN */
+.ewcc-dashboard-overview .ewcc-dashboard-sport-row > div {
+  align-items: flex-start;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-sport-row strong,
+.ewcc-dashboard-overview .ewcc-dashboard-sport-row > div > span {
+  margin: 0;
+  text-align: left;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-status {
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .ewcc-dashboard-overview .ewcc-dashboard-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ewcc-dashboard-overview .ewcc-dashboard-filter select {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   EWCC — STATISTIK KEWANGAN TABLE ALIGNMENT
+   ========================================================= */
+
+.ewcc-dashboard-overview .ewcc-finance-preview {
+  width: 100%;
+  overflow-x: auto;
+
+  border: 1px solid #e1e7ee;
+  border-radius: 12px;
+
+  background: #ffffff;
+}
+
+
+/* ROW STRUCTURE */
+
+.ewcc-dashboard-overview .ewcc-finance-row {
+  width: 100%;
+  min-width: 760px;
+  min-height: 68px;
+
+  display: grid;
+
+  /*
+    Komponen = 40%
+    2023–2024 = 20%
+    2025–2026 = 20%
+    Perubahan = 20%
+  */
+  grid-template-columns:
+    40%
+    20%
+    20%
+    20%;
+
+  align-items: center;
+
+  border-bottom: 1px solid #edf0f4;
+}
+
+.ewcc-dashboard-overview .ewcc-finance-row:last-child {
+  border-bottom: none;
+}
+
+
+/* HEADER */
+
+.ewcc-dashboard-overview .ewcc-finance-row.header {
+  min-height: 68px;
+
+  background: #f5f7fa;
+}
+
+.ewcc-dashboard-overview .ewcc-finance-row.header span {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+
+  padding: 0 20px;
+
+  color: #7d8a9d;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  line-height: 1;
+
+  letter-spacing: 0.8px;
+}
+
+
+/* HEADER — ALIGNMENT */
+
+.ewcc-dashboard-overview
+.ewcc-finance-row.header
+span:first-child {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.ewcc-dashboard-overview
+.ewcc-finance-row.header
+span:nth-child(2),
+.ewcc-dashboard-overview
+.ewcc-finance-row.header
+span:nth-child(3),
+.ewcc-dashboard-overview
+.ewcc-finance-row.header
+span:nth-child(4) {
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* DATA ROW */
+
+.ewcc-dashboard-overview .ewcc-finance-row:not(.header) {
+  min-height: 68px;
+
+  background: #ffffff;
+}
+
+
+/* COMPONENT NAME */
+
+.ewcc-dashboard-overview
+.ewcc-finance-row:not(.header)
+span:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 100%;
+
+  padding: 0 20px;
+
+  color: #40516a;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  line-height: 1.35;
+
+  text-align: left;
+}
+
+
+/* FINANCIAL VALUES */
+
+.ewcc-dashboard-overview
+.ewcc-finance-row:not(.header)
+span:nth-child(2),
+.ewcc-dashboard-overview
+.ewcc-finance-row:not(.header)
+span:nth-child(3),
+.ewcc-dashboard-overview
+.ewcc-finance-row:not(.header)
+span:nth-child(4) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  height: 100%;
+
+  padding: 0 20px;
+
+  color: #8794a7;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-align: right;
+}
+
+
+/* LAST / TOTAL ROW */
+
+.ewcc-dashboard-overview
+.ewcc-finance-row:last-child {
+  background: #fbfcfe;
+}
+
+.ewcc-dashboard-overview
+.ewcc-finance-row:last-child
+span {
+  color: #34445c;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   TABLE — LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-row {
+    grid-template-columns:
+      40%
+      20%
+      20%
+      20%;
+  }
+
+}
+
+
+/* =========================================================
+   TABLE — MEDIUM SCREEN
+   ========================================================= */
+
+@media (max-width: 1199px) {
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-row {
+    min-width: 720px;
+
+    grid-template-columns:
+      40%
+      20%
+      20%
+      20%;
+  }
+
+}
+
+
+/* =========================================================
+   TABLE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-preview {
+    border-radius: 10px;
+  }
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-row {
+    min-width: 700px;
+    min-height: 62px;
+  }
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-row.header {
+    min-height: 62px;
+  }
+
+  .ewcc-dashboard-overview
+  .ewcc-finance-row
+  span {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+}
+
+/* =========================================================
+   EWCC — PERFORMANCE CHART
+   SASARAN VS PENCAPAIAN
+   ========================================================= */
+
+.ewcc-performance-chart {
+  width: 100%;
+  min-height: 270px;
+}
+
+
+/* SUMMARY */
+
+.ewcc-performance-summary {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.ewcc-performance-summary-item {
+  flex: 1;
+  min-height: 68px;
+
+  padding: 12px 16px;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 11px;
+
+  background: #fafbfd;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.ewcc-performance-summary-item.target {
+  border-left: 4px solid #ff6a21;
+}
+
+.ewcc-performance-summary-item.achievement {
+  border-left: 4px solid #1d2d45;
+}
+
+.ewcc-performance-dot {
+  width: 10px;
+  height: 10px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+}
+
+.ewcc-performance-summary-item.target
+.ewcc-performance-dot {
+  background: #ff6a21;
+}
+
+.ewcc-performance-summary-item.achievement
+.ewcc-performance-dot {
+  background: #1d2d45;
+}
+
+.ewcc-performance-summary-item > div {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.ewcc-performance-summary-item small {
+  width: 100%;
+
+  color: #8996a8;
+
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.ewcc-performance-summary-item strong {
+  color: #1d2d45;
+
+  font-size: 24px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.ewcc-performance-summary-item span:not(.ewcc-performance-dot) {
+  color: #9aa6b6;
+
+  font-size: 10px;
+}
+
+
+/* CHART AREA */
+
+.ewcc-performance-chart-area {
+  position: relative;
+
+  display: flex;
+
+  min-height: 210px;
+
+  padding: 0 30px 0 0;
+}
+
+.ewcc-performance-axis {
+  width: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 3px 0 26px;
+
+  color: #a0abba;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+.ewcc-performance-bars {
+  flex: 1;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  gap: 55px;
+
+  padding: 0 30px;
+
+  border-bottom: 1px solid #e2e7ee;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 32%,
+      #f1f4f7 32%,
+      #f1f4f7 calc(32% + 1px),
+      transparent calc(32% + 1px),
+      transparent 65%,
+      #f1f4f7 65%,
+      #f1f4f7 calc(65% + 1px),
+      transparent calc(65% + 1px)
+    );
+}
+
+.ewcc-performance-group {
+  width: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 9px;
+}
+
+.ewcc-performance-bar-track {
+  width: 72px;
+  height: 175px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  border-radius: 9px 9px 0 0;
+
+  background: #f2f4f7;
+}
+
+.ewcc-performance-bar {
+  position: relative;
+
+  width: 72px;
+
+  min-height: 0;
+
+  border-radius: 9px 9px 0 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  transition:
+    height 0.45s ease;
+}
+
+.ewcc-performance-bar.target {
+  background:
+    linear-gradient(
+      180deg,
+      #ff873f 0%,
+      #f26a21 100%
+    );
+}
+
+.ewcc-performance-bar.achievement {
+  background:
+    linear-gradient(
+      180deg,
+      #344963 0%,
+      #1d2d45 100%
+    );
+}
+
+.ewcc-performance-bar strong {
+  position: absolute;
+
+  top: -25px;
+
+  color: #34445c;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ewcc-performance-group > span {
+  color: #6f7e92;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PERFORMANCE CHART — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .ewcc-performance-summary {
+    flex-direction: column;
+  }
+
+  .ewcc-performance-chart-area {
+    padding-right: 5px;
+  }
+
+  .ewcc-performance-bars {
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+}

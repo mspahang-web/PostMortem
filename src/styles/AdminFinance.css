@@ -1,0 +1,109 @@
+.ewcc-finance-page,
+.ewcc-finance-canvas {
+  width: 100%;
+  min-width: 0;
+}
+
+.ewcc-finance-page {
+  color: var(--ewcc-ink, #172033);
+}
+
+.finance-entry-table-wrap {
+  width: 100%;
+  overflow-x: visible !important;
+}
+
+.finance-entry-table {
+  width: 100%;
+  min-width: 0;
+}
+
+.finance-entry-header,
+.finance-entry-row {
+  grid-template-columns: minmax(190px, 1.5fr) repeat(2, minmax(135px, 1fr)) minmax(190px, 1.3fr) !important;
+}
+
+.finance-entry-row > div {
+  min-width: 0;
+}
+
+.finance-entry-label {
+  overflow-wrap: anywhere;
+}
+
+.finance-entry-field input,
+.finance-entry-notes textarea {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .ewcc-finance-canvas > header {
+    align-items: flex-start !important;
+    padding: 20px !important;
+  }
+
+  .ewcc-finance-canvas > header h1 {
+    font-size: 21px !important;
+  }
+
+  .ewcc-finance-canvas > div:nth-child(2) {
+    padding: 20px 16px 36px !important;
+  }
+
+  .finance-entry-header {
+    display: none !important;
+  }
+
+  .finance-entry-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 8px;
+    padding: 10px 12px;
+  }
+
+  .finance-entry-label {
+    grid-column: 1 / -1;
+    padding: 10px 4px !important;
+  }
+
+  .finance-entry-field {
+    padding: 8px 4px !important;
+  }
+
+  .finance-entry-field::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 7px;
+    color: #7d8a9d;
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .finance-entry-notes {
+    grid-column: 1 / -1;
+    padding: 8px 4px 12px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .ewcc-finance-canvas > header {
+    flex-direction: column;
+  }
+
+  .ewcc-finance-canvas > header button {
+    align-self: flex-start;
+  }
+
+  .ewcc-finance-canvas > div:nth-child(2) > section {
+    padding: 16px !important;
+  }
+
+  .finance-entry-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .finance-entry-label,
+  .finance-entry-field,
+  .finance-entry-notes {
+    grid-column: 1;
+  }
+}
