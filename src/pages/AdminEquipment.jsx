@@ -146,7 +146,35 @@ export default function AdminEquipment({
       : null
 
   return (
-    <div className="equipment-page equipment-admin equipment-admin-view">
+    <div className="equipment-page equipment-admin equipment-admin-view admin-equipment-page">
+
+          {/* HEADER */}
+
+          <div className="ewcc-section-title admin-page-heading">
+
+            <div>
+              <span>
+                PENGURUSAN SISTEM
+              </span>
+
+              <h2>
+                Cadangan Peralatan 2028
+              </h2>
+
+              <p>
+                Pemantauan cadangan peralatan SUKMA 2028 mengikut sukan.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="ewcc-secondary-button"
+              onClick={onBack}
+            >
+              ← Kembali
+            </button>
+
+          </div>
 
           {/* KPI */}
 
@@ -259,17 +287,7 @@ export default function AdminEquipment({
 
           <section className="ewcc-section">
 
-            <div
-              className="ewcc-section-title"
-              style={{
-                display: 'flex',
-                justifyContent:
-                  'space-between',
-                alignItems: 'center',
-                gap: 16,
-                flexWrap: 'wrap',
-              }}
-            >
+            <div className="ewcc-section-title">
 
               <div>
 
@@ -282,14 +300,6 @@ export default function AdminEquipment({
                 </h2>
 
               </div>
-
-              <button
-                type="button"
-                className="ewcc-secondary-button"
-                onClick={onBack}
-              >
-                ← Kembali
-              </button>
 
             </div>
 

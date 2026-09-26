@@ -78,14 +78,14 @@ function AdminSports({
 
   return (
 
-    <section className="ewcc-section">
+    <section className="ewcc-section admin-sports-page">
 
 
       {/* =================================================
           HEADER
       ================================================= */}
 
-      <div className="ewcc-section-title">
+      <div className="ewcc-section-title admin-page-heading">
 
         <div>
 

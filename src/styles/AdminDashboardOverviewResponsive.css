@@ -1,3 +1,48 @@
+.ewcc-dashboard-medal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ewcc-dashboard-medal-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ewcc-dashboard-medal-group-heading span {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #f1f4f9;
+  color: #40516a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.ewcc-dashboard-medal-group .ewcc-dashboard-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi.medal-kpi.para-medal {
+  border-color: #e4d9f5;
+  background: linear-gradient(180deg, #fbf9ff 0%, #ffffff 100%);
+}
+
+@media (max-width: 900px) {
+  .ewcc-dashboard-medal-group .ewcc-dashboard-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .ewcc-dashboard-medal-group .ewcc-dashboard-kpi-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .ewcc-dashboard-overview .ewcc-dashboard-kpi.medal-kpi {
   flex-direction: column;
   justify-content: center;
@@ -78,6 +123,99 @@
   white-space: nowrap;
 }
 
+.sukma-2028-responses {
+  padding-top: 16px;
+  border-top: 1px solid #edf0f4;
+}
+
+.sukma-2028-responses-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+  color: #40516a;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.sukma-2028-responses-heading span {
+  color: #8995a7;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sukma-2028-response-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sukma-2028-response-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #e5eaf0;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.sukma-2028-response-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: #40516a;
+  font-size: 11px;
+}
+
+.sukma-2028-response-title span {
+  color: #8a97aa;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.sukma-2028-response-card ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sukma-2028-response-card li {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.sukma-2028-response-card li b {
+  color: #40516a;
+  font-size: 10px;
+}
+
+.sukma-2028-response-card li span {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow-wrap: anywhere;
+}
+
+.sukma-2028-no-responses {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed #d9e1eb;
+  border-radius: 10px;
+  color: #8995a7;
+  font-size: 11px;
+  text-align: center;
+}
+
 .ewcc-dashboard-report-button:hover {
   border-color: #a9bee9;
   background: #f5f8ff;
@@ -100,6 +238,23 @@
 }
 
 @media (max-width: 700px) {
+  .sukma-2028-response-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sukma-2028-component-row {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+  }
+
+  .sukma-2028-component-row > div {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .sukma-2028-component-label {
+    overflow-wrap: anywhere;
+  }
+
   .ewcc-dashboard-overview .ewcc-dashboard-sport-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 10px;

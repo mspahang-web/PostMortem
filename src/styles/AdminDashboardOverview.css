@@ -1980,3 +1980,21 @@ span {
   }
 
 }
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi:not(.medal-kpi) {
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi:not(.medal-kpi) .ewcc-dashboard-kpi-content {
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.ewcc-dashboard-overview .ewcc-dashboard-kpi:not(.medal-kpi) .ewcc-dashboard-kpi-content > * {
+  width: 100%;
+  text-align: center;
+}

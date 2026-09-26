@@ -1073,15 +1073,15 @@ const SUKMA_2028_ITEMS = [
     label: 'Atlet dikekalkan',
   },
   {
-    key: 'atletPrestasiTinggi',
+    key: 'atletDinaikkanProgramPrestasiTinggi',
     label: 'Atlet dinaikkan ke program prestasi tinggi',
   },
   {
-    key: 'atletBaharu',
+    key: 'atletBaharuDiberiPeluang',
     label: 'Atlet baharu yang perlu diberi peluang',
   },
   {
-    key: 'atletIntervensi',
+    key: 'atletPerluIntervensi',
     label: 'Atlet yang memerlukan intervensi',
   },
   {
@@ -1105,10 +1105,21 @@ const SUKMA_2028_ITEMS = [
     label: 'Keperluan sains sukan',
   },
   {
-    key: 'keperluanPerubatan',
+    key: 'keperluanPerubatanRehabilitasi',
     label: 'Keperluan perubatan / rehabilitasi',
   },
 ]
+
+function getSection11AnswerText(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => String(item ?? '').trim())
+      .filter(Boolean)
+      .join(' • ')
+  }
+
+  return String(value ?? '').trim()
+}
 
 function getSection11Data(report) {
   const section11 = report?.section_11
@@ -1163,6 +1174,20 @@ function calculateSukma2028Analytics(
       return {
         ...item,
         filledReports,
+        responses: reports
+          .map((report) => {
+            const answer = getSection11AnswerText(
+              getSection11Data(report)[item.key]
+            )
+
+            return answer
+              ? {
+                  sport: report.sport || report.login_id || 'Sukan',
+                  answer,
+                }
+              : null
+          })
+          .filter(Boolean),
         percentage:
           reports.length > 0
             ? Math.round(
@@ -2060,6 +2085,7 @@ function AdminDashboardOverview({
                 sport,
                 status,
                 section_3,
+                section_11,
                 section_5,
                 section_7,
                 section_10,
@@ -2393,23 +2419,31 @@ function AdminDashboardOverview({
     total: 76,
   }
 
-
   const sukma2026 = {
     emas: 28,
     perak: 19,
-    gangsa: 35,
-    total: 82,
+    gangsa: 36,
+    total: 83,
   }
 
 
   // =======================================================
-  // DASHBOARD MEDALS
+  // DASHBOARD MEDALS — ANGKA TETAP (BUKAN DIKIRA DARI LAPORAN)
   // =======================================================
 
-  const dashboardMedals =
-    selectedSport === 'ALL'
-      ? sukma2026
-      : performance.pencapaian
+  const sukmaMedals = {
+    emas: 28,
+    perak: 19,
+    gangsa: 36,
+    total: 83,
+  }
+
+  const paraMedals = {
+    emas: 7,
+    perak: 11,
+    gangsa: 13,
+    total: 31,
+  }
   
   // =======================================================
 // EQUIPMENT 2028
@@ -2644,59 +2678,103 @@ const equipmentSummary = useMemo(() => {
         />
 
 
-        <KpiCard
-          icon="🥇"
-          label="Jumlah Emas"
-          value={
-            dashboardMedals.emas
-          }
-          description={
-            selectedSport === 'ALL'
-              ? 'SUKMA 2026'
-              : 'Pencapaian sukan'
-          }
-          className="gold medal-kpi"
-        />
-
-        <KpiCard
-          icon="🥈"
-          label="Jumlah Perak"
-          value={
-            dashboardMedals.perak
-          }
-          description={
-            selectedSport === 'ALL'
-              ? 'SUKMA 2026'
-              : 'Pencapaian sukan'
-          }
-          className="silver medal-kpi"
-        />
+      </section>
 
 
-        <KpiCard
-          icon="🥉"
-          label="Jumlah Gangsa"
-          value={
-            dashboardMedals.gangsa
-          }
-          description={
-            selectedSport === 'ALL'
-              ? 'SUKMA 2026'
-              : 'Pencapaian sukan'
-          }
-          className="bronze medal-kpi"
-        />
+      {/* =================================================
+          PINGAT — SUKMA
+          ================================================= */}
+
+      <section className="ewcc-dashboard-medal-group">
+
+        <div className="ewcc-dashboard-medal-group-heading">
+          <span>🏆 SUKMA XXII SELANGOR 2026</span>
+        </div>
+
+        <div className="ewcc-dashboard-kpi-grid">
+
+          <KpiCard
+            icon="🥇"
+            label="Jumlah Emas"
+            value={sukmaMedals.emas}
+            description="Angka rasmi ditetapkan"
+            className="gold medal-kpi"
+          />
+
+          <KpiCard
+            icon="🥈"
+            label="Jumlah Perak"
+            value={sukmaMedals.perak}
+            description="Angka rasmi ditetapkan"
+            className="silver medal-kpi"
+          />
+
+          <KpiCard
+            icon="🥉"
+            label="Jumlah Gangsa"
+            value={sukmaMedals.gangsa}
+            description="Angka rasmi ditetapkan"
+            className="bronze medal-kpi"
+          />
+
+          <KpiCard
+            icon="🏅"
+            label="Jumlah Pingat"
+            value={sukmaMedals.total}
+            description="Angka rasmi ditetapkan"
+            className="purple medal-kpi"
+          />
+
+        </div>
+
+      </section>
 
 
-        <KpiCard
-          icon="🏅"
-          label="Jumlah Pingat"
-          value={
-            dashboardMedals.total
-          }
-          description="Emas + Perak + Gangsa"
-          className="purple medal-kpi"
-        />
+      {/* =================================================
+          PINGAT — PARA SUKMA
+          ================================================= */}
+
+      <section className="ewcc-dashboard-medal-group">
+
+        <div className="ewcc-dashboard-medal-group-heading">
+          <span>♿ PARA SUKMA SELANGOR 2026</span>
+        </div>
+
+        <div className="ewcc-dashboard-kpi-grid">
+
+          <KpiCard
+            icon="🥇"
+            label="Emas Para Sukma"
+            value={paraMedals.emas}
+            description="Angka rasmi ditetapkan"
+            className="gold medal-kpi para-medal"
+          />
+
+          <KpiCard
+            icon="🥈"
+            label="Perak Para Sukma"
+            value={paraMedals.perak}
+            description="Angka rasmi ditetapkan"
+            className="silver medal-kpi para-medal"
+          />
+
+          <KpiCard
+            icon="🥉"
+            label="Gangsa Para Sukma"
+            value={paraMedals.gangsa}
+            description="Angka rasmi ditetapkan"
+            className="bronze medal-kpi para-medal"
+          />
+
+          <KpiCard
+            icon="🏅"
+            label="Jumlah Pingat Para Sukma"
+            value={paraMedals.total}
+            description="Angka rasmi ditetapkan"
+            className="purple medal-kpi para-medal"
+          />
+
+        </div>
 
       </section>
 
@@ -2897,7 +2975,7 @@ const equipmentSummary = useMemo(() => {
         <DashboardPanel
           eyebrow="PERBANDINGAN"
           title="SUKMA 2024 vs 2026"
-          description="Perbandingan pencapaian pingat Kontinjen Pahang."
+          description="Angka rujukan yang ditetapkan dalam sistem; KPI pingat di atas dikira daripada Bahagian C laporan."
         >
 
           <div
@@ -2932,10 +3010,9 @@ const equipmentSummary = useMemo(() => {
                 lineHeight: 1.6,
               }}
             >
-              Data 2026 dipaparkan
-              sebagai pencapaian
-              keseluruhan Kontinjen
-              Pahang.
+              Angka perbandingan 2024 dan 2026 ialah nilai rujukan sedia ada.
+              Jumlah KPI semasa datang daripada pingat yang direkodkan dalam
+              Bahagian C setiap laporan.
             </div>
 
           </div>
@@ -3447,6 +3524,7 @@ const equipmentSummary = useMemo(() => {
               .map((item) => (
                 <div
                   key={item.key}
+                  className="sukma-2028-component-row"
                   style={{
                     display: 'grid',
                     gridTemplateColumns:
@@ -3456,6 +3534,7 @@ const equipmentSummary = useMemo(() => {
                   }}
                 >
                   <span
+                    className="sukma-2028-component-label"
                     style={{
                       fontSize: '12px',
                       color: '#596a81',
@@ -3506,6 +3585,43 @@ const equipmentSummary = useMemo(() => {
               ))
           }
         </div>
+      </div>
+
+      {/* INPUT DATA */}
+      <div className="sukma-2028-responses">
+        <div className="sukma-2028-responses-heading">
+          Cadangan yang direkodkan
+          <span>Jawapan sebenar daripada Bahagian 11</span>
+        </div>
+
+        {sukma2028Analytics.componentStats.some(
+          (item) => item.responses.length > 0
+        ) ? (
+          <div className="sukma-2028-response-grid">
+            {sukma2028Analytics.componentStats
+              .filter((item) => item.responses.length > 0)
+              .map((item) => (
+                <article className="sukma-2028-response-card" key={item.key}>
+                  <div className="sukma-2028-response-title">
+                    <strong>{item.label}</strong>
+                    <span>{item.responses.length} laporan</span>
+                  </div>
+                  <ul>
+                    {item.responses.map((response, index) => (
+                      <li key={`${item.key}-${response.sport}-${index}`}>
+                        <b>{response.sport}</b>
+                        <span title={response.answer}>{response.answer}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+          </div>
+        ) : (
+          <p className="sukma-2028-no-responses">
+            Belum ada jawapan Bahagian 11 untuk dipaparkan.
+          </p>
+        )}
       </div>
 
       {/* PERALATAN */}

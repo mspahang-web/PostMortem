@@ -410,27 +410,6 @@ const sportsWithReports =
   // RENDER
   // ==========================================
 
-if (showPostMortem) {
-
-  return (
-    <AdminPostMortem
-
-      initialReportId={
-        selectedPostMortemReportId
-      }
-
-      onBack={async () => {
-        setShowPostMortem(false)
-        setSelectedPostMortemReportId(null)
-        setAdminView('dashboard')
-        await loadPostMortemReports()
-      }}
-
-    />
-  )
-
-}
-
   return (
     <main className="ewcc-admin">
 
@@ -645,10 +624,12 @@ if (showPostMortem) {
               setShowPostMortem(false)
             }}
             onOpenReports={() => {
+              setAdminView('reports')
               setSelectedPostMortemReportId(null)
               setShowPostMortem(true)
             }}
             onOpenReport={(reportId) => {
+              setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
               setShowPostMortem(true)
             }}
@@ -662,6 +643,7 @@ if (showPostMortem) {
             loading={loadingUsers}
             onAddUser={() => setShowUserModal(true)}
             onOpenReport={(reportId) => {
+              setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
               setShowPostMortem(true)
             }}
@@ -674,6 +656,7 @@ if (showPostMortem) {
             sports={sports}
             postMortemReports={postMortemReports}
             onOpenReport={(reportId) => {
+              setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
               setShowPostMortem(true)
             }}
@@ -687,6 +670,17 @@ if (showPostMortem) {
           ) : adminView === 'equipment' ? (
             <AdminEquipment
               onBack={() => setAdminView('dashboard')}
+            />
+          ) : adminView === 'reports' ? (
+            <AdminPostMortem
+              embedded
+              initialReportId={selectedPostMortemReportId}
+              onBack={async () => {
+                setShowPostMortem(false)
+                setSelectedPostMortemReportId(null)
+                setAdminView('dashboard')
+                await loadPostMortemReports()
+              }}
             />
           ) : (
 
@@ -891,6 +885,7 @@ if (showPostMortem) {
                     <button
                     className="ewcc-module-card"
                     onClick={() => {
+                      setAdminView('reports')
                       setSelectedPostMortemReportId(null)
                       setShowPostMortem(true)
                     }}
@@ -982,6 +977,7 @@ if (showPostMortem) {
       className="sport-status-row"
       onClick={() => {
         if (sport.reportId) {
+          setAdminView('reports')
           setSelectedPostMortemReportId(sport.reportId)
           setShowPostMortem(true)
         }

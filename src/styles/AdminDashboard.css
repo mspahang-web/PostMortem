@@ -27,13 +27,104 @@
   white-space: nowrap;
 }
 
-.admin-users-page {
+.admin-users-page,
+.admin-sports-page,
+.admin-reports-page {
   width: 100%;
   min-width: 0;
 }
 
-.admin-users-page .ewcc-kpi-grid {
+.admin-users-page .ewcc-kpi-grid,
+.admin-sports-page .ewcc-kpi-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* =========================================================
+   KPI CARD TEXT OVERFLOW FIX
+   Scoped to the admin shell so labels/descriptions wrap
+   instead of spilling out of the card when text is longer
+   than the card width (App.css forces nowrap globally).
+   ========================================================= */
+
+.ewcc-admin-content .ewcc-kpi-card span,
+.ewcc-admin-content .ewcc-kpi-card small {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* =========================================================
+   TABLE CELL TEXT OVERFLOW FIX
+   App.css uses table-layout: fixed + white-space: nowrap on
+   .user-table, which spills text past the cell when content
+   is longer than the fixed column width. Allow wrapping
+   inside the admin shell so cells grow in height instead.
+   ========================================================= */
+
+.ewcc-admin-content .user-table td {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.4;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: auto;
+}
+
+.ewcc-admin-content .user-status,
+.ewcc-admin-content .status-badge {
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* =========================================================
+   COLUMN WIDTHS — PER TABLE, MATCHED TO ITS OWN COLUMNS
+   Each admin table reuses the base .user-table look, but the
+   generic nth-child widths in App.css were tuned for the
+   Pengguna table's columns only. Override per table below so
+   each column gets the width its actual content needs.
+   ========================================================= */
+
+/* PENGGUNA: ID / NAMA / SUKAN / PERANAN / STATUS LAPORAN / TINDAKAN */
+.admin-users-table th:nth-child(1),
+.admin-users-table td:nth-child(1) { width: 16%; }
+.admin-users-table th:nth-child(2),
+.admin-users-table td:nth-child(2) { width: 22%; }
+.admin-users-table th:nth-child(3),
+.admin-users-table td:nth-child(3) { width: 16%; }
+.admin-users-table th:nth-child(4),
+.admin-users-table td:nth-child(4) { width: 14%; }
+.admin-users-table th:nth-child(5),
+.admin-users-table td:nth-child(5) { width: 18%; }
+
+/* SUKAN: BIL / KOD SUKAN / NAMA SUKAN / STATUS / POST-MORTEM / TINDAKAN */
+.admin-sports-table th:nth-child(1),
+.admin-sports-table td:nth-child(1) { width: 6%; }
+.admin-sports-table th:nth-child(2),
+.admin-sports-table td:nth-child(2) { width: 14%; }
+.admin-sports-table th:nth-child(3),
+.admin-sports-table td:nth-child(3) { width: 32%; }
+.admin-sports-table th:nth-child(4),
+.admin-sports-table td:nth-child(4) { width: 14%; }
+.admin-sports-table th:nth-child(5),
+.admin-sports-table td:nth-child(5) { width: 18%; }
+
+/* LAPORAN: ID PENGGUNA / SUKAN / STATUS / DIKEMASKINI / TINDAKAN */
+.admin-reports-table {
+  min-width: 820px;
+}
+.admin-reports-table th:nth-child(1),
+.admin-reports-table td:nth-child(1) { width: 22%; }
+.admin-reports-table th:nth-child(2),
+.admin-reports-table td:nth-child(2) { width: 20%; }
+.admin-reports-table th:nth-child(3),
+.admin-reports-table td:nth-child(3) { width: 18%; }
+.admin-reports-table th:nth-child(4),
+.admin-reports-table td:nth-child(4) { width: 22%; }
+.admin-reports-table th:last-child,
+.admin-reports-table td:last-child {
+  width: 160px;
+  text-align: center;
 }
 
 .admin-users-table {
@@ -81,7 +172,8 @@
 
 @media (max-width: 1200px) and (min-width: 601px) {
   .admin-users-table,
-  .admin-sports-table {
+  .admin-sports-table,
+  .admin-reports-table {
     min-width: 780px;
   }
 }
@@ -132,7 +224,9 @@
 .ewcc-admin-content .ewcc-kpi-card,
 .ewcc-admin-content .ewcc-status-card,
 .ewcc-admin-content .equipment-page,
-.ewcc-admin-content .admin-users-page {
+.ewcc-admin-content .admin-users-page,
+.ewcc-admin-content .admin-sports-page,
+.ewcc-admin-content .admin-reports-page {
   min-width: 0;
   max-width: 100%;
 }
@@ -210,6 +304,36 @@
   white-space: nowrap;
 }
 
+/* The report module is embedded in the primary admin shell. Keep its content
+   inside the available column and suppress its former standalone shell layout. */
+.ewcc-admin-report-embedded {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+.ewcc-admin-report-embedded > .ewcc-admin-content {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.ewcc-admin-report-embedded .ewcc-admin-body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
 @media (max-width: 800px) {
   .ewcc-admin {
     display: block;
@@ -278,7 +402,8 @@
     padding: 18px;
   }
 
-  .admin-users-page .ewcc-kpi-grid {
+  .admin-users-page .ewcc-kpi-grid,
+  .admin-sports-page .ewcc-kpi-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -355,7 +480,9 @@
   .ewcc-admin .admin-users-table th:last-child,
   .ewcc-admin .admin-users-table td:last-child,
   .ewcc-admin .admin-sports-table th:last-child,
-  .ewcc-admin .admin-sports-table td:last-child {
+  .ewcc-admin .admin-sports-table td:last-child,
+  .ewcc-admin .admin-reports-table th:last-child,
+  .ewcc-admin .admin-reports-table td:last-child {
     position: sticky;
     right: 0;
     z-index: 2;
@@ -364,7 +491,8 @@
   }
 
   .ewcc-admin .admin-users-table th:last-child,
-  .ewcc-admin .admin-sports-table th:last-child {
+  .ewcc-admin .admin-sports-table th:last-child,
+  .ewcc-admin .admin-reports-table th:last-child {
     z-index: 3;
     background: #f5f7fa;
   }

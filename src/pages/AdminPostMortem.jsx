@@ -8,6 +8,8 @@ function AdminPostMortem({
 
   initialReportId,
 
+  embedded = false,
+
 }) {
 
   // ==========================================
@@ -23,6 +25,16 @@ function AdminPostMortem({
   const [selectedReport, setSelectedReport] = useState(null)
   const [openSection, setOpenSection] = useState(null)
   const [reviewing, setReviewing] = useState(false)
+
+  const handleDetailBack = () => {
+    if (embedded) {
+      setSelectedReport(null)
+      setOpenSection(null)
+      return
+    }
+
+    onBack?.()
+  }
 
 
   // ==========================================
@@ -778,7 +790,7 @@ const handleMarkReviewed = async () => {
 
 
 
-    <main className="ewcc-admin">
+    <main className={`ewcc-admin${embedded ? ' ewcc-admin-report-embedded' : ''}`}>
 
 
 
@@ -790,7 +802,7 @@ const handleMarkReviewed = async () => {
 
 
 
-      <aside className="ewcc-sidebar">
+      {!embedded && <aside className="ewcc-sidebar">
 
 
 
@@ -900,7 +912,7 @@ const handleMarkReviewed = async () => {
 
 
 
-      </aside>
+      </aside>}
 
 
 
@@ -932,7 +944,7 @@ const handleMarkReviewed = async () => {
 
 
 
-            <div className="ewcc-section-title">
+            <div className="ewcc-section-title admin-page-heading">
 
 
 
@@ -1208,7 +1220,7 @@ const handleMarkReviewed = async () => {
 
 
 
-            <section className="ewcc-section">
+            <section className="ewcc-section admin-reports-page">
 
 
 
@@ -1354,7 +1366,7 @@ const handleMarkReviewed = async () => {
 
 
 
-            <section className="ewcc-section">
+            <section className="ewcc-section admin-reports-page">
 
 
 
@@ -1412,7 +1424,7 @@ const handleMarkReviewed = async () => {
 
 
 
-                    <table className="user-table">
+                    <table className="user-table admin-reports-table">
 
 
 
@@ -1666,7 +1678,7 @@ const handleMarkReviewed = async () => {
 
                 className="ewcc-secondary-button"
 
-                onClick={onBack}
+                onClick={handleDetailBack}
 
               >
 
