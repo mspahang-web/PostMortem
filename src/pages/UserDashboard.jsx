@@ -550,7 +550,7 @@ if (showFinance) {
             </div>
 
 
-            <div className="ewcc-module-grid">
+            <div className="ewcc-module-grid user-module-grid">
 
 
               {/* BORANG */}
@@ -671,57 +671,71 @@ if (showFinance) {
 
               </button>
 
+
+              {/* PERALATAN */}
+
+              <button
+                className="ewcc-module-card"
+                onClick={() => setShowEquipment2028(true)}
+              >
+
+                <div className="module-icon module-green">
+                  📦
+                </div>
+
+                <div className="module-content">
+
+                  <h3>
+                    Cadangan Peralatan 2028
+                  </h3>
+
+                  <p>
+                    Masukkan cadangan peralatan yang diperlukan
+                    oleh sukan anda bagi persediaan SUKMA 2028.
+                  </p>
+
+                </div>
+
+                <span className="module-arrow">
+                  →
+                </span>
+
+              </button>
+
+
+              {/* KEWANGAN */}
+
+              <button
+                className="ewcc-module-card"
+                onClick={() => setShowFinance(true)}
+              >
+
+                <div className="module-icon module-purple">
+                  💰
+                </div>
+
+                <div className="module-content">
+
+                  <h3>
+                    Perbandingan Kewangan
+                  </h3>
+
+                  <p>
+                    Masukkan kelulusan perbelanjaan sukan anda
+                    bagi tempoh 2023–2024 dan 2025–2026.
+                  </p>
+
+                </div>
+
+                <span className="module-arrow">
+                  →
+                </span>
+
+              </button>
+
             </div>
 
           </section>
-
-          <button
-          className="ewcc-module-card"
-          onClick={() => setShowEquipment2028(true)}
-        >
-          <div className="module-icon module-green">
-            📦
-          </div>
-
-          <div className="module-content">
-            <h3>
-              Cadangan Peralatan 2028
-            </h3>
-
-            <p>
-              Masukkan cadangan peralatan yang diperlukan
-              oleh sukan anda bagi persediaan SUKMA 2028.
-            </p>
-          </div>
-
-          <span className="module-arrow">
-            →
-          </span>
-        </button>
-
-          <button
-          className="ewcc-module-card"
-          onClick={() => setShowFinance(true)}
-        >
-          <div className="module-icon module-orange">
-            💰
-          </div>
-
-          <div className="module-content">
-            <h3>
-              Perbandingan Kewangan
-            </h3>
-
-            <p>
-              Masukkan kelulusan perbelanjaan sukan anda
-              bagi tempoh 2023–2024 dan 2025–2026.
-            </p>
-          </div>
-
-          <span className="module-arrow">
-            →
-          </span>
-        </button>
 
 
           {/* ==================================

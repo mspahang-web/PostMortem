@@ -389,8 +389,11 @@ export default function UserFinance({
                                     step="0.01"
                                     aria-label={`${item.label} ${period.label}`}
                                     readOnly={isTotal}
+                                    placeholder="0.00"
                                     value={
-                                      financeData[item.key]?.[period.key] ?? 0
+                                      isTotal
+                                        ? financeData[item.key]?.[period.key] ?? 0
+                                        : financeData[item.key]?.[period.key] || ''
                                     }
                                     onChange={(e) =>
                                       updateFinanceValue(

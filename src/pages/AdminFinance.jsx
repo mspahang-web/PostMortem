@@ -1080,12 +1080,12 @@ function AdminFinance({ onBack }) {
                                         ? 'Dikira automatik'
                                         : undefined
                                     }
+                                    placeholder="0.00"
                                     value={
-                                      financeData[
-                                        item.key
-                                      ]?.[
-                                        '2023_2024'
-                                      ] ?? 0
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                        ? financeData[item.key]?.['2023_2024'] ?? 0
+                                        : financeData[item.key]?.['2023_2024'] || ''
                                     }
                                     onChange={(
                                       e
@@ -1183,12 +1183,12 @@ function AdminFinance({ onBack }) {
                                         ? 'Dikira automatik'
                                         : undefined
                                     }
+                                    placeholder="0.00"
                                     value={
-                                      financeData[
-                                        item.key
-                                      ]?.[
-                                        '2025_2026'
-                                      ] ?? 0
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                        ? financeData[item.key]?.['2025_2026'] ?? 0
+                                        : financeData[item.key]?.['2025_2026'] || ''
                                     }
                                     onChange={(
                                       e

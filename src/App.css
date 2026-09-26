@@ -8529,3 +8529,46 @@ body {
   }
 
 }
+
+
+/* =========================================================
+   USER DASHBOARD MODULES (2 x 2)
+   ========================================================= */
+
+.module-green {
+  background: #dcfce7;
+}
+
+.ewcc-module-grid.user-module-grid {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 600px) {
+
+  .ewcc-module-grid.user-module-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* Section children get 28px side margins; with width: 100% they
+   overflowed and the right edge of the cards was clipped. */
+.ewcc-user-dashboard .ewcc-admin-body .ewcc-section > :not(.ewcc-section-header) {
+  width: auto;
+}
+
+/* Let long KPI text (sport names, status notes) wrap inside the card. */
+.ewcc-user-dashboard .ewcc-kpi-card > div:last-child {
+  min-width: 0;
+}
+
+.ewcc-user-dashboard .ewcc-kpi-card strong,
+.ewcc-user-dashboard .ewcc-kpi-card small {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.ewcc-user-dashboard .ewcc-kpi-card strong {
+  font-size: clamp(20px, 1.9vw, 29px);
+}
