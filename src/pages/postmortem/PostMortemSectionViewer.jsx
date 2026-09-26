@@ -1,3 +1,4 @@
+import { countMedalsByEvent } from '../../lib/medals'
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -434,6 +435,9 @@ const renderSection3 = (data) => {
     ? data.acaraList
     : []
 
+  // Recount per event (stored totals may predate event counting).
+  const medalCounts = countMedalsByEvent(acaraList)
+
   return (
     <div className="pm-report-special">
 
@@ -445,7 +449,7 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {acaraList.length}
+            {medalCounts.events}
           </strong>
         </div>
 
@@ -455,7 +459,7 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {data.jumlahSasaran ?? 0}
+            {medalCounts.sasaran.total}
           </strong>
         </div>
 
@@ -465,7 +469,7 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {data.jumlahPencapaian ?? 0}
+            {medalCounts.pencapaian.total}
           </strong>
         </div>
 

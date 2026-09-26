@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { countMedalsByEvent } from '../../lib/medals'
 
 const createAcara = () => ({
   acara: '',
@@ -39,52 +40,16 @@ function Section3Sasaran({
 
 
   // =========================================================
-  // KIRAAN SASARAN ASAL
+  // KIRAAN SASARAN & PENCAPAIAN (mengikut acara: baris dengan
+  // nama Acara dan pingat yang sama dikira sekali)
   // =========================================================
-  const sasaranSummary = useMemo(() => {
-    const emas = acaraList.filter(
-      (item) => item.sasaran === 'EMAS'
-    ).length
+  const medalCounts = useMemo(
+    () => countMedalsByEvent(acaraList),
+    [acaraList]
+  )
 
-    const perak = acaraList.filter(
-      (item) => item.sasaran === 'PERAK'
-    ).length
-
-    const gangsa = acaraList.filter(
-      (item) => item.sasaran === 'GANGSA'
-    ).length
-
-    return {
-      emas,
-      perak,
-      gangsa,
-      total: emas + perak + gangsa,
-    }
-  }, [acaraList])
-
-  // =========================================================
-  // KIRAAN PENCAPAIAN SEBENAR
-  // =========================================================
-  const pencapaianSummary = useMemo(() => {
-    const emas = acaraList.filter(
-      (item) => item.pingat === 'EMAS'
-    ).length
-
-    const perak = acaraList.filter(
-      (item) => item.pingat === 'PERAK'
-    ).length
-
-    const gangsa = acaraList.filter(
-      (item) => item.pingat === 'GANGSA'
-    ).length
-
-    return {
-      emas,
-      perak,
-      gangsa,
-      total: emas + perak + gangsa,
-    }
-  }, [acaraList])
+  const sasaranSummary = medalCounts.sasaran
+  const pencapaianSummary = medalCounts.pencapaian
 
   // =========================================================
   // KEMASKINI DATA ACARA
@@ -203,6 +168,13 @@ function Section3Sasaran({
           <div>
             • <strong>Pingat / Kedudukan</strong> ialah
             keputusan sebenar selepas pertandingan.
+          </div>
+
+          <div>
+            • Pingat dikira <strong>mengikut acara</strong>. Bagi acara
+            berpasukan, isi satu baris bagi setiap atlet dengan
+            <strong> nama Acara yang sama</strong> (contoh: FOURS LELAKI)
+            supaya pingat pasukan dikira sekali sahaja.
           </div>
 
           <div>

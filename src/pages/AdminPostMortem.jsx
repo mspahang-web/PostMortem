@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getSportName } from '../lib/sports'
+import { countMedalsByEvent } from '../lib/medals'
 import {
   TRAINING_MAX_SCORE,
   TRAINING_RATING_SCORE,
@@ -468,35 +469,28 @@ const getReportMetrics = (report) => {
 
 
 
+  // Counted per event: a team event's rows share one Acara name.
+  const medalCounts =
+
+    countMedalsByEvent(acaraList)
+
+
+
   const jumlahAcara =
 
-    acaraList.length
+    medalCounts.events
 
 
 
   const jumlahSasaran =
 
-    Number(section3.jumlahSasaran) ||
-
-    acaraList.filter(
-
-      (item) => item?.sasaran
-
-    ).length
+    medalCounts.sasaran.total
 
 
 
   const jumlahPencapaian =
 
-    Number(section3.jumlahPencapaian) ||
-
-    acaraList.filter(
-
-      (item) =>
-
-        item?.status === 'Capai'
-
-    ).length
+    medalCounts.pencapaian.total
 
 
 

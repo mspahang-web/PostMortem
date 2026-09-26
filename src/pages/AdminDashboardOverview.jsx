@@ -16,6 +16,7 @@ import {
   getTrainingComponents,
 } from '../lib/training'
 import { getSportName } from '../lib/sports'
+import { countMedalsByEvent } from '../lib/medals'
 
 
 // =========================================================
@@ -114,49 +115,6 @@ function DashboardPanel({
 
 
 // =========================================================
-// NORMALISE
-// =========================================================
-
-function normaliseValue(value) {
-  return String(value || '')
-    .trim()
-    .toLowerCase()
-}
-
-
-// =========================================================
-// MEDAL CHECK
-// =========================================================
-
-function isMedal(value, medal) {
-  const text = normaliseValue(value)
-
-  if (medal === 'emas') {
-    return (
-      text.includes('emas') ||
-      text === 'gold'
-    )
-  }
-
-  if (medal === 'perak') {
-    return (
-      text.includes('perak') ||
-      text === 'silver'
-    )
-  }
-
-  if (medal === 'gangsa') {
-    return (
-      text.includes('gangsa') ||
-      text === 'bronze'
-    )
-  }
-
-  return false
-}
-
-
-// =========================================================
 // SECTION 3
 // =========================================================
 
@@ -204,112 +162,35 @@ function getSection7Issues(report) {
 
 function calculatePerformance(reports) {
 
-  const rows = reports.flatMap(
-    (report) =>
+  // Counted per event within each report (sport), then summed:
+  // a team event's rows share one Acara name and count once.
+  const totals = {
+    jumlahSasaran: 0,
+    jumlahPencapaian: 0,
+    sasaran: { emas: 0, perak: 0, gangsa: 0, total: 0 },
+    pencapaian: { emas: 0, perak: 0, gangsa: 0, total: 0 },
+  }
+
+  reports.forEach((report) => {
+    const counts = countMedalsByEvent(
       getSection3Rows(report)
-  )
+    )
 
-  const validRows = rows.filter(
-    (row) =>
-      row &&
-      (
-        row.acara ||
-        row.atlet ||
-        row.sasaran ||
-        row.pencapaian ||
-        row.pingat
-      )
-  )
+    totals.jumlahSasaran += counts.targetedEvents
+    totals.jumlahPencapaian += counts.achievedEvents
 
-  const jumlahSasaran =
-    validRows.filter(
-      (row) =>
-        row.sasaran &&
-        normaliseValue(
-          row.sasaran
-        ) !== 'tiada sasaran'
-    ).length
+    for (const key of ['emas', 'perak', 'gangsa', 'total']) {
+      totals.sasaran[key] += counts.sasaran[key]
+      totals.pencapaian[key] += counts.pencapaian[key]
+    }
+  })
 
-  const jumlahPencapaian =
-    validRows.filter(
-      (row) =>
-        normaliseValue(
-          row.status
-        ) === 'capai'
-    ).length
-
-  const sasaran = {
-
-    emas:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.sasaran,
-            'emas'
-          )
-      ).length,
-
-    perak:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.sasaran,
-            'perak'
-          )
-      ).length,
-
-    gangsa:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.sasaran,
-            'gangsa'
-          )
-      ).length,
-
-  }
-
-  sasaran.total =
-    sasaran.emas +
-    sasaran.perak +
-    sasaran.gangsa
-
-
-  const pencapaian = {
-
-    emas:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.pingat,
-            'emas'
-          )
-      ).length,
-
-    perak:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.pingat,
-            'perak'
-          )
-      ).length,
-
-    gangsa:
-      validRows.filter(
-        (row) =>
-          isMedal(
-            row.pingat,
-            'gangsa'
-          )
-      ).length,
-
-  }
-
-  pencapaian.total =
-    pencapaian.emas +
-    pencapaian.perak +
-    pencapaian.gangsa
+  const {
+    jumlahSasaran,
+    jumlahPencapaian,
+    sasaran,
+    pencapaian,
+  } = totals
 
 
   const kadarPencapaian =

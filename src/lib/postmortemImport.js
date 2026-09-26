@@ -4,6 +4,7 @@
 // labels, not fixed cells, so tables of any length still line up.
 import { columnIndex, columnLetters, readXlsx } from './xlsxReader'
 import { TRAINING_COMPONENTS, TRAINING_RATINGS } from './training'
+import { withEventMedalTotals } from './medals'
 
 const SECTION_TITLES = {
   A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7,
@@ -268,22 +269,9 @@ function parseSection3(grid, range, warn) {
     acaraList.push(item)
   }
 
-  const countBy = (field, value) => acaraList.filter((item) => item[field] === value).length
-  const sasaran = { emas: countBy('sasaran', 'EMAS'), perak: countBy('sasaran', 'PERAK'), gangsa: countBy('sasaran', 'GANGSA') }
-  const pencapaian = { emas: countBy('pingat', 'EMAS'), perak: countBy('pingat', 'PERAK'), gangsa: countBy('pingat', 'GANGSA') }
-
+  // Totals are counted per event (see lib/medals.js).
   return {
-    data: {
-      acaraList,
-      jumlahSasaran: sasaran.emas + sasaran.perak + sasaran.gangsa,
-      jumlahPencapaian: pencapaian.emas + pencapaian.perak + pencapaian.gangsa,
-      sasaranEmas: sasaran.emas,
-      sasaranPerak: sasaran.perak,
-      sasaranGangsa: sasaran.gangsa,
-      pencapaianEmas: pencapaian.emas,
-      pencapaianPerak: pencapaian.perak,
-      pencapaianGangsa: pencapaian.gangsa,
-    },
+    data: withEventMedalTotals({ acaraList }),
     count: acaraList.length,
   }
 }
