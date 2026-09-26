@@ -12,7 +12,8 @@ function App() {
   // PAGE
   // ==========================================
 
-  const [page, setPage] = useState('home')
+  // The app opens straight on the login screen.
+  const [page, setPage] = useState('login')
 
   // ==========================================
   // LOGIN
@@ -226,7 +227,7 @@ function App() {
 
       setPassword('')
 
-      setPage('home')
+      setPage('login')
     }
 
     return (
@@ -515,7 +516,7 @@ if (page === 'dashboard') {
 
     setPassword('')
 
-    setPage('home')
+    setPage('login')
 
   }
 
