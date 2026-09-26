@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import {
+  TRAINING_MAX_SCORE,
+  TRAINING_RATING_SCORE,
+  getTrainingComponents,
+} from '../lib/training'
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
 
 function AdminPostMortem({
@@ -498,27 +503,11 @@ const getReportMetrics = (report) => {
 
   const latihanItems =
 
-    Array.isArray(section5)
-
-      ? section5
-
-      : []
+    getTrainingComponents(section5)
 
 
 
-  const ratingMap = {
-
-    'Tidak Baik': 1,
-
-    'Kurang Baik': 2,
-
-    'Sederhana': 3,
-
-    'Baik': 4,
-
-    'Sangat Baik': 5,
-
-  }
+  const ratingMap = TRAINING_RATING_SCORE
 
 
 
@@ -2374,7 +2363,9 @@ const handleMarkReviewed = async () => {
 
                                         width: `${
 
-                                          item.rating * 20
+                                          (item.rating /
+                                            TRAINING_MAX_SCORE) *
+                                          100
 
                                         }%`,
 

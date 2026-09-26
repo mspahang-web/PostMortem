@@ -9,6 +9,12 @@ import {
   FINANCE_ITEMS,
   normaliseFinanceData,
 } from '../lib/finance'
+import {
+  TRAINING_MAX_SCORE,
+  TRAINING_RATINGS,
+  TRAINING_RATING_SCORE,
+  getTrainingComponents,
+} from '../lib/training'
 
 
 // =========================================================
@@ -330,21 +336,9 @@ function calculatePerformance(reports) {
 // TRAINING ANALYTICS
 // =========================================================
 
-const ratingOrder = [
-  'Sangat Baik',
-  'Baik',
-  'Sederhana',
-  'Kurang Baik',
-  'Tidak Baik',
-]
+const ratingOrder = TRAINING_RATINGS
 
-const ratingScore = {
-  'Sangat Baik': 5,
-  'Baik': 4,
-  'Sederhana': 3,
-  'Kurang Baik': 2,
-  'Tidak Baik': 1,
-}
+const ratingScore = TRAINING_RATING_SCORE
 
 
 function getTrainingItems(reports) {
@@ -352,14 +346,9 @@ function getTrainingItems(reports) {
   return reports.flatMap(
     (report) => {
 
-      const section5 =
+      return getTrainingComponents(
         report?.section_5
-
-      if (Array.isArray(section5)) {
-        return section5
-      }
-
-      return []
+      )
     }
   )
 }
@@ -420,8 +409,60 @@ function calculateTrainingAnalytics(
       : '—'
 
 
+  // One row per component, averaged across all reports.
+  const componentMap = new Map()
+
+  items.forEach((item) => {
+    const title =
+      item?.title || 'Komponen'
+
+    if (!componentMap.has(title)) {
+      componentMap.set(title, [])
+    }
+
+    const score =
+      ratingScore[item?.rating]
+
+    if (score) {
+      componentMap.get(title).push(score)
+    }
+  })
+
+  const components =
+    [...componentMap].map(
+      ([title, scores]) => {
+        if (scores.length === 0) {
+          return {
+            title,
+            count: 0,
+            average: null,
+            rating: null,
+          }
+        }
+
+        const componentAverage =
+          scores.reduce(
+            (total, score) =>
+              total + score,
+            0
+          ) / scores.length
+
+        return {
+          title,
+          count: scores.length,
+          average: componentAverage,
+          rating:
+            ratingOrder[
+              TRAINING_MAX_SCORE -
+                Math.round(componentAverage)
+            ],
+        }
+      }
+    )
+
   return {
     items,
+    components,
     ratedItems,
     distribution,
     totalRatings,
@@ -442,7 +483,7 @@ function TrainingAnalytics({
     distribution,
     average,
     totalRatings,
-    items,
+    components,
   } = analytics
 
 
@@ -527,7 +568,7 @@ function TrainingAnalytics({
                 marginLeft: '4px',
               }}
             >
-              / 5
+              / {TRAINING_MAX_SCORE}
             </small>
           </strong>
         </div>
@@ -709,7 +750,7 @@ function TrainingAnalytics({
           }}
         >
 
-          {items.length === 0 ? (
+          {components.length === 0 ? (
 
             <span
               style={{
@@ -722,7 +763,7 @@ function TrainingAnalytics({
 
           ) : (
 
-            items.map(
+            components.map(
               (item, index) => (
 
                 <div
@@ -779,8 +820,24 @@ function TrainingAnalytics({
                         'nowrap',
                     }}
                   >
-                    {item?.rating ||
-                      'Belum dinilai'}
+                    {item.rating
+                      ? `${item.rating} · ${item.average.toFixed(1)}`
+                      : 'Belum dinilai'}
+
+                    {item.count > 0 && (
+                      <small
+                        style={{
+                          display: 'block',
+                          textAlign: 'right',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          color: '#9aa5b4',
+                          marginTop: '2px',
+                        }}
+                      >
+                        {item.count} penilaian
+                      </small>
+                    )}
                   </strong>
 
                 </div>
