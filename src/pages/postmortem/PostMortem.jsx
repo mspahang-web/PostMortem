@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { UserPageHero } from '../../components/UserLayout'
+import PageHero from '../../components/PageHero'
 import { supabase } from '../../lib/supabase'
 
 import Section1MaklumatSukan from './Section1MaklumatSukan'
@@ -1155,7 +1155,7 @@ function PostMortem({
 
     <>
 
-          <UserPageHero
+          <PageHero
             eyebrow="EWCC POST-MORTEM • BORANG LAPORAN"
             title="Laporan Post-Mortem"
             description="Lengkapkan laporan post-mortem secara berperingkat. Klik nombor bahagian untuk terus ke bahagian tersebut."

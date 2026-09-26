@@ -1,7 +1,6 @@
 // Shell for every sport-user page: the same sidebar and page header
 // as the admin dashboard, with the user's own menu.
 import '../styles/AdminDashboard.css'
-import '../styles/AdminDashboardOverview.css'
 import { getSportName } from '../lib/sports'
 
 const USER_MENU = [
@@ -10,48 +9,6 @@ const USER_MENU = [
   { key: 'equipment', icon: '⚙', label: 'Peralatan 2028' },
   { key: 'finance', icon: 'RM', label: 'Kewangan' },
 ]
-
-const DEFAULT_META = [
-  'SUKMA XXII SELANGOR 2026 & PARA SUKMA SELANGOR 2026',
-  'MAJLIS SUKAN PAHANG',
-]
-
-export function UserPageHero({
-  eyebrow,
-  title,
-  description,
-  meta = DEFAULT_META,
-}) {
-  return (
-    <section className="ewcc-dashboard-hero">
-      <div className="ewcc-dashboard-hero-content">
-        <span className="ewcc-dashboard-eyebrow">
-          {eyebrow}
-        </span>
-
-        <h2>
-          {title}
-        </h2>
-
-        {description && (
-          <p>
-            {description}
-          </p>
-        )}
-
-        {meta.length > 0 && (
-          <div className="ewcc-dashboard-hero-meta">
-            {meta.map((item) => (
-              <span key={item}>
-                {item}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
-  )
-}
 
 export default function UserLayout({
   userProfile,

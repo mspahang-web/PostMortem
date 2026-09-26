@@ -12,7 +12,7 @@ import {
   withComputedTotal,
 } from '../lib/finance'
 import '../styles/Equipment2028.css'
-import { UserPageHero } from '../components/UserLayout'
+import PageHero from '../components/PageHero'
 import { getSportName } from '../lib/sports'
 
 const inputStyle = {
@@ -190,7 +190,7 @@ export default function UserFinance({
 
           {/* HEADER */}
 
-          <UserPageHero
+          <PageHero
             eyebrow="POST-MORTEM • MAKLUMAT KEWANGAN"
             title="Perbandingan Kewangan"
             description="Masukkan kelulusan perbelanjaan sukan anda bagi tempoh 2023–2024 dan 2025–2026. Jumlah dan perubahan dikira secara automatik."

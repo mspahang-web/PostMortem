@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import PageHero from '../components/PageHero'
 
 function AdminSports({
   sports,
@@ -78,6 +79,22 @@ function AdminSports({
 
   return (
 
+    <>
+      <PageHero
+        eyebrow="EWCC POST-MORTEM • PENGURUSAN SISTEM"
+        title="Senarai Sukan"
+        description="Senarai sukan aktif Kontinjen Pahang yang didaftarkan dalam sistem EWCC."
+        actions={
+          <button
+            type="button"
+            className="ewcc-secondary-button"
+            onClick={onBack}
+          >
+            ← Kembali
+          </button>
+        }
+      />
+
     <section className="ewcc-section admin-sports-page">
 
 
@@ -85,34 +102,6 @@ function AdminSports({
           HEADER
       ================================================= */}
 
-      <div className="ewcc-section-title admin-page-heading">
-
-        <div>
-
-          <span>
-            PENGURUSAN SISTEM
-          </span>
-
-          <h2>
-            Senarai Sukan
-          </h2>
-
-          <p>
-            Senarai sukan aktif Kontinjen Pahang
-            yang didaftarkan dalam sistem EWCC.
-          </p>
-
-        </div>
-
-
-        <button
-          className="ewcc-secondary-button"
-          onClick={onBack}
-        >
-          ← Kembali
-        </button>
-
-      </div>
 
 
       {/* =================================================
@@ -372,6 +361,7 @@ function AdminSports({
 
 
     </section>
+    </>
 
   )
 

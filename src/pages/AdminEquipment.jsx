@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
 import '../styles/Equipment2028.css'
 import { getSportName } from '../lib/sports'
+import PageHero from '../components/PageHero'
 
 function formatCurrency(value) {
   return Number(value || 0).toLocaleString('ms-MY', {
@@ -151,31 +152,20 @@ export default function AdminEquipment({
 
           {/* HEADER */}
 
-          <div className="ewcc-section-title admin-page-heading">
-
-            <div>
-              <span>
-                PENGURUSAN SISTEM
-              </span>
-
-              <h2>
-                Cadangan Peralatan 2028
-              </h2>
-
-              <p>
-                Pemantauan cadangan peralatan SUKMA 2028 mengikut sukan.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className="ewcc-secondary-button"
-              onClick={onBack}
-            >
-              ← Kembali
-            </button>
-
-          </div>
+          <PageHero
+            eyebrow="EWCC POST-MORTEM • PENGURUSAN SISTEM"
+            title="Cadangan Peralatan 2028"
+            description="Pemantauan cadangan peralatan SUKMA 2028 mengikut sukan."
+            actions={
+              <button
+                type="button"
+                className="ewcc-secondary-button"
+                onClick={onBack}
+              >
+                ← Kembali
+              </button>
+            }
+          />
 
           {/* KPI */}
 

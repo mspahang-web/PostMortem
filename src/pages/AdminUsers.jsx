@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import PageHero from '../components/PageHero'
 
 function AdminUsers({
   users,
@@ -27,22 +28,24 @@ function AdminUsers({
   }, [users, sports, search])
 
   return (
+    <>
+      <PageHero
+        eyebrow="EWCC POST-MORTEM • PENGURUSAN SISTEM"
+        title="Pengurusan Pengguna"
+        description="Senarai akaun pengguna dan status laporan mereka."
+        actions={
+          <>
+            <button type="button" className="ewcc-secondary-button" onClick={onBack}>
+              ← Kembali
+            </button>
+            <button type="button" className="ewcc-primary-button" onClick={onAddUser}>
+              + Tambah Pengguna
+            </button>
+          </>
+        }
+      />
+
     <section className="ewcc-section admin-users-page">
-      <div className="ewcc-section-title admin-page-heading">
-        <div>
-          <span>PENGURUSAN SISTEM</span>
-          <h2>Pengurusan Pengguna</h2>
-          <p>Senarai akaun pengguna dan status laporan mereka.</p>
-        </div>
-        <div className="admin-page-actions">
-          <button type="button" className="ewcc-secondary-button" onClick={onBack}>
-            ← Kembali
-          </button>
-          <button type="button" className="ewcc-primary-button" onClick={onAddUser}>
-            + Tambah Pengguna
-          </button>
-        </div>
-      </div>
 
       <section className="ewcc-kpi-grid">
         <div className="ewcc-kpi-card">
@@ -120,6 +123,7 @@ function AdminUsers({
         )}
       </div>
     </section>
+    </>
   )
 }
 

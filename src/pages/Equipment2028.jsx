@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
 import '../styles/Equipment2028.css'
-import { UserPageHero } from '../components/UserLayout'
+import PageHero from '../components/PageHero'
 import { getSportName } from '../lib/sports'
 
 const EMPTY_FORM = {
@@ -457,7 +457,7 @@ export default function Equipment2028({
 
           {/* HEADER */}
 
-          <UserPageHero
+          <PageHero
             eyebrow="SUKMA 2028 • CADANGAN PERALATAN"
             title="Cadangan Peralatan 2028"
             description="Masukkan cadangan peralatan yang diperlukan oleh sukan anda bagi persediaan SUKMA 2028."

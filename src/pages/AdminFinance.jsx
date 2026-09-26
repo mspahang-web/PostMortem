@@ -12,6 +12,7 @@ import {
   withComputedTotal,
 } from '../lib/finance'
 import { getSportName } from '../lib/sports'
+import PageHero from '../components/PageHero'
 
 function AdminFinance({ onBack }) {
   const [reports, setReports] = useState([])
@@ -382,95 +383,20 @@ function AdminFinance({ onBack }) {
             HEADER
             ====================================== */}
 
-        <header
-          style={{
-            background:
-              '#ffffff',
-            borderBottom:
-              '1px solid #e3e8ee',
-            padding:
-              '24px 32px',
-            display: 'flex',
-            alignItems:
-              'center',
-            justifyContent:
-              'space-between',
-            gap: '20px',
-          }}
-        >
-          <div>
-            <span
-              style={{
-                display:
-                  'block',
-                fontSize:
-                  '11px',
-                fontWeight:
-                  800,
-                letterSpacing:
-                  '1.4px',
-                color:
-                  '#d2872c',
-                marginBottom:
-                  '7px',
-              }}
+        <PageHero
+          eyebrow="EWCC POST-MORTEM • KEWANGAN"
+          title="Statistik Kewangan"
+          description="Pengurusan peruntukan dan kelulusan perbelanjaan post-mortem."
+          actions={
+            <button
+              type="button"
+              className="ewcc-secondary-button"
+              onClick={onBack}
             >
-              EWCC POST-MORTEM
-            </span>
-
-            <h1
-              style={{
-                margin: 0,
-                fontSize:
-                  '25px',
-                fontWeight:
-                  800,
-                color:
-                  '#23344d',
-              }}
-            >
-              Statistik Kewangan
-            </h1>
-
-            <p
-              style={{
-                margin:
-                  '7px 0 0',
-                fontSize:
-                  '13px',
-                color:
-                  '#7c899a',
-              }}
-            >
-              Pengurusan peruntukan dan
-              kelulusan perbelanjaan
-              post-mortem.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={onBack}
-            style={{
-              border:
-                '1px solid #d9e0e8',
-              background:
-                '#ffffff',
-              color:
-                '#40516a',
-              borderRadius:
-                '10px',
-              padding:
-                '11px 18px',
-              fontWeight:
-                750,
-              cursor:
-                'pointer',
-            }}
-          >
-            ← Kembali
-          </button>
-        </header>
+              ← Kembali
+            </button>
+          }
+        />
 
         {/* ======================================
             CONTENT

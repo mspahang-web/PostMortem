@@ -7,6 +7,7 @@ import {
   getTrainingComponents,
 } from '../lib/training'
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
+import PageHero from '../components/PageHero'
 
 function AdminPostMortem({
 
@@ -890,63 +891,23 @@ const handleMarkReviewed = async () => {
 
 
 
-          <section className="ewcc-section">
-
-
-
-            <div className="ewcc-section-title admin-page-heading">
-
-
-
-              <div>
-
-
-
-                <span>
-
-                  PENGURUSAN LAPORAN
-
-                </span>
-
-
-
-                <h2>
-
-                  Laporan Post-Mortem
-
-                </h2>
-
-
-
-              </div>
-
-
-
-              <button
-
-                className="ewcc-secondary-button"
-
-                onClick={loadReports}
-
-                disabled={loading}
-
-              >
-
-                {loading
-
-                  ? 'Memuatkan...'
-
-                  : '↻ Muat Semula'}
-
-              </button>
-
-
-
-            </div>
-
-
-
-          </section>
+            <PageHero
+              eyebrow="EWCC POST-MORTEM • PENGURUSAN LAPORAN"
+              title="Laporan Post-Mortem"
+              description="Semak, tapis dan buka laporan post-mortem setiap sukan."
+              actions={
+                <button
+                  type="button"
+                  className="ewcc-secondary-button"
+                  onClick={loadReports}
+                  disabled={loading}
+                >
+                  {loading
+                    ? 'Memuatkan...'
+                    : '↻ Muat Semula'}
+                </button>
+              }
+            />
 
 
 

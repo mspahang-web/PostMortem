@@ -3,7 +3,8 @@ import { supabase } from '../lib/supabase'
 import Equipment2028 from './Equipment2028'
 import UserFinance from './UserFinance'
 import PostMortem from './postmortem/PostMortem'
-import UserLayout, { UserPageHero } from '../components/UserLayout'
+import UserLayout from '../components/UserLayout'
+import PageHero from '../components/PageHero'
 import { getSportName } from '../lib/sports'
 
 function UserDashboard({
@@ -295,7 +296,7 @@ if (content) {
       onLogout={handleUserLogout}
     >
 
-          <UserPageHero
+          <PageHero
             eyebrow="EWCC POST-MORTEM • PENGGUNA SUKAN"
             title={`Selamat Datang, ${userProfile?.name || 'Pengguna'}`}
             description="Selamat datang ke Sistem Pengurusan Post-Mortem Kontinjen Pahang."
