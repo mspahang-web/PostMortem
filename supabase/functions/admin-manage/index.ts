@@ -35,9 +35,28 @@ Deno.serve(async (req) => {
     return fail('Kaedah tidak dibenarkan.', 405)
   }
 
+  // Service key: legacy name first, then the newer SUPABASE_SECRET_KEYS.
+  let serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || ''
+  if (!serviceKey) {
+    try {
+      const keys = JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS') || '{}')
+      serviceKey = keys.default || Object.values(keys)[0] || ''
+    } catch {
+      serviceKey = ''
+    }
+  }
+
+  if (!serviceKey) {
+    return fail(
+      'Kunci pelayan Supabase tidak tersedia untuk fungsi ini. ' +
+        'Semak Edge Functions → Secrets (SUPABASE_SERVICE_ROLE_KEY).',
+      500
+    )
+  }
+
   const admin = createClient(
     Deno.env.get('SUPABASE_URL')!,
-    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+    String(serviceKey),
     { auth: { persistSession: false } }
   )
 
