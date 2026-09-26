@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const DEFAULT_ITEMS = [
   {
@@ -83,12 +83,6 @@ const Section11Sukma2028 = ({
     ...(initialData || {}),
   }))
 
-  useEffect(() => {
-    setFormData({
-      ...createDefaultData(),
-      ...(initialData || {}),
-    })
-  }, [initialData])
 
   const handleChange = (key, value) => {
     setFormData((current) => ({

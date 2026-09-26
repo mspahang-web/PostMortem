@@ -17,7 +17,6 @@ function PostMortemReview({
   section13Data,
   onBack,
   onSubmit,
-  onComplete,
 }) {
   const sectionData = [
     {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const STATUS_OPTIONS = [
   {
@@ -41,14 +41,6 @@ const Section10StatusAtlet = ({
       : [createEmptyAthlete()]
   )
 
-  useEffect(() => {
-    if (
-      Array.isArray(initialData) &&
-      initialData.length > 0
-    ) {
-      setAthletes(initialData)
-    }
-  }, [initialData])
 
   const updateAthlete = (
     index,

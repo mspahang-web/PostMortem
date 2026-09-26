@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const categoryOptions = [
   'Teknikal Pertandingan',
@@ -35,11 +35,6 @@ function Section7Isu({
       : [createInitialIssue()]
   )
 
-  useEffect(() => {
-    if (Array.isArray(initialData) && initialData.length) {
-      setIssues(initialData)
-    }
-  }, [initialData])
 
   // =========================================================
   // UPDATE ISSUE

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const createInitialFactors = (count) =>
   Array.from({ length: count }, () => '')
@@ -25,21 +25,6 @@ function Section6Faktor({
       : defaultData.faktorKegagalan
   )
 
-  useEffect(() => {
-    if (initialData) {
-      setFaktorKejayaan(
-        initialData.faktorKejayaan?.length
-          ? initialData.faktorKejayaan
-          : defaultData.faktorKejayaan
-      )
-
-      setFaktorKegagalan(
-        initialData.faktorKegagalan?.length
-          ? initialData.faktorKegagalan
-          : defaultData.faktorKegagalan
-      )
-    }
-  }, [initialData])
 
   // =========================================================
   // UPDATE FAKTOR KEJAYAAN

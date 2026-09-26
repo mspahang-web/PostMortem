@@ -99,7 +99,7 @@ function UserDashboard({
 
   useEffect(() => {
 
-    loadReportStatus()
+    Promise.resolve().then(loadReportStatus)
 
   }, [])
 

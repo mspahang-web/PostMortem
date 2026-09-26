@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const createEmptyProtest = () => ({
   acaraTarikh: '',
@@ -21,14 +21,6 @@ const Section8Bantahan = ({
       : [createEmptyProtest()]
   )
 
-  useEffect(() => {
-    if (
-      Array.isArray(initialData) &&
-      initialData.length > 0
-    ) {
-      setProtests(initialData)
-    }
-  }, [initialData])
 
   const updateProtest = (
     index,

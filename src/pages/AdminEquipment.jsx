@@ -80,7 +80,7 @@ export default function AdminEquipment({
   }
 
   useEffect(() => {
-    loadEquipment()
+    Promise.resolve().then(loadEquipment)
   }, [])
 
   /*

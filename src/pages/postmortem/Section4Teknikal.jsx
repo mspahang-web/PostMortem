@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const defaultData = {
   kekuatanUtama: '',
@@ -71,18 +71,11 @@ function Section4Teknikal({
   onNext,
   onBack,
 }) {
-  const [formData, setFormData] = useState(
-    initialData || defaultData
-  )
+  const [formData, setFormData] = useState({
+    ...defaultData,
+    ...(initialData || {}),
+  })
 
-  useEffect(() => {
-    if (initialData) {
-      setFormData({
-        ...defaultData,
-        ...initialData,
-      })
-    }
-  }, [initialData])
 
   const updateField = (field, value) => {
     setFormData((prev) => ({

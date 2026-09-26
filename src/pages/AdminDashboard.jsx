@@ -18,7 +18,6 @@ function AdminDashboard({
 
   const [adminView, setAdminView] = useState('dashboard')
 
-  const [showPostMortem, setShowPostMortem] = useState(false)
 
   const [selectedPostMortemReportId, setSelectedPostMortemReportId] =
   useState(null)
@@ -32,7 +31,6 @@ function AdminDashboard({
   const [sports, setSports] = useState([])
 
   const [postMortemReports, setPostMortemReports] = useState([])
-  const [loadingPostMortem, setLoadingPostMortem] = useState(false)
 
   const [showUserModal, setShowUserModal] = useState(false)
 
@@ -130,7 +128,6 @@ function AdminDashboard({
 // ==========================================
 
 const loadPostMortemReports = async () => {
-  setLoadingPostMortem(true)
 
   try {
     const { data, error } = await supabase
@@ -165,9 +162,6 @@ const loadPostMortemReports = async () => {
     )
 
     setPostMortemReports([])
-
-  } finally {
-    setLoadingPostMortem(false)
   }
 }
 
@@ -326,17 +320,16 @@ if (existingUser) {
   // ==========================================
 
   useEffect(() => {
-    loadUsers()
-    loadSports()
-    loadPostMortemReports()
+    Promise.resolve().then(() => {
+      loadUsers()
+      loadSports()
+      loadPostMortemReports()
+    })
   }, [])
 
   // ==========================================
   // POST-MORTEM SUMMARY
   // ==========================================
-
-const totalPostMortem =
-  postMortemReports.length
 
 const draftPostMortem =
   postMortemReports.filter(
@@ -509,7 +502,6 @@ const sportsWithReports =
             onClick={() => {
               setAdminView('reports')
               setSelectedPostMortemReportId(null)
-              setShowPostMortem(true)
             }}
           >
 
@@ -530,7 +522,6 @@ const sportsWithReports =
           }`}
           onClick={() => {
             setAdminView('equipment')
-            setShowPostMortem(false)
           }}
         >
           <span className="sidebar-menu-icon">
@@ -550,7 +541,6 @@ const sportsWithReports =
           }`}
           onClick={() => {
             setAdminView('finance')
-            setShowPostMortem(false)
           }}
         >
           <span className="sidebar-menu-icon">
@@ -621,17 +611,14 @@ const sportsWithReports =
             postMortemReports={postMortemReports}
             onOpenEquipment={() => {
               setAdminView('equipment')
-              setShowPostMortem(false)
             }}
             onOpenReports={() => {
               setAdminView('reports')
               setSelectedPostMortemReportId(null)
-              setShowPostMortem(true)
             }}
             onOpenReport={(reportId) => {
               setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
-              setShowPostMortem(true)
             }}
           />
 
@@ -645,7 +632,6 @@ const sportsWithReports =
             onOpenReport={(reportId) => {
               setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
-              setShowPostMortem(true)
             }}
             onBack={() => setAdminView('dashboard')}
           />
@@ -658,7 +644,6 @@ const sportsWithReports =
             onOpenReport={(reportId) => {
               setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
-              setShowPostMortem(true)
             }}
             onBack={() => setAdminView('dashboard')}
           />
@@ -676,7 +661,6 @@ const sportsWithReports =
               embedded
               initialReportId={selectedPostMortemReportId}
               onBack={async () => {
-                setShowPostMortem(false)
                 setSelectedPostMortemReportId(null)
                 setAdminView('dashboard')
                 await loadPostMortemReports()
@@ -887,7 +871,6 @@ const sportsWithReports =
                     onClick={() => {
                       setAdminView('reports')
                       setSelectedPostMortemReportId(null)
-                      setShowPostMortem(true)
                     }}
                     >
 
@@ -979,7 +962,6 @@ const sportsWithReports =
         if (sport.reportId) {
           setAdminView('reports')
           setSelectedPostMortemReportId(sport.reportId)
-          setShowPostMortem(true)
         }
       }}
       style={{

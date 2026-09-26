@@ -50,7 +50,9 @@ export default function Equipment2028({
   }, [equipment])
 
   useEffect(() => {
-    loadEquipment()
+    Promise.resolve().then(loadEquipment)
+    // Load once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function getCurrentUser() {

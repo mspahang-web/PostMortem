@@ -134,6 +134,16 @@ function AdminPostMortem({
 
       setReports(data || [])
 
+      if (initialReportId) {
+        setSelectedReport((current) =>
+          current ||
+          (data || []).find(
+            (item) => item.id === initialReportId
+          ) ||
+          null
+        )
+      }
+
 
 
     } catch (error) {
@@ -182,69 +192,13 @@ function AdminPostMortem({
 
 
 
-    loadReports()
-
-
-
+    Promise.resolve().then(loadReports)
+    // Load once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
 
-  useEffect(() => {
-
-
-
-  if (
-
-    !initialReportId ||
-
-    selectedReport ||
-
-    reports.length === 0
-
-  ) {
-
-    return
-
-  }
-
-
-
-
-
-  const report = reports.find(
-
-    (item) =>
-
-      item.id === initialReportId
-
-  )
-
-
-
-
-
-  if (report) {
-
-
-
-    setSelectedReport(report)
-
-
-
-  }
-
-
-
-}, [
-
-  initialReportId,
-
-  reports,
-
-  selectedReport,
-
-])
 
 
 

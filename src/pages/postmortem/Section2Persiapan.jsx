@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const componentDefinitions = [
   {
@@ -39,117 +39,116 @@ const createDefaultData = () => ({
   programPemulihanRehabilitasi: [createRow()],
 })
 
+function getInitialFormData(initialData) {
+  if (!initialData) {
+    return createDefaultData()
+  }
+
+  /*
+   * Sokong format baharu:
+   * {
+   *   latihanPusat: [...],
+   *   kejohanan: [...],
+   *   ...
+   * }
+   */
+  if (
+    !Array.isArray(initialData) &&
+    typeof initialData === 'object'
+  ) {
+    return {
+      ...createDefaultData(),
+      ...initialData,
+
+      latihanPusat:
+        Array.isArray(initialData.latihanPusat) &&
+        initialData.latihanPusat.length > 0
+          ? initialData.latihanPusat
+          : [createRow()],
+
+      kejohanan:
+        Array.isArray(initialData.kejohanan) &&
+        initialData.kejohanan.length > 0
+          ? initialData.kejohanan
+          : [createRow()],
+
+      ujianPenilaiPrestasi:
+        Array.isArray(
+          initialData.ujianPenilaiPrestasi
+        ) &&
+        initialData.ujianPenilaiPrestasi.length > 0
+          ? initialData.ujianPenilaiPrestasi
+          : [createRow()],
+
+      programSainsSukan:
+        Array.isArray(initialData.programSainsSukan) &&
+        initialData.programSainsSukan.length > 0
+          ? initialData.programSainsSukan
+          : [createRow()],
+
+      programPemulihanRehabilitasi:
+        Array.isArray(
+          initialData.programPemulihanRehabilitasi
+        ) &&
+        initialData.programPemulihanRehabilitasi.length > 0
+          ? initialData.programPemulihanRehabilitasi
+          : [createRow()],
+    }
+  }
+
+  /*
+   * Sokongan untuk draft lama yang masih berbentuk:
+   *
+   * [
+   *   {
+   *     komponen: 'Latihan Pusat',
+   *     ...
+   *   }
+   * ]
+   *
+   * Data lama tidak dibuang.
+   */
+  if (Array.isArray(initialData)) {
+    const converted = createDefaultData()
+
+    componentDefinitions.forEach((component) => {
+      const oldRows = initialData.filter(
+        (item) =>
+          item?.komponen === component.label
+      )
+
+      if (oldRows.length > 0) {
+        converted[component.key] = oldRows.map(
+          (item) => ({
+            bilanganAtlet:
+              item.bilanganAtlet || '',
+            lokasi:
+              item.lokasi || '',
+            tempoh:
+              item.tempoh || '',
+            pencapaian:
+              item.pencapaian || '',
+            catatan:
+              item.catatan || '',
+          })
+        )
+      }
+    })
+
+    return converted
+  }
+
+  return createDefaultData()
+}
+
 function Section2Persiapan({
   initialData,
   onNext,
   onBack,
 }) {
-  const [formData, setFormData] = useState(
-    createDefaultData()
+  const [formData, setFormData] = useState(() =>
+    getInitialFormData(initialData)
   )
-
-  useEffect(() => {
-    if (!initialData) {
-      setFormData(createDefaultData())
-      return
-    }
-
-    /*
-     * Sokong format baharu:
-     * {
-     *   latihanPusat: [...],
-     *   kejohanan: [...],
-     *   ...
-     * }
-     */
-    if (
-      !Array.isArray(initialData) &&
-      typeof initialData === 'object'
-    ) {
-      setFormData({
-        ...createDefaultData(),
-        ...initialData,
-
-        latihanPusat:
-          Array.isArray(initialData.latihanPusat) &&
-          initialData.latihanPusat.length > 0
-            ? initialData.latihanPusat
-            : [createRow()],
-
-        kejohanan:
-          Array.isArray(initialData.kejohanan) &&
-          initialData.kejohanan.length > 0
-            ? initialData.kejohanan
-            : [createRow()],
-
-        ujianPenilaiPrestasi:
-          Array.isArray(
-            initialData.ujianPenilaiPrestasi
-          ) &&
-          initialData.ujianPenilaiPrestasi.length > 0
-            ? initialData.ujianPenilaiPrestasi
-            : [createRow()],
-
-        programSainsSukan:
-          Array.isArray(initialData.programSainsSukan) &&
-          initialData.programSainsSukan.length > 0
-            ? initialData.programSainsSukan
-            : [createRow()],
-
-        programPemulihanRehabilitasi:
-          Array.isArray(
-            initialData.programPemulihanRehabilitasi
-          ) &&
-          initialData.programPemulihanRehabilitasi.length > 0
-            ? initialData.programPemulihanRehabilitasi
-            : [createRow()],
-      })
-
-      return
-    }
-
-    /*
-     * Sokongan untuk draft lama yang masih berbentuk:
-     *
-     * [
-     *   {
-     *     komponen: 'Latihan Pusat',
-     *     ...
-     *   }
-     * ]
-     *
-     * Data lama tidak dibuang.
-     */
-    if (Array.isArray(initialData)) {
-      const converted = createDefaultData()
-
-      componentDefinitions.forEach((component) => {
-        const oldRows = initialData.filter(
-          (item) =>
-            item?.komponen === component.label
-        )
-
-        if (oldRows.length > 0) {
-          converted[component.key] = oldRows.map(
-            (item) => ({
-              bilanganAtlet:
-                item.bilanganAtlet || '',
-              lokasi:
-                item.lokasi || '',
-              tempoh:
-                item.tempoh || '',
-              pencapaian:
-                item.pencapaian || '',
-              catatan:
-                item.catatan || '',
-            })
-          )
-        }
-      })
-
-      setFormData(converted)
-    }
-  }, [initialData])
 
   const updateRow = (
     componentKey,

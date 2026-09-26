@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const DEFAULT_DATA = {
   keberkesananBarisanKejurulatihan: '',
@@ -17,12 +17,6 @@ const Section9Kejurulatihan = ({
     ...(initialData || {}),
   })
 
-  useEffect(() => {
-    setFormData({
-      ...DEFAULT_DATA,
-      ...(initialData || {}),
-    })
-  }, [initialData])
 
   const handleChange = (field, value) => {
     setFormData((current) => ({

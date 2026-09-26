@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const DEFAULT_DATA = {
   perkaraPerluDiperbaiki: ['', '', ''],
@@ -16,12 +16,6 @@ const Section12Rumusan = ({
     ...(initialData || {}),
   })
 
-  useEffect(() => {
-    setFormData({
-      ...DEFAULT_DATA,
-      ...(initialData || {}),
-    })
-  }, [initialData])
 
   const updatePerkara = (index, value) => {
     setFormData((current) => {

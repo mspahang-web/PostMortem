@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const createAcara = () => ({
   acara: '',
@@ -37,11 +37,6 @@ function Section3Sasaran({
       : defaultData.acaraList
   )
 
-  useEffect(() => {
-    if (initialData?.acaraList?.length) {
-      setAcaraList(initialData.acaraList)
-    }
-  }, [initialData])
 
   // =========================================================
   // KIRAAN SASARAN ASAL

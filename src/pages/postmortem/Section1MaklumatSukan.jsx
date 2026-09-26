@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const defaultFormData = {
   pengurusPasukan: '',
@@ -20,16 +20,12 @@ const getFormData = (data) => ({
 })
 
 function Section1MaklumatSukan({
-  userProfile,
   initialData,
   onNext,
   onBack,
 }) {
   const [formData, setFormData] = useState(() => getFormData(initialData))
 
-  useEffect(() => {
-    setFormData(getFormData(initialData))
-  }, [initialData])
 
   const updateField = (field, value) => {
     setFormData((prev) => ({

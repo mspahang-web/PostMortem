@@ -220,7 +220,7 @@ function AdminFinance({ onBack }) {
   // ==========================================
 
   useEffect(() => {
-    loadReports()
+    Promise.resolve().then(loadReports)
   }, [])
 
   // ==========================================
@@ -228,8 +228,10 @@ function AdminFinance({ onBack }) {
   // ==========================================
 
   useEffect(() => {
-    loadSelectedFinance(
-      selectedReportId
+    Promise.resolve().then(() =>
+      loadSelectedFinance(
+        selectedReportId
+      )
     )
   }, [selectedReportId])
 

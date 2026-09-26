@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const ratingOptions = [
   'Sangat Baik',
@@ -64,10 +64,6 @@ const defaultComponents = [
   },
 ]
 
-const defaultData = {
-  components: defaultComponents,
-}
-
 function Section5Latihan({
   initialData,
   onNext,
@@ -79,11 +75,6 @@ function Section5Latihan({
       : defaultComponents
   )
 
-  useEffect(() => {
-    if (initialData?.components?.length) {
-      setComponents(initialData.components)
-    }
-  }, [initialData])
 
   // =========================================================
   // UPDATE RATING
