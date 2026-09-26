@@ -8623,3 +8623,38 @@ button.progress-mini-step:focus-visible span {
 .ewcc-admin-body .ewcc-section > div.postmortem-form-footer:last-child {
   margin: 0;
 }
+
+/* Delete buttons (Padam) in admin tables. */
+.ewcc-danger-button {
+  border: 1px solid #fecaca;
+  border-radius: var(--ewcc-radius-md);
+  padding: 11px 18px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ewcc-danger-button:hover:not(:disabled) {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.ewcc-danger-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Lihat Laporan / Edit / Padam side by side in the TINDAKAN column. */
+.admin-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.admin-row-actions .report-action-button {
+  min-width: 0;
+}
+

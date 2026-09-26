@@ -87,27 +87,27 @@
 
 /* PENGGUNA: ID / NAMA / SUKAN / PERANAN / STATUS LAPORAN / TINDAKAN */
 .admin-users-table th:nth-child(1),
-.admin-users-table td:nth-child(1) { width: 16%; }
+.admin-users-table td:nth-child(1) { width: 14%; }
 .admin-users-table th:nth-child(2),
-.admin-users-table td:nth-child(2) { width: 22%; }
+.admin-users-table td:nth-child(2) { width: 20%; }
 .admin-users-table th:nth-child(3),
-.admin-users-table td:nth-child(3) { width: 16%; }
+.admin-users-table td:nth-child(3) { width: 14%; }
 .admin-users-table th:nth-child(4),
-.admin-users-table td:nth-child(4) { width: 14%; }
+.admin-users-table td:nth-child(4) { width: 9%; }
 .admin-users-table th:nth-child(5),
-.admin-users-table td:nth-child(5) { width: 18%; }
+.admin-users-table td:nth-child(5) { width: 15%; }
 
 /* SUKAN: BIL / KOD SUKAN / NAMA SUKAN / STATUS / POST-MORTEM / TINDAKAN */
 .admin-sports-table th:nth-child(1),
-.admin-sports-table td:nth-child(1) { width: 6%; }
+.admin-sports-table td:nth-child(1) { width: 5%; }
 .admin-sports-table th:nth-child(2),
-.admin-sports-table td:nth-child(2) { width: 14%; }
+.admin-sports-table td:nth-child(2) { width: 11%; }
 .admin-sports-table th:nth-child(3),
-.admin-sports-table td:nth-child(3) { width: 32%; }
+.admin-sports-table td:nth-child(3) { width: 26%; }
 .admin-sports-table th:nth-child(4),
-.admin-sports-table td:nth-child(4) { width: 14%; }
+.admin-sports-table td:nth-child(4) { width: 12%; }
 .admin-sports-table th:nth-child(5),
-.admin-sports-table td:nth-child(5) { width: 18%; }
+.admin-sports-table td:nth-child(5) { width: 15%; }
 
 /* LAPORAN: ID PENGGUNA / SUKAN / STATUS / DIKEMASKINI / TINDAKAN */
 .admin-reports-table {
@@ -151,7 +151,8 @@
 .admin-users-table td:last-child,
 .admin-sports-table th:last-child,
 .admin-sports-table td:last-child {
-  width: 160px;
+  /* Lihat Laporan + Edit + Padam */
+  width: 260px;
   text-align: center;
 }
 

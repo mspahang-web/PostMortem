@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { loadSportNames } from '../lib/sports'
 import AdminPostMortem from './AdminPostMortem'
 import AdminSports from './AdminSports'
 import AdminUsers from './AdminUsers'
@@ -629,6 +630,12 @@ const sportsWithReports =
             sports={sports}
             loading={loadingUsers}
             onAddUser={() => setShowUserModal(true)}
+            onChanged={async () => {
+              await Promise.all([
+                loadUsers(),
+                loadPostMortemReports(),
+              ])
+            }}
             onOpenReport={(reportId) => {
               setAdminView('reports')
               setSelectedPostMortemReportId(reportId)
@@ -640,6 +647,13 @@ const sportsWithReports =
 
           <AdminSports
             sports={sports}
+            users={users}
+            onChanged={async () => {
+              await Promise.all([
+                loadSports(),
+                loadSportNames(),
+              ])
+            }}
             postMortemReports={postMortemReports}
             onOpenReport={(reportId) => {
               setAdminView('reports')
@@ -1156,7 +1170,9 @@ const sportsWithReports =
                         -- Pilih Sukan --
                       </option>
 
-                      {sports.map((sport) => (
+                      {sports
+                        .filter((sport) => !/^(inactive|tidak)/i.test(String(sport.status || '')))
+                        .map((sport) => (
 
                         <option
                           key={sport.sport_code}
