@@ -1,4 +1,5 @@
 import { countMedalsByEvent } from '../../lib/medals'
+import { getAthleteStatusLabel } from '../../lib/athleteStatus'
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -1250,7 +1251,7 @@ const renderSection10 = (data) => {
 
                   <td>
                     {displayValue(
-                      athlete?.status
+                      getAthleteStatusLabel(athlete?.status)
                     )}
                   </td>
 

@@ -1,5 +1,6 @@
 import { getSportName } from '../../lib/sports'
 import { withEventMedalTotals } from '../../lib/medals'
+import { getAthleteStatusLabel } from '../../lib/athleteStatus'
 function PostMortemReview({
   userProfile,
   onSaveDraft,
@@ -69,7 +70,12 @@ function PostMortemReview({
     {
       number: 10,
       title: 'Status Atlet Selepas SUKMA',
-      data: section10Data,
+      data: Array.isArray(section10Data)
+        ? section10Data.map((athlete) => ({
+            ...athlete,
+            status: getAthleteStatusLabel(athlete?.status),
+          }))
+        : section10Data,
     },
     {
       number: 11,

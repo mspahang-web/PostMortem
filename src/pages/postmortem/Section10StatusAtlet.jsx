@@ -1,27 +1,6 @@
 import { useState } from 'react'
+import { ATHLETE_STATUS_OPTIONS } from '../../lib/athleteStatus'
 
-const STATUS_OPTIONS = [
-  {
-    value: 'A',
-    label: 'A - Potensi Kebangsaan',
-  },
-  {
-    value: 'B',
-    label: 'B - Potensi SUKMA',
-  },
-  {
-    value: 'C',
-    label: 'C - Pembangunan',
-  },
-  {
-    value: 'D',
-    label: 'D - Perlu Intervensi',
-  },
-  {
-    value: 'E',
-    label: 'E - Tidak Dicadangkan',
-  },
-]
 
 const createEmptyAthlete = () => ({
   namaAtlet: '',
@@ -328,7 +307,7 @@ const Section10StatusAtlet = ({
                           Pilih status
                         </option>
 
-                        {STATUS_OPTIONS.map(
+                        {ATHLETE_STATUS_OPTIONS.map(
                           (option) => (
                             <option
                               key={
