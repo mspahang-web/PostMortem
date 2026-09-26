@@ -276,49 +276,22 @@ const Section13Pengesahan = ({
       </div>
 
       {/* NAVIGATION */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '16px',
-          paddingTop: '24px',
-          borderTop:
-            '1px solid #e5e7eb',
-        }}
-      >
+      <div className="postmortem-form-footer">
 
         <button
           type="button"
+          className="ewcc-secondary-button"
           onClick={onBack}
-          style={{
-            border:
-              '1px solid #cbd5e1',
-            background: '#ffffff',
-            color: '#334155',
-            padding: '12px 22px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontWeight: 600,
-          }}
         >
           ← Kembali
         </button>
 
         <button
           type="button"
+          className="ewcc-primary-button"
           onClick={handleNext}
-          style={{
-            border: 'none',
-            background: '#f97316',
-            color: '#ffffff',
-            padding: '12px 22px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontWeight: 600,
-          }}
         >
-          Simpan & Semak Laporan →
+          Simpan & Seterusnya →
         </button>
 
       </div>

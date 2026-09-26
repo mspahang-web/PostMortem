@@ -8612,3 +8612,14 @@ button.progress-mini-step:focus-visible span {
     justify-content: flex-start;
   }
 }
+
+/* Post-mortem section footers (← Kembali / Simpan & Seterusnya →) look the
+   same in every section, whatever card the section is built with. */
+.ewcc-admin-body .postmortem-form-footer button {
+  min-height: 44px;
+}
+
+.ewcc-admin-body .ewcc-section > div.postmortem-form-footer,
+.ewcc-admin-body .ewcc-section > div.postmortem-form-footer:last-child {
+  margin: 0;
+}

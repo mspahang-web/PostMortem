@@ -785,30 +785,24 @@ function Section3Sasaran({
       {/* =====================================================
           NAVIGATION
       ====================================================== */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: '24px',
-          gap: '12px',
-        }}
-      >
+      <div className="postmortem-form-footer">
+
         <button
           type="button"
+          className="ewcc-secondary-button"
           onClick={onBack}
-          className="ewcc-btn ewcc-btn-secondary"
         >
           ← Kembali
         </button>
 
         <button
           type="button"
+          className="ewcc-primary-button"
           onClick={handleNext}
-          className="ewcc-btn ewcc-btn-primary"
         >
-          Simpan &amp; Teruskan →
+          Simpan & Seterusnya →
         </button>
+
       </div>
 
     </div>
