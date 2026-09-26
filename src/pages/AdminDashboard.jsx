@@ -977,10 +977,6 @@ const sportsWithReports =
               {sport.sport_name}
             </strong>
 
-            <small>
-              {sport.sport_code}
-            </small>
-
           </div>
 
           <div className="sport-status-value">

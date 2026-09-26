@@ -4,6 +4,7 @@ import Equipment2028 from './Equipment2028'
 import UserFinance from './UserFinance'
 import PostMortem from './postmortem/PostMortem'
 import UserLayout, { UserPageHero } from '../components/UserLayout'
+import { getSportName } from '../lib/sports'
 
 function UserDashboard({
   userProfile,
@@ -300,7 +301,7 @@ if (content) {
             description="Selamat datang ke Sistem Pengurusan Post-Mortem Kontinjen Pahang."
             meta={[
               'SUKMA XXII SELANGOR 2026 & PARA SUKMA SELANGOR 2026',
-              userProfile?.sport || 'MAJLIS SUKAN PAHANG',
+              getSportName(userProfile?.sport) || 'MAJLIS SUKAN PAHANG',
             ]}
           />
 
@@ -327,11 +328,11 @@ if (content) {
                 </span>
 
                 <strong>
-                  {userProfile?.sport || '-'}
+                  {getSportName(userProfile?.sport) || '-'}
                 </strong>
 
                 <small>
-                  Kod Sukan
+                  Nama Sukan
                 </small>
 
               </div>

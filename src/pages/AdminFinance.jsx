@@ -11,6 +11,7 @@ import {
   normaliseFinanceData,
   withComputedTotal,
 } from '../lib/finance'
+import { getSportName } from '../lib/sports'
 
 function AdminFinance({ onBack }) {
   const [reports, setReports] = useState([])
@@ -177,6 +178,9 @@ function AdminFinance({ onBack }) {
       (report) =>
         report.sport
           ?.toLowerCase()
+          .includes(keyword) ||
+        getSportName(report.sport)
+          .toLowerCase()
           .includes(keyword) ||
         report.login_id
           ?.toLowerCase()
@@ -581,7 +585,7 @@ function AdminFinance({ onBack }) {
                           report.id
                         }
                       >
-                        {report.sport ||
+                        {getSportName(report.sport) ||
                           'Sukan tidak dinyatakan'}{' '}
                         •{' '}
                         {report.login_id ||
@@ -766,7 +770,7 @@ function AdminFinance({ onBack }) {
                           '21px',
                       }}
                     >
-                      {selectedReport?.sport ||
+                      {getSportName(selectedReport?.sport) ||
                         'Sukan tidak dinyatakan'}
                     </strong>
 

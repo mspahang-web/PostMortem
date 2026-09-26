@@ -4,6 +4,7 @@ import './App.css'
 
 import AdminDashboard from './pages/AdminDashboard'
 import UserDashboard from './pages/UserDashboard'
+import { loadSportNames } from './lib/sports'
 
 function App() {
 
@@ -175,6 +176,9 @@ function App() {
         'SPORT:',
         profile.sport
       )
+
+      // Sport names for display (reports store the sport code).
+      await loadSportNames()
 
       setUserProfile(profile)
 

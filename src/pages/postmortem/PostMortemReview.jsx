@@ -1,3 +1,4 @@
+import { getSportName } from '../../lib/sports'
 function PostMortemReview({
   userProfile,
   onSaveDraft,
@@ -367,7 +368,7 @@ function PostMortemReview({
         <div className="postmortem-review-user-field">
           <span>Sukan</span>
           <strong>
-            {userProfile?.sport || '-'}
+            {getSportName(userProfile?.sport) || '-'}
           </strong>
         </div>
 

@@ -2,6 +2,7 @@
 // as the admin dashboard, with the user's own menu.
 import '../styles/AdminDashboard.css'
 import '../styles/AdminDashboardOverview.css'
+import { getSportName } from '../lib/sports'
 
 const USER_MENU = [
   { key: 'dashboard', icon: '▦', label: 'Dashboard' },
@@ -123,7 +124,7 @@ export default function UserLayout({
             </span>
 
             <small>
-              {userProfile?.sport || userProfile?.login_id || ''}
+              {getSportName(userProfile?.sport) || userProfile?.login_id || ''}
             </small>
           </div>
 

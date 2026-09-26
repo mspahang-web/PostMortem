@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
 import '../styles/Equipment2028.css'
 import { UserPageHero } from '../components/UserLayout'
+import { getSportName } from '../lib/sports'
 
 const EMPTY_FORM = {
   peralatan: '',
@@ -35,7 +36,7 @@ export default function Equipment2028({
   const [form, setForm] = useState(EMPTY_FORM)
 
   const sportName =
-    userProfile?.sport ||
+    getSportName(userProfile?.sport) ||
     'Sukan'
 
   const loginId =

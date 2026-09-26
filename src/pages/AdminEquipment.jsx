@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
 import '../styles/Equipment2028.css'
+import { getSportName } from '../lib/sports'
 
 function formatCurrency(value) {
   return Number(value || 0).toLocaleString('ms-MY', {
@@ -116,8 +117,8 @@ export default function AdminEquipment({
 
     return Object.values(grouped).sort(
       (a, b) =>
-        a.sport.localeCompare(
-          b.sport
+        getSportName(a.sport).localeCompare(
+          getSportName(b.sport)
         )
     )
   }, [equipment])
@@ -413,9 +414,9 @@ export default function AdminEquipment({
                               marginBottom: 4,
                             }}
                           >
-                            {
+                            {getSportName(
                               sport.sport
-                            }
+                            )}
                           </strong>
 
                           <small
@@ -567,9 +568,9 @@ export default function AdminEquipment({
                   </span>
 
                   <h2>
-                    {
+                    {getSportName(
                       selectedSportData.sport
-                    }
+                    )}
                   </h2>
 
                 </div>

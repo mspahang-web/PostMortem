@@ -15,6 +15,7 @@ import {
   TRAINING_RATING_SCORE,
   getTrainingComponents,
 } from '../lib/training'
+import { getSportName } from '../lib/sports'
 
 
 // =========================================================
@@ -1243,7 +1244,7 @@ function calculateSukma2028Analytics(
 
             return answer
               ? {
-                  sport: report.sport || report.login_id || 'Sukan',
+                  sport: getSportName(report.sport) || report.login_id || 'Sukan',
                   answer,
                 }
               : null
@@ -4766,15 +4767,6 @@ const equipmentSummary = useMemo(() => {
                       >
                         {sportName}
                       </strong>
-
-                      <span
-                        style={{
-                          fontSize: '10px',
-                          color: '#8995a7',
-                        }}
-                      >
-                        {item.sport}
-                      </span>
                     </div>
 
                     <strong
@@ -4999,10 +4991,6 @@ const equipmentSummary = useMemo(() => {
                       <strong>
                         {sport.sport_name}
                       </strong>
-
-                      <span>
-                        {sport.sport_code}
-                      </span>
 
                     </div>
 

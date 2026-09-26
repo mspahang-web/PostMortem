@@ -17,6 +17,7 @@ import Section12Rumusan from './Section12Rumusan'
 import Section13Pengesahan from './Section13Pengesahan'
 
 import PostMortemReview from './PostMortemReview'
+import { getSportName } from '../../lib/sports'
 
 
 function PostMortem({
@@ -1160,7 +1161,7 @@ function PostMortem({
             description="Lengkapkan laporan post-mortem secara berperingkat. Klik nombor bahagian untuk terus ke bahagian tersebut."
             meta={[
               'SUKMA XXII SELANGOR 2026 & PARA SUKMA SELANGOR 2026',
-              userProfile?.sport || 'MAJLIS SUKAN PAHANG',
+              getSportName(userProfile?.sport) || 'MAJLIS SUKAN PAHANG',
             ]}
           />
 

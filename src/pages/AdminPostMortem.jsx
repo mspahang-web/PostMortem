@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { getSportName } from '../lib/sports'
 import {
   TRAINING_MAX_SCORE,
   TRAINING_RATING_SCORE,
@@ -240,6 +241,12 @@ function AdminPostMortem({
         report.sport
 
           ?.toLowerCase()
+
+          .includes(keyword) ||
+
+        getSportName(report.sport)
+
+          .toLowerCase()
 
           .includes(keyword)
 
@@ -1463,7 +1470,7 @@ const handleMarkReviewed = async () => {
 
                               <td>
 
-                                {report.sport ||
+                                {getSportName(report.sport) ||
 
                                   '-'}
 
@@ -1605,7 +1612,7 @@ const handleMarkReviewed = async () => {
 
                   <h2>
 
-                    {selectedReport.sport ||
+                    {getSportName(selectedReport.sport) ||
 
                       'Sukan'}
 
@@ -1687,7 +1694,7 @@ const handleMarkReviewed = async () => {
 
                     <strong>
 
-                      {selectedReport.sport ||
+                      {getSportName(selectedReport.sport) ||
 
                         '-'}
 
@@ -1817,7 +1824,7 @@ const handleMarkReviewed = async () => {
 
                         <h1>
 
-                          {selectedReport.sport || 'Sukan'}
+                          {getSportName(selectedReport.sport) || 'Sukan'}
 
                         </h1>
 

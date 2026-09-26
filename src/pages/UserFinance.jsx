@@ -13,6 +13,7 @@ import {
 } from '../lib/finance'
 import '../styles/Equipment2028.css'
 import { UserPageHero } from '../components/UserLayout'
+import { getSportName } from '../lib/sports'
 
 const inputStyle = {
   width: '100%',
@@ -49,7 +50,7 @@ export default function UserFinance({
   const [saving, setSaving] = useState(false)
 
   const sportName =
-    userProfile?.sport ||
+    getSportName(userProfile?.sport) ||
     'Sukan'
 
   // ==========================================
