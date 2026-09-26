@@ -185,19 +185,44 @@ export default function UserFinance({
 
   const total = financeData[FINANCE_TOTAL_KEY]
 
+  const totalChange = calculateFinanceChange(
+    total?.['2023_2024'],
+    total?.['2025_2026']
+  )
+
   return (
     <>
 
           {/* HEADER */}
 
           <PageHero
-            eyebrow="POST-MORTEM • MAKLUMAT KEWANGAN"
+            eyebrow="EWCC POST-MORTEM • KEWANGAN"
             title="Perbandingan Kewangan"
             description="Masukkan kelulusan perbelanjaan sukan anda bagi tempoh 2023–2024 dan 2025–2026. Jumlah dan perubahan dikira secara automatik."
             meta={[
               '2023–2024 VS 2025–2026',
               sportName,
             ]}
+            actions={
+              <>
+                <button
+                  type="button"
+                  className="ewcc-secondary-button"
+                  onClick={onBack}
+                >
+                  ← Kembali
+                </button>
+
+                <button
+                  type="button"
+                  className="ewcc-primary-button"
+                  onClick={saveFinance}
+                  disabled={loading || saving}
+                >
+                  {saving ? 'Menyimpan...' : 'Simpan'}
+                </button>
+              </>
+            }
           />
 
           {/* KPI */}
@@ -237,44 +262,29 @@ export default function UserFinance({
               </div>
             </div>
 
+            <div className="ewcc-kpi-card">
+              <div className="kpi-icon kpi-red">
+                📈
+              </div>
+              <div>
+                <span>Perubahan</span>
+                <strong style={{ color: changeColor(totalChange.amount) }}>
+                  RM {formatCurrency(totalChange.amount)}
+                </strong>
+                <small>{formatPercent(totalChange.percent)} berbanding 2023–2024</small>
+              </div>
+            </div>
+
           </section>
 
           {/* FORM */}
 
           <section className="ewcc-section">
 
-            <div
-              className="ewcc-section-title"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: 16,
-                flexWrap: 'wrap',
-              }}
-            >
+            <div className="ewcc-section-title">
               <div>
-                <span>BORANG KEWANGAN</span>
-                <h2>Perbandingan Kewangan</h2>
-              </div>
-
-              <div style={{ display: 'flex', gap: 10 }}>
-                <button
-                  type="button"
-                  className="ewcc-secondary-button"
-                  onClick={onBack}
-                >
-                  ← Kembali
-                </button>
-
-                <button
-                  type="button"
-                  className="ewcc-primary-button"
-                  onClick={saveFinance}
-                  disabled={loading || saving}
-                >
-                  {saving ? 'Menyimpan...' : 'Simpan'}
-                </button>
+                <span>PERBANDINGAN KEWANGAN</span>
+                <h2>2023–2024 vs 2025–2026</h2>
               </div>
             </div>
 
@@ -472,6 +482,23 @@ export default function UserFinance({
 
               )}
 
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                padding: '16px 28px 24px',
+              }}
+            >
+              <button
+                type="button"
+                className="ewcc-primary-button"
+                onClick={saveFinance}
+                disabled={loading || saving}
+              >
+                {saving ? 'Menyimpan...' : 'Simpan'}
+              </button>
             </div>
 
           </section>

@@ -51,6 +51,10 @@ export default function Equipment2028({
     )
   }, [equipment])
 
+  const highPriorityCount = equipment.filter(
+    (item) => item.keutamaan === 'Tinggi'
+  ).length
+
   useEffect(() => {
     Promise.resolve().then(loadEquipment)
     // Load once on mount.
@@ -458,13 +462,32 @@ export default function Equipment2028({
           {/* HEADER */}
 
           <PageHero
-            eyebrow="SUKMA 2028 • CADANGAN PERALATAN"
+            eyebrow="EWCC POST-MORTEM • PERALATAN 2028"
             title="Cadangan Peralatan 2028"
             description="Masukkan cadangan peralatan yang diperlukan oleh sukan anda bagi persediaan SUKMA 2028."
             meta={[
               'SUKMA 2028',
               sportName,
             ]}
+            actions={
+              <>
+                <button
+                  type="button"
+                  className="ewcc-secondary-button"
+                  onClick={onBack}
+                >
+                  ← Kembali
+                </button>
+
+                <button
+                  type="button"
+                  className="ewcc-primary-button"
+                  onClick={openAddForm}
+                >
+                  + Tambah Peralatan
+                </button>
+              </>
+            }
           />
 
           {/* INFO */}
@@ -541,23 +564,35 @@ export default function Equipment2028({
 
             </div>
 
+            <div className="ewcc-kpi-card">
+
+              <div className="kpi-icon kpi-red">
+                ⚠️
+              </div>
+
+              <div>
+                <span>
+                  Keutamaan Tinggi
+                </span>
+
+                <strong>
+                  {highPriorityCount}
+                </strong>
+
+                <small>
+                  Item perlu diberi perhatian
+                </small>
+              </div>
+
+            </div>
+
           </section>
 
           {/* SENARAI */}
 
           <section className="ewcc-section">
 
-            <div
-              className="ewcc-section-title"
-              style={{
-                display: 'flex',
-                justifyContent:
-                  'space-between',
-                alignItems: 'center',
-                gap: 16,
-                flexWrap: 'wrap',
-              }}
-            >
+            <div className="ewcc-section-title">
 
               <div>
 
@@ -568,33 +603,6 @@ export default function Equipment2028({
                 <h2>
                   Cadangan Peralatan
                 </h2>
-
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 10,
-                }}
-              >
-
-                <button
-                  type="button"
-                  className="ewcc-secondary-button"
-                  onClick={onBack}
-                >
-                  ← Kembali
-                </button>
-
-                <button
-                  type="button"
-                  className="ewcc-primary-button"
-                  onClick={
-                    openAddForm
-                  }
-                >
-                  + Tambah Peralatan
-                </button>
 
               </div>
 
