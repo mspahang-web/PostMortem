@@ -12,6 +12,7 @@ import {
   withComputedTotal,
 } from '../lib/finance'
 import '../styles/Equipment2028.css'
+import { UserPageHero } from '../components/UserLayout'
 
 const inputStyle = {
   width: '100%',
@@ -184,33 +185,19 @@ export default function UserFinance({
   const total = financeData[FINANCE_TOTAL_KEY]
 
   return (
-    <main className="ewcc-user-dashboard equipment-page equipment-applicant">
-
-      <section className="ewcc-admin-content">
-
-        <div className="ewcc-admin-body">
+    <>
 
           {/* HEADER */}
 
-          <section className="ewcc-welcome">
-            <span className="welcome-eyebrow">
-              POST-MORTEM • MAKLUMAT KEWANGAN
-            </span>
-
-            <h2>
-              Perbandingan Kewangan
-            </h2>
-
-            <p>
-              Masukkan kelulusan perbelanjaan sukan anda bagi
-              tempoh 2023–2024 dan 2025–2026. Jumlah Kelulusan
-              Perbelanjaan dikira secara automatik.
-            </p>
-
-            <span className="welcome-note">
-              {sportName}
-            </span>
-          </section>
+          <UserPageHero
+            eyebrow="POST-MORTEM • MAKLUMAT KEWANGAN"
+            title="Perbandingan Kewangan"
+            description="Masukkan kelulusan perbelanjaan sukan anda bagi tempoh 2023–2024 dan 2025–2026. Jumlah dan perubahan dikira secara automatik."
+            meta={[
+              '2023–2024 VS 2025–2026',
+              sportName,
+            ]}
+          />
 
           {/* KPI */}
 
@@ -488,10 +475,6 @@ export default function UserFinance({
 
           </section>
 
-        </div>
-
-      </section>
-
-    </main>
+    </>
   )
 }

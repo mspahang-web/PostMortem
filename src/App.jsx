@@ -4,7 +4,6 @@ import './App.css'
 
 import AdminDashboard from './pages/AdminDashboard'
 import UserDashboard from './pages/UserDashboard'
-import PostMortem from './pages/postmortem/PostMortem'
 
 function App() {
 
@@ -207,22 +206,6 @@ function App() {
         }`
       )
     }
-  }
-
-  // ==========================================
-  // POST-MORTEM
-  // ==========================================
-
-  if (page === 'postmortem') {
-
-    return (
-      <PostMortem
-        userProfile={userProfile}
-        onBack={() =>
-          setPage('dashboard')
-        }
-      />
-    )
   }
 
   // ==========================================
@@ -536,9 +519,6 @@ if (page === 'dashboard') {
 
     <UserDashboard
       userProfile={userProfile}
-      onPostMortem={() =>
-        setPage('postmortem')
-      }
       onLogout={handleUserLogout}
     />
 

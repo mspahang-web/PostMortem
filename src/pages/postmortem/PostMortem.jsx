@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { UserPageHero } from '../../components/UserLayout'
 import { supabase } from '../../lib/supabase'
 
 import Section1MaklumatSukan from './Section1MaklumatSukan'
@@ -1103,220 +1104,65 @@ function PostMortem({
 
 
   // =========================================================
+  // JUMP TO SECTION
+  // =========================================================
+
+  const goToSection = (sectionNumber) => {
+
+    if (sectionNumber === currentSection) return
+
+    // Sections keep edits locally until "Simpan & Seterusnya",
+    // so leaving one discards what hasn't been saved.
+    if (currentSection <= 13) {
+      const confirmed = window.confirm(
+        `Pergi ke Bahagian ${sectionNumber}?\n\n` +
+        `Maklumat yang belum disimpan dalam Bahagian ${currentSection} akan hilang. ` +
+        'Tekan "Simpan & Seterusnya" dahulu jika mahu menyimpannya.'
+      )
+
+      if (!confirmed) return
+    }
+
+    setCurrentSection(sectionNumber)
+  }
+
+
+  // =========================================================
   // RENDER
   // =========================================================
 
   if (loadingDraft) {
     return (
-      <main className="ewcc-admin">
-        <section className="ewcc-admin-content">
-          <div className="ewcc-admin-body">
-            <div className="ewcc-loading-state" role="status" aria-live="polite">
-              Memuatkan draf laporan...
-            </div>
-          </div>
-        </section>
-      </main>
+      <div className="ewcc-loading-state" role="status" aria-live="polite">
+        Memuatkan draf laporan...
+      </div>
     )
   }
 
   if (draftLoadError) {
     return (
-      <main className="ewcc-admin">
-        <section className="ewcc-admin-content">
-          <div className="ewcc-admin-body">
-            <div className="ewcc-loading-state" role="alert">
-              Draf tidak dapat dimuatkan. Kembali ke papan pemuka dan cuba lagi.
-              <button className="ewcc-secondary-button" onClick={onBack}>
-                Kembali ke papan pemuka
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
+      <div className="ewcc-loading-state" role="alert">
+        Draf tidak dapat dimuatkan. Kembali ke papan pemuka dan cuba lagi.
+        <button className="ewcc-secondary-button" onClick={onBack}>
+          Kembali ke papan pemuka
+        </button>
+      </div>
     )
   }
 
   return (
 
-    <main className="ewcc-admin">
-
-      {/* SIDEBAR */}
-
-      <aside className="ewcc-sidebar">
-
-        <div className="sidebar-brand">
-
-          <div className="sidebar-logo">
-
-            <div className="logo-shield">
-              <span>EW</span>
-            </div>
-
-          </div>
-
-          <h1>
-            EWCC
-          </h1>
-
-          <p>
-            Post-Mortem
-          </p>
-
-          <span className="sidebar-role">
-            Majlis Sukan Pahang
-          </span>
-
-        </div>
-
-
-        <nav className="sidebar-menu">
-
-          <button
-            className="sidebar-menu-item"
-            onClick={onBack}
-          >
-
-            <span className="sidebar-menu-icon">
-              ⌂
-            </span>
-
-            <span>
-              Dashboard
-            </span>
-
-          </button>
-
-
-          <button
-            className="sidebar-menu-item active"
-          >
-
-            <span className="sidebar-menu-icon">
-              📝
-            </span>
-
-            <span>
-              Post-Mortem
-            </span>
-
-          </button>
-
-        </nav>
-
-
-        <div className="sidebar-footer">
-
-          <div className="sidebar-footer-info">
-
-            <strong>
-              {userProfile?.name || 'Pengguna'}
-            </strong>
-
-            <span>
-              Pengguna Sukan
-            </span>
-
-            <small>
-              {userProfile?.login_id || ''}
-            </small>
-
-          </div>
-
-
-          <button
-            className="sidebar-logout"
-            onClick={onBack}
-          >
-
-            <span>
-              ↪
-            </span>
-
-            Log Keluar
-
-          </button>
-
-        </div>
-
-      </aside>
-
-
-      {/* CONTENT */}
-
-      <section className="ewcc-admin-content">
-
-        <header className="ewcc-admin-header">
-
-          <div className="admin-header-brand">
-
-            <div className="admin-header-logo">
-
-              <div className="logo-shield">
-                <span>EW</span>
-              </div>
-
-            </div>
-
-
-            <div>
-
-              <h1>
-                Elephant Warrior Command Centre
-              </h1>
-
-              <p>
-                Majlis Sukan Pahang
-              </p>
-
-              <span>
-                Sistem Pengurusan Post-Mortem Kontinjen Pahang
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div className="admin-header-right">
-
-            <strong>
-              {userProfile?.name || ''}
-            </strong>
-
-            <span>
-              {userProfile?.login_id || ''}
-            </span>
-
-          </div>
-
-        </header>
-
-
-        {/* BODY */}
-
-        <div className="ewcc-admin-body">
-
-          <section className="ewcc-welcome">
-
-            <span className="welcome-eyebrow">
-              EWCC POST-MORTEM
-            </span>
-
-            <h2>
-              Laporan Post-Mortem
-            </h2>
-
-            <p>
-              Lengkapkan laporan post-mortem
-              secara berperingkat.
-            </p>
-
-            <span className="welcome-note">
-              SUKMA XXII & PARA SUKMA SELANGOR 2026
-            </span>
-
-          </section>
+    <>
+
+          <UserPageHero
+            eyebrow="EWCC POST-MORTEM • BORANG LAPORAN"
+            title="Laporan Post-Mortem"
+            description="Lengkapkan laporan post-mortem secara berperingkat. Klik nombor bahagian untuk terus ke bahagian tersebut."
+            meta={[
+              'SUKMA XXII SELANGOR 2026 & PARA SUKMA SELANGOR 2026',
+              userProfile?.sport || 'MAJLIS SUKAN PAHANG',
+            ]}
+          />
 
 
           {/* PROGRESS */}
@@ -1332,8 +1178,19 @@ function PostMortem({
 
                 return (
 
-                  <div
+                  <button
+                    type="button"
                     key={sectionNumber}
+                    onClick={() =>
+                      goToSection(sectionNumber)
+                    }
+                    aria-label={`Bahagian ${sectionNumber}`}
+                    aria-current={
+                      currentSection ===
+                      sectionNumber
+                        ? 'step'
+                        : undefined
+                    }
                     className={`
                       progress-mini-step
                       ${
@@ -1355,7 +1212,7 @@ function PostMortem({
                       {sectionNumber}
                     </span>
 
-                  </div>
+                  </button>
 
                 )
               }
@@ -1572,27 +1429,7 @@ function PostMortem({
           )}
 
 
-          <footer className="ewcc-content-footer">
-
-            <span>
-              EWCC Post-Mortem
-            </span>
-
-            <span>
-              Versi 1.0
-            </span>
-
-            <span>
-              Majlis Sukan Pahang
-            </span>
-
-          </footer>
-
-        </div>
-
-      </section>
-
-    </main>
+    </>
   )
 }
 

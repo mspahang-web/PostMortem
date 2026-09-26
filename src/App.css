@@ -2438,45 +2438,8 @@ body {
    EWCC USER DASHBOARD
 ========================================== */
 
-.ewcc-user-dashboard {
-  min-height: 100vh;
-  display: flex;
-  background: #f4f6fa;
-}
-
-.ewcc-user-dashboard .ewcc-sidebar {
-  flex-shrink: 0;
-}
-
-
-/* User dashboard menggunakan struktur
-   sidebar + content yang sama seperti Admin */
-
-.ewcc-user-dashboard .ewcc-admin-content {
-  flex: 1;
-  min-width: 0;
-}
-
-
-/* Mobile */
-
-@media (max-width: 900px) {
-
-  .ewcc-user-dashboard {
-    flex-direction: column;
-  }
-
-  .ewcc-user-dashboard .ewcc-sidebar {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .ewcc-user-dashboard .sidebar-menu {
-    flex-direction: row;
-    overflow-x: auto;
-  }
-
-}
+/* User pages share the admin shell (.ewcc-admin); see
+   components/UserLayout.jsx. */
 
 /* ==========================================
    POST-MORTEM - SASARAN & PENCAPAIAN
@@ -8571,4 +8534,38 @@ body {
 
 .ewcc-user-dashboard .ewcc-kpi-card strong {
   font-size: clamp(20px, 1.9vw, 29px);
+}
+
+
+/* Post-mortem step numbers are buttons that jump to a section. */
+button.progress-mini-step {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.progress-mini-step:hover span {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(242, 106, 33, 0.25);
+}
+
+button.progress-mini-step:focus-visible span {
+  outline: 2px solid #f26a21;
+  outline-offset: 2px;
+}
+
+/* Admin CSS zeroes section-title margins; on user pages keep the title
+   aligned with the section content below it. */
+.ewcc-user-dashboard .ewcc-admin-content .ewcc-admin-body .ewcc-section > .ewcc-section-title {
+  margin: 0 28px 18px;
+  padding-top: 24px;
+}
+
+@media (max-width: 700px) {
+  .ewcc-user-dashboard .ewcc-admin-content .ewcc-admin-body .ewcc-section > .ewcc-section-title {
+    margin: 0 20px 16px;
+    padding-top: 20px;
+  }
 }

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
 import '../styles/Equipment2028.css'
+import { UserPageHero } from '../components/UserLayout'
 
 const EMPTY_FORM = {
   peralatan: '',
@@ -451,35 +452,19 @@ export default function Equipment2028({
     )
 
   return (
-    <main className="ewcc-user-dashboard equipment-page equipment-applicant">
-
-      <section className="ewcc-admin-content">
-
-        <div className="ewcc-admin-body">
+    <>
 
           {/* HEADER */}
 
-          <section
-            className="ewcc-welcome"
-          >
-            <span className="welcome-eyebrow">
-              SUKMA 2028 • CADANGAN PERALATAN
-            </span>
-
-            <h2>
-              Cadangan Peralatan 2028
-            </h2>
-
-            <p>
-              Masukkan cadangan peralatan
-              yang diperlukan oleh sukan
-              anda bagi persediaan SUKMA 2028.
-            </p>
-
-            <span className="welcome-note">
-              {sportName}
-            </span>
-          </section>
+          <UserPageHero
+            eyebrow="SUKMA 2028 • CADANGAN PERALATAN"
+            title="Cadangan Peralatan 2028"
+            description="Masukkan cadangan peralatan yang diperlukan oleh sukan anda bagi persediaan SUKMA 2028."
+            meta={[
+              'SUKMA 2028',
+              sportName,
+            ]}
+          />
 
           {/* INFO */}
 
@@ -1293,10 +1278,6 @@ export default function Equipment2028({
 
           )}
 
-        </div>
-
-      </section>
-
-    </main>
+    </>
   )
 }

@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Equipment2028 from './Equipment2028'
 import UserFinance from './UserFinance'
+import PostMortem from './postmortem/PostMortem'
+import UserLayout, { UserPageHero } from '../components/UserLayout'
 
 function UserDashboard({
   userProfile,
-  onPostMortem,
   onLogout,
 }) {
 
@@ -16,8 +17,8 @@ function UserDashboard({
   const [report, setReport] = useState(null)
   const [loadingReport, setLoadingReport] = useState(true)
   const [reportLoadError, setReportLoadError] = useState(false)
-  const [showEquipment2028, setShowEquipment2028] = useState(false)
-  const [showFinance, setShowFinance] = useState(false)
+  // dashboard | postmortem | equipment | finance
+  const [view, setView] = useState('dashboard')
 
   const loadReportStatus = async () => {
 
@@ -199,9 +200,28 @@ function UserDashboard({
       return
     }
 
-    onPostMortem()
+    setView('postmortem')
 
   }
+
+  const handleNavigate = (nextView) => {
+
+    if (nextView === 'postmortem') {
+      handlePostMortemClick()
+      return
+    }
+
+    if (nextView === 'dashboard') {
+      // Status may have changed (e.g. report submitted).
+      loadReportStatus()
+    }
+
+    setView(nextView)
+
+  }
+
+  const backToDashboard = () =>
+    handleNavigate('dashboard')
 
 
   // ==========================================
@@ -221,193 +241,68 @@ function UserDashboard({
   // RENDER
   // ==========================================
 
-if (showEquipment2028) {
-  return (
+const layoutClassName =
+  view === 'equipment' || view === 'finance'
+    ? 'equipment-page equipment-applicant'
+    : ''
+
+let content = null
+
+if (view === 'postmortem') {
+  content = (
+    <PostMortem
+      userProfile={userProfile}
+      onBack={backToDashboard}
+    />
+  )
+} else if (view === 'equipment') {
+  content = (
     <Equipment2028
       userProfile={userProfile}
-      onBack={() => setShowEquipment2028(false)}
+      onBack={backToDashboard}
     />
   )
-}
-
-if (showFinance) {
-  return (
+} else if (view === 'finance') {
+  content = (
     <UserFinance
       userProfile={userProfile}
-      onBack={() => setShowFinance(false)}
+      onBack={backToDashboard}
     />
+  )
+}
+
+if (content) {
+  return (
+    <UserLayout
+      userProfile={userProfile}
+      activeView={view}
+      onNavigate={handleNavigate}
+      onLogout={handleUserLogout}
+      className={layoutClassName}
+    >
+      {content}
+    </UserLayout>
   )
 }
 
   return (
 
-    <main className="ewcc-user-dashboard">
+    <UserLayout
+      userProfile={userProfile}
+      activeView={view}
+      onNavigate={handleNavigate}
+      onLogout={handleUserLogout}
+    >
 
-      {/* ======================================
-          SIDEBAR
-          ====================================== */}
-
-      <aside className="ewcc-sidebar">
-
-        <div className="sidebar-brand">
-
-          <div className="sidebar-logo">
-
-            <div className="logo-shield">
-              <span>EW</span>
-            </div>
-
-          </div>
-
-          <h1>
-            EWCC
-          </h1>
-
-          <p>
-            Post-Mortem
-          </p>
-
-          <span className="sidebar-role">
-            Majlis Sukan Pahang
-          </span>
-
-        </div>
-
-
-        {/* MENU */}
-
-        <nav className="sidebar-menu">
-
-          <button
-            className="sidebar-menu-item active"
-          >
-
-            <span className="sidebar-menu-icon">
-              ⌂
-            </span>
-
-            <span>
-              Dashboard
-            </span>
-
-          </button>
-
-
-          <button
-            className="sidebar-menu-item"
-            onClick={handlePostMortemClick}
-          >
-
-            <span className="sidebar-menu-icon">
-              📝
-            </span>
-
-            <span>
-              Post-Mortem
-            </span>
-
-          </button>
-
-
-          <button
-            className="sidebar-menu-item"
-            onClick={() =>
-              alert(
-                'Profil pengguna akan dibina selepas ini.'
-              )
-            }
-          >
-
-            <span className="sidebar-menu-icon">
-              👤
-            </span>
-
-            <span>
-              Profil
-            </span>
-
-          </button>
-
-        </nav>
-
-
-        {/* FOOTER */}
-
-        <div className="sidebar-footer">
-
-          <div className="sidebar-footer-info">
-
-            <strong>
-              {userProfile?.name || 'Pengguna'}
-            </strong>
-
-            <span>
-              Pengguna Sukan
-            </span>
-
-            <small>
-              {userProfile?.login_id || ''}
-            </small>
-
-          </div>
-
-
-          <button
-            className="sidebar-logout"
-            onClick={handleUserLogout}
-          >
-
-            <span>
-              ↪
-            </span>
-
-            Log Keluar
-
-          </button>
-
-        </div>
-
-      </aside>
-
-
-      {/* ======================================
-          MAIN
-          ====================================== */}
-
-      <section className="ewcc-admin-content">
-
-        {/* BODY */}
-
-        <div className="ewcc-admin-body">
-
-
-          {/* ==================================
-              WELCOME
-              ================================== */}
-
-          <section className="ewcc-welcome">
-
-            <span className="welcome-eyebrow">
-              EWCC POST-MORTEM • PENGGUNA SUKAN
-            </span>
-
-            <h2>
-              Selamat Datang,{' '}
-              {userProfile?.name}
-            </h2>
-
-            <p>
-              Selamat datang ke Sistem
-              Pengurusan Post-Mortem
-              Kontinjen Pahang.
-            </p>
-
-            <span className="welcome-note">
-              SUKMA XXII & PARA SUKMA
-              SELANGOR 2026
-            </span>
-
-          </section>
+          <UserPageHero
+            eyebrow="EWCC POST-MORTEM • PENGGUNA SUKAN"
+            title={`Selamat Datang, ${userProfile?.name || 'Pengguna'}`}
+            description="Selamat datang ke Sistem Pengurusan Post-Mortem Kontinjen Pahang."
+            meta={[
+              'SUKMA XXII SELANGOR 2026 & PARA SUKMA SELANGOR 2026',
+              userProfile?.sport || 'MAJLIS SUKAN PAHANG',
+            ]}
+          />
 
 
           {/* ==================================
@@ -676,7 +571,7 @@ if (showFinance) {
 
               <button
                 className="ewcc-module-card"
-                onClick={() => setShowEquipment2028(true)}
+                onClick={() => setView('equipment')}
               >
 
                 <div className="module-icon module-green">
@@ -707,7 +602,7 @@ if (showFinance) {
 
               <button
                 className="ewcc-module-card"
-                onClick={() => setShowFinance(true)}
+                onClick={() => setView('finance')}
               >
 
                 <div className="module-icon module-purple">
@@ -738,31 +633,7 @@ if (showFinance) {
           </section>
 
 
-          {/* ==================================
-              FOOTER
-              ================================== */}
-
-          <footer className="ewcc-content-footer">
-
-            <span>
-              EWCC Post-Mortem
-            </span>
-
-            <span>
-              Versi 1.0
-            </span>
-
-            <span>
-              Majlis Sukan Pahang
-            </span>
-
-          </footer>
-
-        </div>
-
-      </section>
-
-    </main>
+    </UserLayout>
 
   )
 }
