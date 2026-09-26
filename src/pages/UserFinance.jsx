@@ -102,12 +102,9 @@ export default function UserFinance({
         ...current,
         [key]: {
           ...current[key],
-          [field]:
-            field === 'catatan'
-              ? value
-              : value === ''
-                ? 0
-                : Number(value),
+          // Keep what was typed (e.g. '0.' while entering 0.50);
+          // numbers are normalised on save.
+          [field]: value,
         },
       })
     )
@@ -132,7 +129,7 @@ export default function UserFinance({
       }
 
       const payload = {
-        finance_data: withComputedTotal(financeData),
+        finance_data: normaliseFinanceData(financeData),
         updated_at: new Date().toISOString(),
       }
 
@@ -393,7 +390,9 @@ export default function UserFinance({
                                     value={
                                       isTotal
                                         ? financeData[item.key]?.[period.key] ?? 0
-                                        : financeData[item.key]?.[period.key] || ''
+                                        : financeData[item.key]?.[period.key] === 0
+                                          ? ''
+                                          : financeData[item.key]?.[period.key] ?? ''
                                     }
                                     onChange={(e) =>
                                       updateFinanceValue(

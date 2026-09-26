@@ -206,12 +206,9 @@ function AdminFinance({ onBack }) {
 
         [key]: {
           ...current[key],
-          [field]:
-            field === 'catatan'
-              ? value
-              : value === ''
-                ? 0
-                : Number(value),
+          // Keep what was typed (e.g. '0.' while entering 0.50);
+          // numbers are normalised on save.
+          [field]: value,
         },
       })
     )
@@ -232,12 +229,15 @@ function AdminFinance({ onBack }) {
 
     setSaving(true)
 
+    const savedFinanceData =
+      normaliseFinanceData(financeData)
+
     try {
       const { error } =
         await supabase
           .from('postmortem_reports')
           .update({
-            finance_data: financeData,
+            finance_data: savedFinanceData,
             updated_at:
               new Date().toISOString(),
           })
@@ -269,7 +269,7 @@ function AdminFinance({ onBack }) {
             ? {
                 ...report,
                 finance_data:
-                  financeData,
+                  savedFinanceData,
                 updated_at:
                   new Date().toISOString(),
               }
@@ -1085,7 +1085,9 @@ function AdminFinance({ onBack }) {
                                       item.key ===
                                       FINANCE_TOTAL_KEY
                                         ? financeData[item.key]?.['2023_2024'] ?? 0
-                                        : financeData[item.key]?.['2023_2024'] || ''
+                                        : financeData[item.key]?.['2023_2024'] === 0
+                                          ? ''
+                                          : financeData[item.key]?.['2023_2024'] ?? ''
                                     }
                                     onChange={(
                                       e
@@ -1188,7 +1190,9 @@ function AdminFinance({ onBack }) {
                                       item.key ===
                                       FINANCE_TOTAL_KEY
                                         ? financeData[item.key]?.['2025_2026'] ?? 0
-                                        : financeData[item.key]?.['2025_2026'] || ''
+                                        : financeData[item.key]?.['2025_2026'] === 0
+                                          ? ''
+                                          : financeData[item.key]?.['2025_2026'] ?? ''
                                     }
                                     onChange={(
                                       e
