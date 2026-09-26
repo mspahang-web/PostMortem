@@ -92,6 +92,77 @@ Deno.serve(async (req) => {
   try {
     switch (action) {
       // ================= USERS =================
+      case 'user.create': {
+        const name = String(body.name || '').trim()
+        const loginId = String(body.loginId || '').trim().toUpperCase()
+        const sport = String(body.sport || '').trim().toUpperCase()
+        const password = String(body.password || '')
+        // Computed by the app with the same helper used at login.
+        const email = String(body.email || '').trim().toLowerCase()
+
+        if (!name) return fail('Sila masukkan Nama Pengguna.')
+        if (!/^[A-Z0-9_-]{2,30}$/.test(loginId)) {
+          return fail('ID Pengguna mestilah 2–30 aksara (huruf, nombor, - atau _), tanpa jarak.')
+        }
+        if (loginId === 'ADMIN') return fail('ID "ADMIN" dikhaskan untuk pentadbir.')
+        if (!sport) return fail('Sila pilih Sukan.')
+        if (password.length < 6) return fail('Kata laluan mestilah sekurang-kurangnya 6 aksara.')
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('E-mel log masuk tidak sah.')
+
+        const { data: sportRow } = await admin
+          .from('sports')
+          .select('sport_code')
+          .eq('sport_code', sport)
+          .maybeSingle()
+
+        if (!sportRow) return fail(`Sukan "${sport}" tidak wujud.`)
+
+        const { data: taken } = await admin
+          .from('profiles')
+          .select('id')
+          .ilike('login_id', loginId)
+          .maybeSingle()
+
+        if (taken) return fail(`ID Pengguna "${loginId}" telah digunakan.`)
+
+        const { data: created, error: createError } =
+          await admin.auth.admin.createUser({
+            email,
+            password,
+            email_confirm: true,
+            user_metadata: { name, login_id: loginId, sport },
+          })
+
+        if (createError || !created?.user) {
+          const message = createError?.message || 'Akaun tidak dapat dicipta.'
+          return fail(
+            /already|registered|exists/i.test(message)
+              ? `Akaun log masuk untuk ID "${loginId}" sudah wujud dalam Supabase Auth (${email}).`
+              : message
+          )
+        }
+
+        // upsert: some projects create the profile row with a trigger.
+        const { error: profileError } = await admin
+          .from('profiles')
+          .upsert({
+            id: created.user.id,
+            name,
+            login_id: loginId,
+            sport,
+            role: 'user',
+            email,
+          })
+
+        if (profileError) {
+          // Don't leave a login without a profile behind.
+          await admin.auth.admin.deleteUser(created.user.id)
+          return fail(`Profil tidak dapat disimpan: ${profileError.message}`)
+        }
+
+        return reply({ success: true, userId: created.user.id })
+      }
+
       case 'user.update': {
         const userId = String(body.userId || '')
         const name = String(body.name || '').trim()

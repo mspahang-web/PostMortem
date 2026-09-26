@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { loadSportNames } from '../lib/sports'
+import { adminManage } from '../lib/adminApi'
+import { getLoginEmail } from '../lib/loginEmail'
 import AdminPostMortem from './AdminPostMortem'
 import AdminSports from './AdminSports'
 import AdminUsers from './AdminUsers'
@@ -232,66 +234,14 @@ if (existingUser) {
     try {
       setLoadingUsers(true)
 
-      // Dapatkan session admin
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-
-      if (!session) {
-        alert(
-          'Sesi login telah tamat. Sila login semula.'
-        )
-        return
-      }
-
-      // Panggil Edge Function
-      const { data, error } =
-        await supabase.functions.invoke(
-          'create-user',
-          {
-            body: {
-              name: newUserName.trim(),
-
-              loginId: normalizedLoginId,
-
-              sport: newUserSport,
-
-              password: newUserPassword,
-            },
-          }
-        )
-
-      if (error) {
-        console.error(
-          'Create user error:',
-          error
-        )
-
-        alert(
-          `Gagal mencipta pengguna.\n\n${
-            error.message ||
-            'Ralat tidak diketahui.'
-          }`
-        )
-
-        return
-      }
-
-      if (!data?.success) {
-        console.error(
-          'Edge Function response:',
-          data
-        )
-
-        alert(
-          `Gagal mencipta pengguna.\n\n${
-            data?.error ||
-            'Ralat tidak diketahui.'
-          }`
-        )
-
-        return
-      }
+      // Same email helper as login, so the new account can log in.
+      await adminManage('user.create', {
+        name: newUserName.trim(),
+        loginId: normalizedLoginId,
+        sport: newUserSport,
+        password: newUserPassword,
+        email: getLoginEmail(normalizedLoginId),
+      })
 
       alert(
         'Pengguna berjaya dicipta.'
@@ -304,12 +254,12 @@ if (existingUser) {
       await loadUsers()
     } catch (error) {
       console.error(
-        'Unexpected error:',
+        'Create user error:',
         error
       )
 
       alert(
-        'Berlaku ralat semasa mencipta pengguna.'
+        `Gagal mencipta pengguna.\n\n${error.message}`
       )
     } finally {
       setLoadingUsers(false)

@@ -5,6 +5,7 @@ import './App.css'
 import AdminDashboard from './pages/AdminDashboard'
 import UserDashboard from './pages/UserDashboard'
 import { loadSportNames } from './lib/sports'
+import { getLoginEmail } from './lib/loginEmail'
 
 function App() {
 
@@ -69,20 +70,8 @@ function App() {
       // INTERNAL EMAIL
       // ========================================
 
-      // Email pattern for sport accounts ({id} = lowercase login ID).
-      // Use an inbox MSP owns (e.g. mspahang+{id}@gmail.com) so Supabase
-      // emails (reset / magic link) can't reach a stranger.
-      const loginEmailTemplate =
-        import.meta.env.VITE_LOGIN_EMAIL_TEMPLATE ||
-        '{id}@gmail.com'
-
       const internalEmail =
-        normalizedLoginId === 'ADMIN'
-          ? 'mspahang@gmail.com'
-          : loginEmailTemplate.replace(
-              '{id}',
-              normalizedLoginId.toLowerCase()
-            )
+        getLoginEmail(normalizedLoginId)
 
       console.log(
         'INTERNAL EMAIL:',
