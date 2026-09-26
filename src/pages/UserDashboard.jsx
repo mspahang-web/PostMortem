@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Equipment2028 from './Equipment2028'
+import UserFinance from './UserFinance'
 
 function UserDashboard({
   userProfile,
@@ -16,6 +17,7 @@ function UserDashboard({
   const [loadingReport, setLoadingReport] = useState(true)
   const [reportLoadError, setReportLoadError] = useState(false)
   const [showEquipment2028, setShowEquipment2028] = useState(false)
+  const [showFinance, setShowFinance] = useState(false)
 
   const loadReportStatus = async () => {
 
@@ -224,6 +226,15 @@ if (showEquipment2028) {
     <Equipment2028
       userProfile={userProfile}
       onBack={() => setShowEquipment2028(false)}
+    />
+  )
+}
+
+if (showFinance) {
+  return (
+    <UserFinance
+      userProfile={userProfile}
+      onBack={() => setShowFinance(false)}
     />
   )
 }
@@ -680,6 +691,30 @@ if (showEquipment2028) {
             <p>
               Masukkan cadangan peralatan yang diperlukan
               oleh sukan anda bagi persediaan SUKMA 2028.
+            </p>
+          </div>
+
+          <span className="module-arrow">
+            →
+          </span>
+        </button>
+
+          <button
+          className="ewcc-module-card"
+          onClick={() => setShowFinance(true)}
+        >
+          <div className="module-icon module-orange">
+            💰
+          </div>
+
+          <div className="module-content">
+            <h3>
+              Perbandingan Kewangan
+            </h3>
+
+            <p>
+              Masukkan kelulusan perbelanjaan sukan anda
+              bagi tempoh 2023–2024 dan 2025–2026.
             </p>
           </div>
 

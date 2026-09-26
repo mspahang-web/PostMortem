@@ -5,6 +5,10 @@ import { getEquipmentAmount } from '../lib/equipment'
 
 import '../styles/AdminDashboardOverview.css'
 import '../styles/AdminDashboardOverviewResponsive.css'
+import {
+  FINANCE_ITEMS,
+  normaliseFinanceData,
+} from '../lib/finance'
 
 
 // =========================================================
@@ -1419,48 +1423,15 @@ function calculateConfirmationAnalytics(
 // FINANCE ANALYTICS
 // =========================================================
 
-const FINANCE_ITEMS = [
-  {
-    key: 'kosPeruntukanKeseluruhan',
-    label: 'Kos / Peruntukan Keseluruhan',
-  },
-  {
-    key: 'peralatan',
-    label: 'Kelulusan Perbelanjaan Peralatan',
-  },
-  {
-    key: 'latihanPusat',
-    label: 'Kelulusan Perbelanjaan Latihan Pusat',
-  },
-  {
-    key: 'kejohanan',
-    label: 'Kelulusan Perbelanjaan Kejohanan',
-  },
-  {
-    key: 'elaunAtlet',
-    label: 'Elaun Atlet',
-  },
-  {
-    key: 'lantikanJurulatih',
-    label: 'Lantikan Jurulatih',
-  },
-  {
-    key: 'lainLain',
-    label: 'Lain-lain Kelulusan',
-  },
-  {
-    key: 'jumlahKelulusan',
-    label: 'Jumlah Kelulusan Perbelanjaan',
-  },
-]
-
 function getFinanceValue(
   financeData,
   key,
   period
 ) {
+  // Normalise so Jumlah Kelulusan is always the computed sum,
+  // including for reports saved before it was automatic.
   const value =
-    financeData?.[key]?.[period]
+    normaliseFinanceData(financeData)?.[key]?.[period]
 
   const number =
     Number(value)

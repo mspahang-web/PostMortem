@@ -1,92 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import '../styles/AdminFinance.css'
-
-const FINANCE_ITEMS = [
-  {
-    key: 'kosPeruntukanKeseluruhan',
-    label: 'Kos / Peruntukan Keseluruhan',
-  },
-  {
-    key: 'peralatan',
-    label: 'Kelulusan Perbelanjaan Peralatan',
-  },
-  {
-    key: 'latihanPusat',
-    label: 'Kelulusan Perbelanjaan Latihan Pusat',
-  },
-  {
-    key: 'kejohanan',
-    label: 'Kelulusan Perbelanjaan Kejohanan',
-  },
-  {
-    key: 'elaunAtlet',
-    label: 'Elaun Atlet',
-  },
-  {
-    key: 'lantikanJurulatih',
-    label: 'Lantikan Jurulatih',
-  },
-  {
-    key: 'lainLain',
-    label: 'Lain-lain Kelulusan',
-  },
-  {
-    key: 'jumlahKelulusan',
-    label: 'Jumlah Kelulusan Perbelanjaan',
-  },
-]
-
-const createEmptyFinanceData = () => {
-  return FINANCE_ITEMS.reduce((result, item) => {
-    result[item.key] = {
-      '2023_2024': 0,
-      '2025_2026': 0,
-      catatan: '',
-    }
-
-    return result
-  }, {})
-}
-
-function normaliseFinanceData(data) {
-  const empty = createEmptyFinanceData()
-
-  if (!data || typeof data !== 'object') {
-    return empty
-  }
-
-  FINANCE_ITEMS.forEach((item) => {
-    const source = data[item.key]
-
-    if (!source || typeof source !== 'object') {
-      return
-    }
-
-    empty[item.key] = {
-      '2023_2024':
-        Number(source['2023_2024']) || 0,
-
-      '2025_2026':
-        Number(source['2025_2026']) || 0,
-
-      catatan:
-        source.catatan || '',
-    }
-  })
-
-  return empty
-}
-
-function formatCurrency(value) {
-  return Number(value || 0).toLocaleString(
-    'ms-MY',
-    {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }
-  )
-}
+import {
+  FINANCE_ITEMS,
+  FINANCE_TOTAL_KEY,
+  createEmptyFinanceData,
+  formatCurrency,
+  normaliseFinanceData,
+  withComputedTotal,
+} from '../lib/finance'
 
 function AdminFinance({ onBack }) {
   const [reports, setReports] = useState([])
@@ -278,19 +200,21 @@ function AdminFinance({ onBack }) {
     field,
     value
   ) => {
-    setFinanceData((current) => ({
-      ...current,
+    setFinanceData((current) =>
+      withComputedTotal({
+        ...current,
 
-      [key]: {
-        ...current[key],
-        [field]:
-          field === 'catatan'
-            ? value
-            : value === ''
-              ? 0
-              : Number(value),
-      },
-    }))
+        [key]: {
+          ...current[key],
+          [field]:
+            field === 'catatan'
+              ? value
+              : value === ''
+                ? 0
+                : Number(value),
+        },
+      })
+    )
   }
 
   // ==========================================
@@ -1146,6 +1070,16 @@ function AdminFinance({ onBack }) {
                                     type="number"
                                     min="0"
                                     step="0.01"
+                                    readOnly={
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                    }
+                                    title={
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                        ? 'Dikira automatik'
+                                        : undefined
+                                    }
                                     value={
                                       financeData[
                                         item.key
@@ -1185,6 +1119,16 @@ function AdminFinance({ onBack }) {
                                         '#34445c',
                                       outline:
                                         'none',
+                                      background:
+                                        item.key ===
+                                        FINANCE_TOTAL_KEY
+                                          ? '#f1f5f9'
+                                          : '#fff',
+                                      fontWeight:
+                                        item.key ===
+                                        FINANCE_TOTAL_KEY
+                                          ? 700
+                                          : 400,
                                     }}
                                   />
                                 </div>
@@ -1229,6 +1173,16 @@ function AdminFinance({ onBack }) {
                                     type="number"
                                     min="0"
                                     step="0.01"
+                                    readOnly={
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                    }
+                                    title={
+                                      item.key ===
+                                      FINANCE_TOTAL_KEY
+                                        ? 'Dikira automatik'
+                                        : undefined
+                                    }
                                     value={
                                       financeData[
                                         item.key
@@ -1268,6 +1222,16 @@ function AdminFinance({ onBack }) {
                                         '#34445c',
                                       outline:
                                         'none',
+                                      background:
+                                        item.key ===
+                                        FINANCE_TOTAL_KEY
+                                          ? '#f1f5f9'
+                                          : '#fff',
+                                      fontWeight:
+                                        item.key ===
+                                        FINANCE_TOTAL_KEY
+                                          ? 700
+                                          : 400,
                                     }}
                                   />
                                 </div>
