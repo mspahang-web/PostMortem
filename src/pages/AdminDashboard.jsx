@@ -673,6 +673,9 @@ const sportsWithReports =
           ) : adminView === 'reports' ? (
             <AdminPostMortem
               embedded
+              users={users}
+              sports={sports}
+              onImported={loadPostMortemReports}
               initialReportId={selectedPostMortemReportId}
               onBack={async () => {
                 setSelectedPostMortemReportId(null)

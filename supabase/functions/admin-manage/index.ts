@@ -259,6 +259,116 @@ Deno.serve(async (req) => {
         return reply({ success: true })
       }
 
+      // ================= IMPORT (Excel) =================
+      case 'report.import': {
+        const userId = String(body.userId || '')
+        const sections = (body.sections || {}) as Record<string, unknown>
+        const equipment = Array.isArray(body.equipment) ? body.equipment : []
+        const replaceEquipment = body.replaceEquipment === true
+        const overwriteSubmitted = body.overwriteSubmitted === true
+
+        if (!userId) return fail('Pengguna tidak dinyatakan.')
+
+        const { data: target } = await admin
+          .from('profiles')
+          .select('id, role, login_id, sport')
+          .eq('id', userId)
+          .maybeSingle()
+
+        if (!target) return fail('Pengguna tidak dijumpai.', 404)
+        if (target.role === 'admin') return fail('Laporan tidak boleh diimport ke akaun pentadbir.')
+
+        const sectionColumns: Record<string, unknown> = {}
+        for (let n = 1; n <= 13; n++) {
+          if (sections[n] !== undefined && sections[n] !== null) {
+            sectionColumns[`section_${n}`] = sections[n]
+          }
+        }
+
+        const { data: existing } = await admin
+          .from('postmortem_reports')
+          .select('id, status')
+          .eq('user_id', userId)
+          .order('updated_at', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        let reportId = existing?.id || null
+        const now = new Date().toISOString()
+
+        if (existing) {
+          if (existing.status !== 'draft' && !overwriteSubmitted) {
+            return fail(
+              `Laporan sukan ini berstatus "${existing.status}". ` +
+                'Sahkan penulisan ganti jika mahu meneruskan import.'
+            )
+          }
+
+          const { error } = await admin
+            .from('postmortem_reports')
+            .update({ ...sectionColumns, updated_at: now })
+            .eq('id', existing.id)
+
+          if (error) return fail(error.message)
+        } else {
+          const { data: created, error } = await admin
+            .from('postmortem_reports')
+            .insert({
+              ...sectionColumns,
+              user_id: userId,
+              login_id: target.login_id || '',
+              sport: target.sport || null,
+              status: 'draft',
+              updated_at: now,
+            })
+            .select('id')
+            .single()
+
+          if (error) return fail(error.message)
+          reportId = created.id
+        }
+
+        let equipmentCount = 0
+
+        if (equipment.length > 0) {
+          let startBil = 1
+
+          if (replaceEquipment) {
+            const { error } = await admin.from('equipment_2028').delete().eq('user_id', userId)
+            if (error) return fail(error.message)
+          } else {
+            const { count } = await admin
+              .from('equipment_2028')
+              .select('*', { count: 'exact', head: true })
+              .eq('user_id', userId)
+            startBil = (count || 0) + 1
+          }
+
+          const rows = equipment.map((item: Record<string, unknown>, index: number) => ({
+            user_id: userId,
+            login_id: target.login_id || '',
+            sport: target.sport || null,
+            bil: startBil + index,
+            peralatan: String(item.peralatan || '').trim(),
+            kuantiti: Number(item.kuantiti) || 1,
+            spesifikasi_jenama: String(item.spesifikasi_jenama || '').trim(),
+            kegunaan: String(item.kegunaan || '').trim(),
+            keutamaan: ['Tinggi', 'Sederhana', 'Rendah'].includes(String(item.keutamaan))
+              ? String(item.keutamaan)
+              : 'Sederhana',
+            anggaran_harga_seunit: Number(item.anggaran_harga_seunit) || 0,
+            justifikasi_keperluan: String(item.justifikasi_keperluan || '').trim(),
+            updated_at: now,
+          }))
+
+          const { error } = await admin.from('equipment_2028').insert(rows)
+          if (error) return fail(`Laporan diimport, tetapi peralatan gagal disimpan: ${error.message}`)
+          equipmentCount = rows.length
+        }
+
+        return reply({ success: true, reportId, equipmentCount })
+      }
+
       default:
         return fail(`Tindakan "${action}" tidak dikenali.`)
     }

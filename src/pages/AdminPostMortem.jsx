@@ -8,6 +8,7 @@ import {
 } from '../lib/training'
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
 import PageHero from '../components/PageHero'
+import ImportExcelModal from '../components/ImportExcelModal'
 
 function AdminPostMortem({
 
@@ -16,6 +17,12 @@ function AdminPostMortem({
   initialReportId,
 
   embedded = false,
+
+  users = [],
+
+  sports = [],
+
+  onImported,
 
 }) {
 
@@ -30,6 +37,8 @@ function AdminPostMortem({
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
   const [selectedReport, setSelectedReport] = useState(null)
+
+  const [showImport, setShowImport] = useState(false)
   const [openSection, setOpenSection] = useState(null)
   const [reviewing, setReviewing] = useState(false)
 
@@ -896,18 +905,42 @@ const handleMarkReviewed = async () => {
               title="Laporan Post-Mortem"
               description="Semak, tapis dan buka laporan post-mortem setiap sukan."
               actions={
-                <button
-                  type="button"
-                  className="ewcc-secondary-button"
-                  onClick={loadReports}
-                  disabled={loading}
-                >
-                  {loading
-                    ? 'Memuatkan...'
-                    : '↻ Muat Semula'}
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="ewcc-secondary-button"
+                    onClick={loadReports}
+                    disabled={loading}
+                  >
+                    {loading
+                      ? 'Memuatkan...'
+                      : '↻ Muat Semula'}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="ewcc-primary-button"
+                    onClick={() => setShowImport(true)}
+                  >
+                    ↑ Import Excel
+                  </button>
+                </>
               }
             />
+
+            {showImport && (
+              <ImportExcelModal
+                users={users}
+                sports={sports}
+                reports={reports}
+                onClose={() => setShowImport(false)}
+                onImported={async () => {
+                  setShowImport(false)
+                  await loadReports()
+                  await onImported?.()
+                }}
+              />
+            )}
 
 
 

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TRAINING_COMPONENTS } from '../../lib/training'
 
 const ratingOptions = [
   'Sangat Baik',
@@ -7,62 +8,11 @@ const ratingOptions = [
   'Lemah',
 ]
 
-const defaultComponents = [
-  {
-    id: 'programLatihan',
-    title: 'Program latihan',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'intensitiLatihan',
-    title: 'Intensiti latihan',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'kecergasan',
-    title: 'Kecergasan',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'teknikal',
-    title: 'Teknikal',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'taktikal',
-    title: 'Taktikal',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'mental',
-    title: 'Mental',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'pemakanan',
-    title: 'Pemakanan',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'pemulihan',
-    title: 'Pemulihan',
-    rating: '',
-    catatan: '',
-  },
-  {
-    id: 'sainsSukan',
-    title: 'Sains sukan',
-    rating: '',
-    catatan: '',
-  },
-]
+const defaultComponents = TRAINING_COMPONENTS.map((item) => ({
+  ...item,
+  rating: '',
+  catatan: '',
+}))
 
 function Section5Latihan({
   initialData,

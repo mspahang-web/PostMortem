@@ -30,3 +30,16 @@ export function getTrainingComponents(section5) {
 
   return []
 }
+
+// Components rated in Section 5, in form order.
+export const TRAINING_COMPONENTS = [
+  { id: 'programLatihan', title: 'Program latihan' },
+  { id: 'intensitiLatihan', title: 'Intensiti latihan' },
+  { id: 'kecergasan', title: 'Kecergasan' },
+  { id: 'teknikal', title: 'Teknikal' },
+  { id: 'taktikal', title: 'Taktikal' },
+  { id: 'mental', title: 'Mental' },
+  { id: 'pemakanan', title: 'Pemakanan' },
+  { id: 'pemulihan', title: 'Pemulihan' },
+  { id: 'sainsSukan', title: 'Sains sukan' },
+]

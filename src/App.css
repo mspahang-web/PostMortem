@@ -8658,3 +8658,112 @@ button.progress-mini-step:focus-visible span {
   min-width: 0;
 }
 
+
+/* Import Excel modal (components/ImportExcelModal.jsx). */
+.import-excel-modal {
+  max-width: 720px;
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+.import-excel-modal .ewcc-modal-body {
+  overflow-y: auto;
+}
+
+.import-excel-modal input[type="file"] {
+  height: auto;
+  padding: 10px 12px;
+}
+
+.import-note {
+  margin: -6px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+}
+
+.import-note.import-error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.import-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.import-check input {
+  margin-top: 2px;
+}
+
+.import-summary {
+  border: 1px solid #e5eaf0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.import-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.import-summary th,
+.import-summary td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #edf1f5;
+  text-align: left;
+  vertical-align: top;
+}
+
+.import-summary th {
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.import-summary tr:last-child td {
+  border-bottom: 0;
+}
+
+.import-summary td:first-child {
+  color: #334155;
+  font-weight: 600;
+  width: 55%;
+}
+
+.import-summary td small {
+  display: block;
+  margin-top: 4px;
+  color: #b45309;
+  font-size: 11px;
+}
+
+.import-ok,
+.import-warn {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.import-ok {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.import-warn {
+  background: #fef3c7;
+  color: #b45309;
+}
