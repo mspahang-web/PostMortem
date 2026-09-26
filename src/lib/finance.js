@@ -5,34 +5,37 @@ export const FINANCE_PERIODS = [
 
 export const FINANCE_TOTAL_KEY = 'jumlahKelulusan'
 
+// Order and labels follow MSP's finance comparison form. Keys are kept
+// from the earlier form where the meaning is the same, so saved data
+// still lines up.
 export const FINANCE_ITEMS = [
-  {
-    key: 'kosPeruntukanKeseluruhan',
-    label: 'Kos / Peruntukan Keseluruhan',
-  },
-  {
-    key: 'peralatan',
-    label: 'Kelulusan Perbelanjaan Peralatan',
-  },
-  {
-    key: 'latihanPusat',
-    label: 'Kelulusan Perbelanjaan Latihan Pusat',
-  },
-  {
-    key: 'kejohanan',
-    label: 'Kelulusan Perbelanjaan Kejohanan',
-  },
-  {
-    key: 'elaunAtlet',
-    label: 'Elaun Atlet',
-  },
   {
     key: 'lantikanJurulatih',
     label: 'Lantikan Jurulatih',
   },
   {
-    key: 'lainLain',
-    label: 'Lain-lain Kelulusan',
+    key: 'elaunAtlet',
+    label: 'Elaun Latihan Atlet',
+  },
+  {
+    key: 'peralatan',
+    label: 'Peralatan',
+  },
+  {
+    key: 'pakaianPertandingan',
+    label: 'Pakaian Pertandingan',
+  },
+  {
+    key: 'latihanPusat',
+    label: 'Latihan Pusat/Pertandingan Persahabatan',
+  },
+  {
+    key: 'sewaanPenginapan',
+    label: 'Sewaan Penginapan/ Kemudahan Sukan',
+  },
+  {
+    key: 'kejohanan',
+    label: 'Penyertaan Kejohanan',
   },
   {
     key: FINANCE_TOTAL_KEY,
@@ -40,15 +43,10 @@ export const FINANCE_ITEMS = [
   },
 ]
 
-// Items summed into Jumlah Kelulusan Perbelanjaan.
-export const FINANCE_APPROVAL_KEYS = [
-  'peralatan',
-  'latihanPusat',
-  'kejohanan',
-  'elaunAtlet',
-  'lantikanJurulatih',
-  'lainLain',
-]
+// Every component is summed into Jumlah Kelulusan Perbelanjaan.
+export const FINANCE_APPROVAL_KEYS = FINANCE_ITEMS
+  .map((item) => item.key)
+  .filter((key) => key !== FINANCE_TOTAL_KEY)
 
 export function createEmptyFinanceData() {
   return FINANCE_ITEMS.reduce((result, item) => {
@@ -87,6 +85,14 @@ export function normaliseFinanceData(data) {
     return empty
   }
 
+  // Keep values from items no longer on the form so saving never
+  // deletes them from the database.
+  Object.keys(data).forEach((key) => {
+    if (!(key in empty)) {
+      empty[key] = data[key]
+    }
+  })
+
   FINANCE_ITEMS.forEach((item) => {
     const source = data[item.key]
 
@@ -117,4 +123,32 @@ export function formatCurrency(value) {
       maximumFractionDigits: 2,
     }
   )
+}
+
+// Perubahan (RM) and Perubahan (%) between 2023-2024 and 2025-2026.
+// percent is null when 2023-2024 is 0 (no base to compare against).
+export function calculateFinanceChange(previous, current) {
+  const before = Number(previous) || 0
+  const after = Number(current) || 0
+
+  return {
+    amount: after - before,
+    percent:
+      before === 0
+        ? null
+        : ((after - before) / before) * 100,
+  }
+}
+
+export function formatPercent(value) {
+  if (value === null || value === undefined) {
+    return '-'
+  }
+
+  const formatted = value.toLocaleString('ms-MY', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+
+  return `${formatted}%`
 }

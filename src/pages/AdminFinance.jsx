@@ -4,8 +4,10 @@ import '../styles/AdminFinance.css'
 import {
   FINANCE_ITEMS,
   FINANCE_TOTAL_KEY,
+  calculateFinanceChange,
   createEmptyFinanceData,
   formatCurrency,
+  formatPercent,
   normaliseFinanceData,
   withComputedTotal,
 } from '../lib/finance'
@@ -340,6 +342,22 @@ function AdminFinance({ onBack }) {
         current - previous,
     }
   }, [financeData])
+
+  const getChange = (key) =>
+    calculateFinanceChange(
+      financeData[key]?.['2023_2024'],
+      financeData[key]?.['2025_2026']
+    )
+
+  const getChangeColor = (key) => {
+    const { amount } = getChange(key)
+
+    return amount > 0
+      ? '#15803d'
+      : amount < 0
+        ? '#b91c1c'
+        : '#64748b'
+  }
 
   // ==========================================
   // RENDER
@@ -982,6 +1000,40 @@ function AdminFinance({ onBack }) {
                                 '#7d8a9d',
                             }}
                           >
+                            PERUBAHAN (RM)
+                          </span>
+
+                          <span
+                            style={{
+                              textAlign:
+                                'right',
+                              padding:
+                                '0 20px',
+                              fontSize:
+                                '10px',
+                              fontWeight:
+                                800,
+                              color:
+                                '#7d8a9d',
+                            }}
+                          >
+                            PERUBAHAN (%)
+                          </span>
+
+                          <span
+                            style={{
+                              textAlign:
+                                'right',
+                              padding:
+                                '0 20px',
+                              fontSize:
+                                '10px',
+                              fontWeight:
+                                800,
+                              color:
+                                '#7d8a9d',
+                            }}
+                          >
                             CATATAN
                           </span>
                         </div>
@@ -1239,6 +1291,58 @@ function AdminFinance({ onBack }) {
                                     }}
                                   />
                                 </div>
+                              </div>
+
+                              <div
+                                className="finance-entry-field finance-entry-change"
+                                data-label="Perubahan (RM)"
+                                style={{
+                                  padding:
+                                    '12px 20px',
+                                  textAlign:
+                                    'right',
+                                  fontSize:
+                                    '13px',
+                                  fontWeight:
+                                    item.key ===
+                                    FINANCE_TOTAL_KEY
+                                      ? 800
+                                      : 600,
+                                  color:
+                                    getChangeColor(
+                                      item.key
+                                    ),
+                                }}
+                              >
+                                {formatCurrency(
+                                  getChange(item.key).amount
+                                )}
+                              </div>
+
+                              <div
+                                className="finance-entry-field finance-entry-change"
+                                data-label="Perubahan (%)"
+                                style={{
+                                  padding:
+                                    '12px 20px',
+                                  textAlign:
+                                    'right',
+                                  fontSize:
+                                    '13px',
+                                  fontWeight:
+                                    item.key ===
+                                    FINANCE_TOTAL_KEY
+                                      ? 800
+                                      : 600,
+                                  color:
+                                    getChangeColor(
+                                      item.key
+                                    ),
+                                }}
+                              >
+                                {formatPercent(
+                                  getChange(item.key).percent
+                                )}
                               </div>
 
                               <div

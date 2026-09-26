@@ -18,9 +18,19 @@
   min-width: 0;
 }
 
+@media (min-width: 901px) {
+  .finance-entry-table-wrap {
+    overflow-x: auto !important;
+  }
+
+  .finance-entry-table {
+    min-width: 960px;
+  }
+}
+
 .finance-entry-header,
 .finance-entry-row {
-  grid-template-columns: minmax(190px, 1.5fr) repeat(2, minmax(135px, 1fr)) minmax(190px, 1.3fr) !important;
+  grid-template-columns: minmax(190px, 1.4fr) repeat(2, minmax(125px, 1fr)) minmax(105px, 0.8fr) minmax(85px, 0.6fr) minmax(170px, 1.2fr) !important;
 }
 
 .finance-entry-row > div {

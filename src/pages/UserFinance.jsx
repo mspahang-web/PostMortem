@@ -4,8 +4,10 @@ import {
   FINANCE_ITEMS,
   FINANCE_PERIODS,
   FINANCE_TOTAL_KEY,
+  calculateFinanceChange,
   createEmptyFinanceData,
   formatCurrency,
+  formatPercent,
   normaliseFinanceData,
   withComputedTotal,
 } from '../lib/finance'
@@ -24,6 +26,9 @@ const inputStyle = {
   outline: 'none',
   background: '#fff',
 }
+
+const changeColor = (value) =>
+  value > 0 ? '#15803d' : value < 0 ? '#b91c1c' : '#64748b'
 
 const totalInputStyle = {
   ...inputStyle,
@@ -309,21 +314,27 @@ export default function UserFinance({
                     className="equipment-table"
                     style={{
                       width: '100%',
-                      minWidth: 820,
+                      minWidth: 1080,
                       borderCollapse: 'collapse',
                     }}
                   >
                     <thead>
                       <tr>
-                        <th style={{ width: '34%' }}>PERKARA</th>
+                        <th style={{ width: '26%' }}>KOMPONEN</th>
                         {FINANCE_PERIODS.map((period) => (
                           <th
                             key={period.key}
-                            style={{ width: '20%', textAlign: 'right' }}
+                            style={{ width: '15%', textAlign: 'right' }}
                           >
                             {period.label} (RM)
                           </th>
                         ))}
+                        <th style={{ width: '12%', textAlign: 'right' }}>
+                          PERUBAHAN (RM)
+                        </th>
+                        <th style={{ width: '10%', textAlign: 'right' }}>
+                          PERUBAHAN (%)
+                        </th>
                         <th>CATATAN</th>
                       </tr>
                     </thead>
@@ -331,6 +342,10 @@ export default function UserFinance({
                     <tbody>
                       {FINANCE_ITEMS.map((item) => {
                         const isTotal = item.key === FINANCE_TOTAL_KEY
+                        const change = calculateFinanceChange(
+                          financeData[item.key]?.['2023_2024'],
+                          financeData[item.key]?.['2025_2026']
+                        )
 
                         return (
                           <tr
@@ -410,6 +425,28 @@ export default function UserFinance({
                                 </div>
                               </td>
                             ))}
+
+                            <td
+                              style={{
+                                textAlign: 'right',
+                                fontWeight: isTotal ? 800 : 600,
+                                color: changeColor(change.amount),
+                                whiteSpace: 'nowrap',
+                              }}
+                            >
+                              {formatCurrency(change.amount)}
+                            </td>
+
+                            <td
+                              style={{
+                                textAlign: 'right',
+                                fontWeight: isTotal ? 800 : 600,
+                                color: changeColor(change.amount),
+                                whiteSpace: 'nowrap',
+                              }}
+                            >
+                              {formatPercent(change.percent)}
+                            </td>
 
                             <td>
                               <textarea
