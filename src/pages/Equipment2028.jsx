@@ -246,7 +246,8 @@ export default function Equipment2028({
 
         login_id: loginId,
 
-        sport: sportName,
+        // Store the sport code (e.g. ESK); sportName is for display only.
+        sport: userProfile?.sport || sportName,
 
         bil:
           existingItem?.bil ||
