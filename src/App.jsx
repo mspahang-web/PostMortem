@@ -68,10 +68,20 @@ function App() {
       // INTERNAL EMAIL
       // ========================================
 
+      // Email pattern for sport accounts ({id} = lowercase login ID).
+      // Use an inbox MSP owns (e.g. mspahang+{id}@gmail.com) so Supabase
+      // emails (reset / magic link) can't reach a stranger.
+      const loginEmailTemplate =
+        import.meta.env.VITE_LOGIN_EMAIL_TEMPLATE ||
+        '{id}@gmail.com'
+
       const internalEmail =
         normalizedLoginId === 'ADMIN'
           ? 'mspahang@gmail.com'
-          : `${normalizedLoginId.toLowerCase()}@gmail.com`
+          : loginEmailTemplate.replace(
+              '{id}',
+              normalizedLoginId.toLowerCase()
+            )
 
       console.log(
         'INTERNAL EMAIL:',
