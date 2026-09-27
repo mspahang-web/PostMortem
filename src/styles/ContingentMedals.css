@@ -560,3 +560,8 @@
 .cm-report-records li {
   white-space: pre-line;
 }
+
+/* Sits between the four summary cards and the two-column area. */
+.postmortem-overview-panel.cm-report-panel {
+  margin-bottom: 20px;
+}

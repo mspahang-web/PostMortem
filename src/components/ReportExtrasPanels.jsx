@@ -281,7 +281,7 @@ export function ReportContingentMedalsPanel({ reportId }) {
   const current = editions[0]
 
   return (
-    <div className="postmortem-overview-panel report-extra-panel">
+    <div className="postmortem-overview-panel report-extra-panel cm-report-panel">
       <PanelHeader
         kicker={`PINGAT KONTINJEN · ${medals.kejohanan}`}
         title="Pencapaian Pingat Kontinjen"

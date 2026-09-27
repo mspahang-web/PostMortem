@@ -2025,6 +2025,12 @@ const handleMarkReviewed = async () => {
 
 
 
+                    {/* PINGAT KONTINJEN SUKAN INI */}
+
+                    <ReportContingentMedalsPanel
+                      reportId={selectedReport.id}
+                    />
+
 
 
                     {/* TWO COLUMN AREA */}
@@ -2765,7 +2771,7 @@ const handleMarkReviewed = async () => {
 
 
 
-                    {/* PERALATAN, KEWANGAN & PINGAT KONTINJEN SUKAN INI */}
+                    {/* PERALATAN & KEWANGAN SUKAN INI */}
 
                     <ReportEquipmentPanel
                       sport={selectedReport.sport}
@@ -2773,10 +2779,6 @@ const handleMarkReviewed = async () => {
 
                     <ReportFinancePanel
                       financeData={selectedReport.finance_data}
-                    />
-
-                    <ReportContingentMedalsPanel
-                      reportId={selectedReport.id}
                     />
 
                   </div>
