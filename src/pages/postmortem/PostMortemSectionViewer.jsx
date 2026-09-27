@@ -1,5 +1,6 @@
 import { getSection3Totals } from '../../lib/medals'
 import { getAthleteStatusLabel } from '../../lib/athleteStatus'
+import { AthleteStatusChart, TrainingRatingChart } from '../../components/ReportCharts'
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -763,6 +764,9 @@ const renderSection5 = (data) => {
   }
 
   return (
+    <>
+    <TrainingRatingChart components={components} />
+
     <div className="pm-rating-list">
 
       {components.map(
@@ -835,6 +839,7 @@ const renderSection5 = (data) => {
       )}
 
     </div>
+    </>
   )
 }
 
@@ -1291,6 +1296,9 @@ const renderSection10 = (data) => {
   }
 
   return (
+    <>
+    <AthleteStatusChart athletes={data} />
+
     <div className="pm-report-block">
 
       <SectionHeader
@@ -1373,6 +1381,7 @@ const renderSection10 = (data) => {
       </div>
 
     </div>
+    </>
   )
 }
 
