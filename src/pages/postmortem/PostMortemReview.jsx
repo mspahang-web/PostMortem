@@ -1,5 +1,5 @@
 import { getSportName } from '../../lib/sports'
-import { withEventMedalTotals } from '../../lib/medals'
+import { withSection3Totals } from '../../lib/medals'
 import { getAthleteStatusLabel } from '../../lib/athleteStatus'
 function PostMortemReview({
   userProfile,
@@ -35,7 +35,7 @@ function PostMortemReview({
     {
       number: 3,
       title: 'Sasaran & Pencapaian',
-      data: withEventMedalTotals(section3Data),
+      data: withSection3Totals(section3Data),
     },
     {
       number: 4,

@@ -1,4 +1,6 @@
-// Medal counts for Section 3 (Sasaran & Pencapaian), counted per event:
+// Section 3 (Sasaran & Pencapaian) totals. The user types the totals in;
+// counting per event below is only the fallback for older reports.
+// Medal counts counted per event:
 // in a team event every athlete has a row, but the team wins one medal.
 // Rows with the same Acara name and the same medal count once.
 
@@ -71,23 +73,57 @@ export function getAcaraList(section3) {
   return []
 }
 
-// Section 3 data with its stored totals recalculated per event.
-export function withEventMedalTotals(section3) {
+const manualNumber = (value) =>
+  value === undefined || value === null || value === '' || isNaN(Number(value))
+    ? null
+    : Number(value)
+
+// Section 3 totals as typed in by the user (Jumlah Acara / Sasaran /
+// Pencapaian). Reports saved before these were manual fall back to
+// counting the rows per event.
+export function getSection3Totals(section3) {
+  const counts = countMedalsByEvent(getAcaraList(section3))
+  const source = Array.isArray(section3) ? {} : section3 || {}
+  const pick = (key, fallback) => manualNumber(source[key]) ?? fallback
+
+  const sasaran = {
+    emas: pick('sasaranEmas', counts.sasaran.emas),
+    perak: pick('sasaranPerak', counts.sasaran.perak),
+    gangsa: pick('sasaranGangsa', counts.sasaran.gangsa),
+  }
+  sasaran.total = sasaran.emas + sasaran.perak + sasaran.gangsa
+
+  const pencapaian = {
+    emas: pick('pencapaianEmas', counts.pencapaian.emas),
+    perak: pick('pencapaianPerak', counts.pencapaian.perak),
+    gangsa: pick('pencapaianGangsa', counts.pencapaian.gangsa),
+  }
+  pencapaian.total = pencapaian.emas + pencapaian.perak + pencapaian.gangsa
+
+  return {
+    jumlahAcara: pick('jumlahAcara', counts.events),
+    sasaran,
+    pencapaian,
+  }
+}
+
+// Section 3 data with its total fields filled in (for display).
+export function withSection3Totals(section3) {
   if (!section3 || typeof section3 !== 'object') return section3
 
-  const acaraList = getAcaraList(section3)
-  const counts = countMedalsByEvent(acaraList)
+  const totals = getSection3Totals(section3)
 
   return {
     ...(Array.isArray(section3) ? {} : section3),
-    acaraList,
-    jumlahSasaran: counts.sasaran.total,
-    jumlahPencapaian: counts.pencapaian.total,
-    sasaranEmas: counts.sasaran.emas,
-    sasaranPerak: counts.sasaran.perak,
-    sasaranGangsa: counts.sasaran.gangsa,
-    pencapaianEmas: counts.pencapaian.emas,
-    pencapaianPerak: counts.pencapaian.perak,
-    pencapaianGangsa: counts.pencapaian.gangsa,
+    acaraList: getAcaraList(section3),
+    jumlahAcara: totals.jumlahAcara,
+    jumlahSasaran: totals.sasaran.total,
+    jumlahPencapaian: totals.pencapaian.total,
+    sasaranEmas: totals.sasaran.emas,
+    sasaranPerak: totals.sasaran.perak,
+    sasaranGangsa: totals.sasaran.gangsa,
+    pencapaianEmas: totals.pencapaian.emas,
+    pencapaianPerak: totals.pencapaian.perak,
+    pencapaianGangsa: totals.pencapaian.gangsa,
   }
 }

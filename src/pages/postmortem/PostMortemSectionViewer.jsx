@@ -1,4 +1,4 @@
-import { countMedalsByEvent } from '../../lib/medals'
+import { getSection3Totals } from '../../lib/medals'
 import { getAthleteStatusLabel } from '../../lib/athleteStatus'
 /* =========================================================
    HELPERS
@@ -436,8 +436,10 @@ const renderSection3 = (data) => {
     ? data.acaraList
     : []
 
-  // Recount per event (stored totals may predate event counting).
-  const medalCounts = countMedalsByEvent(acaraList)
+  // Totals typed in by the user (older reports: counted per event).
+  const totals = getSection3Totals(data)
+  const breakdown = (medals) =>
+    `Emas ${medals.emas} · Perak ${medals.perak} · Gangsa ${medals.gangsa}`
 
   return (
     <div className="pm-report-special">
@@ -450,7 +452,7 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {medalCounts.events}
+            {totals.jumlahAcara}
           </strong>
         </div>
 
@@ -460,8 +462,12 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {medalCounts.sasaran.total}
+            {totals.sasaran.total}
           </strong>
+
+          <small>
+            {breakdown(totals.sasaran)}
+          </small>
         </div>
 
         <div className="pm-summary-card">
@@ -470,8 +476,12 @@ const renderSection3 = (data) => {
           </span>
 
           <strong>
-            {medalCounts.pencapaian.total}
+            {totals.pencapaian.total}
           </strong>
+
+          <small>
+            {breakdown(totals.pencapaian)}
+          </small>
         </div>
 
       </div>

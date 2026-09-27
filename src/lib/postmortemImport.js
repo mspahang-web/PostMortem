@@ -4,7 +4,6 @@
 // labels, not fixed cells, so tables of any length still line up.
 import { columnIndex, columnLetters, readXlsx } from './xlsxReader'
 import { TRAINING_COMPONENTS, TRAINING_RATINGS } from './training'
-import { withEventMedalTotals } from './medals'
 
 const SECTION_TITLES = {
   A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7,
@@ -269,9 +268,36 @@ function parseSection3(grid, range, warn) {
     acaraList.push(item)
   }
 
-  // Totals are counted per event (see lib/medals.js).
+  // Totals are typed in the sheet: a "Jumlah sasaran:" / "Jumlah
+  // pencapaian:" row with EMAS / PERAK / GANGSA headers and the numbers on
+  // the row below.
+  const readTotals = (pattern, label) => {
+    const row = findRow(grid, header + 1, range.to, pattern)
+    if (row < 0) {
+      warn(`Baris "${label}" tidak dijumpai; jumlah perlu diisi dalam borang.`)
+      return { emas: 0, perak: 0, gangsa: 0 }
+    }
+    const cols = headerColumns(grid, row, { emas: /^emas$/, perak: /^perak$/, gangsa: /^gangsa$/ })
+    const value = (key) => (cols[key] ? Number(grid.raw(cols[key], row + 1)) || 0 : 0)
+    return { emas: value('emas'), perak: value('perak'), gangsa: value('gangsa') }
+  }
+
+  const sasaran = readTotals(/^jumlah sasaran/, 'Jumlah sasaran')
+  const pencapaian = readTotals(/^jumlah pencapaian/, 'Jumlah pencapaian')
+  warn('Jumlah Acara tiada dalam templat Excel; sila isi dalam borang Bahagian 3.')
+
   return {
-    data: withEventMedalTotals({ acaraList }),
+    data: {
+      acaraList,
+      jumlahSasaran: sasaran.emas + sasaran.perak + sasaran.gangsa,
+      jumlahPencapaian: pencapaian.emas + pencapaian.perak + pencapaian.gangsa,
+      sasaranEmas: sasaran.emas,
+      sasaranPerak: sasaran.perak,
+      sasaranGangsa: sasaran.gangsa,
+      pencapaianEmas: pencapaian.emas,
+      pencapaianPerak: pencapaian.perak,
+      pencapaianGangsa: pencapaian.gangsa,
+    },
     count: acaraList.length,
   }
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getSportName } from '../lib/sports'
-import { countMedalsByEvent } from '../lib/medals'
+import { getSection3Totals } from '../lib/medals'
 import {
   TRAINING_MAX_SCORE,
   TRAINING_RATING_SCORE,
@@ -10,6 +10,7 @@ import {
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
 import PageHero from '../components/PageHero'
 import ImportExcelModal from '../components/ImportExcelModal'
+import { ReportEquipmentPanel, ReportFinancePanel } from '../components/ReportExtrasPanels'
 
 function AdminPostMortem({
 
@@ -98,6 +99,7 @@ function AdminPostMortem({
           section_11,
           section_12,
           section_13,
+          finance_data,
           created_at,
           updated_at,
           submitted_at
@@ -469,28 +471,28 @@ const getReportMetrics = (report) => {
 
 
 
-  // Counted per event: a team event's rows share one Acara name.
-  const medalCounts =
+  // Totals typed in by the sport user in Section 3.
+  const section3Totals =
 
-    countMedalsByEvent(acaraList)
+    getSection3Totals(section3)
 
 
 
   const jumlahAcara =
 
-    medalCounts.events
+    section3Totals.jumlahAcara
 
 
 
   const jumlahSasaran =
 
-    medalCounts.sasaran.total
+    section3Totals.sasaran.total
 
 
 
   const jumlahPencapaian =
 
-    medalCounts.pencapaian.total
+    section3Totals.pencapaian.total
 
 
 
@@ -2628,242 +2630,6 @@ const handleMarkReviewed = async () => {
 
 
 
-                    {/* PERFORMANCE TABLE */}
-
-                    <div className="postmortem-overview-panel">
-
-
-
-                      <div className="overview-panel-header">
-
-
-
-                        <div>
-
-                          <span>
-
-                            PRESTASI ACARA
-
-                          </span>
-
-
-
-                          <h3>
-
-                            Sasaran & Keputusan
-
-                          </h3>
-
-                        </div>
-
-
-
-                        <span className="overview-panel-badge">
-
-                          {metrics.jumlahAcara} acara
-
-                        </span>
-
-
-
-                      </div>
-
-
-
-
-
-                      {metrics.acaraList.length > 0 ? (
-
-
-
-                        <div className="overview-performance-table-wrapper">
-
-
-
-                          <table className="overview-performance-table">
-
-
-
-                            <thead>
-
-
-
-                              <tr>
-
-                                <th>Bil</th>
-
-                                <th>Acara</th>
-
-                                <th>Atlet</th>
-
-                                <th>Sasaran</th>
-
-                                <th>Pencapaian</th>
-
-                                <th>Status</th>
-
-                                <th>Keputusan</th>
-
-                              </tr>
-
-
-
-                            </thead>
-
-
-
-
-
-                            <tbody>
-
-
-
-                              {metrics.acaraList.map(
-
-                                (item, index) => (
-
-
-
-                                  <tr key={index}>
-
-
-
-                                    <td>
-
-                                      <span className="table-number">
-
-                                        {index + 1}
-
-                                      </span>
-
-                                    </td>
-
-
-
-                                    <td>
-
-                                      <strong>
-
-                                        {item?.acara || '-'}
-
-                                      </strong>
-
-                                    </td>
-
-
-
-                                    <td>
-
-                                      {item?.atlet || '-'}
-
-                                    </td>
-
-
-
-                                    <td>
-
-                                      {item?.sasaran || '-'}
-
-                                    </td>
-
-
-
-                                    <td>
-
-                                      {item?.pencapaian || '-'}
-
-                                    </td>
-
-
-
-                                    <td>
-
-
-
-                                      <span
-
-                                        className={`performance-status ${
-
-                                          item?.status === 'Capai'
-
-                                            ? 'achieved'
-
-                                            : item?.status ===
-
-                                              'Tidak Capai'
-
-                                            ? 'not-achieved'
-
-                                            : 'pending'
-
-                                        }`}
-
-                                      >
-
-                                        {item?.status ||
-
-                                          'Belum dinilai'}
-
-                                      </span>
-
-
-
-                                    </td>
-
-
-
-                                    <td>
-
-                                      {item?.keputusan || '-'}
-
-                                    </td>
-
-
-
-                                  </tr>
-
-
-
-                                )
-
-                              )}
-
-
-
-                            </tbody>
-
-
-
-                          </table>
-
-
-
-                        </div>
-
-
-
-                      ) : (
-
-
-
-                        <div className="overview-empty large">
-
-                          Tiada data acara direkodkan.
-
-                        </div>
-
-
-
-                      )}
-
-
-
-                    </div>
-
-
-
-
-
                     {/* COACH LIST */}
 
                     <div className="postmortem-overview-panel">
@@ -3011,6 +2777,17 @@ const handleMarkReviewed = async () => {
                     </div>
 
 
+
+
+                    {/* PERALATAN & KEWANGAN SUKAN INI */}
+
+                    <ReportEquipmentPanel
+                      sport={selectedReport.sport}
+                    />
+
+                    <ReportFinancePanel
+                      financeData={selectedReport.finance_data}
+                    />
 
                   </div>
 

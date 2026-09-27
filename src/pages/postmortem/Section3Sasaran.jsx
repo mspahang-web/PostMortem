@@ -1,5 +1,4 @@
-import { useMemo, useState } from 'react'
-import { countMedalsByEvent } from '../../lib/medals'
+import { useState } from 'react'
 
 const createAcara = () => ({
   acara: '',
@@ -11,8 +10,28 @@ const createAcara = () => ({
   keputusan: '',
 })
 
+// Totals are typed in by the user (as in the Google Sheet), not counted
+// from the rows: a team event has one row per athlete but one medal.
+const TOTAL_FIELDS = [
+  'jumlahAcara',
+  'sasaranEmas',
+  'sasaranPerak',
+  'sasaranGangsa',
+  'pencapaianEmas',
+  'pencapaianPerak',
+  'pencapaianGangsa',
+]
+
+const toInput = (value) =>
+  value === undefined || value === null || value === ''
+    ? ''
+    : String(value)
+
+const toNumber = (value) => Number(value) || 0
+
 const defaultData = {
   acaraList: [createAcara()],
+  jumlahAcara: 0,
   jumlahSasaran: 0,
   jumlahPencapaian: 0,
 
@@ -40,16 +59,30 @@ function Section3Sasaran({
 
 
   // =========================================================
-  // KIRAAN SASARAN & PENCAPAIAN (mengikut acara: baris dengan
-  // nama Acara dan pingat yang sama dikira sekali)
+  // JUMLAH (DIISI MANUAL)
   // =========================================================
-  const medalCounts = useMemo(
-    () => countMedalsByEvent(acaraList),
-    [acaraList]
+  const [totals, setTotals] = useState(() =>
+    Object.fromEntries(
+      TOTAL_FIELDS.map((key) => [key, toInput(initialData?.[key])])
+    )
   )
 
-  const sasaranSummary = medalCounts.sasaran
-  const pencapaianSummary = medalCounts.pencapaian
+  const updateTotal = (key, value) => {
+    setTotals((current) => ({
+      ...current,
+      [key]: value,
+    }))
+  }
+
+  const jumlahSasaran =
+    toNumber(totals.sasaranEmas) +
+    toNumber(totals.sasaranPerak) +
+    toNumber(totals.sasaranGangsa)
+
+  const jumlahPencapaian =
+    toNumber(totals.pencapaianEmas) +
+    toNumber(totals.pencapaianPerak) +
+    toNumber(totals.pencapaianGangsa)
 
   // =========================================================
   // KEMASKINI DATA ACARA
@@ -97,19 +130,18 @@ function Section3Sasaran({
     onNext({
       acaraList,
 
-      // Jumlah keseluruhan
-      jumlahSasaran: sasaranSummary.total,
-      jumlahPencapaian: pencapaianSummary.total,
+      // Jumlah (diisi manual oleh pengguna)
+      jumlahAcara: toNumber(totals.jumlahAcara),
+      jumlahSasaran,
+      jumlahPencapaian,
 
-      // Pecahan sasaran
-      sasaranEmas: sasaranSummary.emas,
-      sasaranPerak: sasaranSummary.perak,
-      sasaranGangsa: sasaranSummary.gangsa,
+      sasaranEmas: toNumber(totals.sasaranEmas),
+      sasaranPerak: toNumber(totals.sasaranPerak),
+      sasaranGangsa: toNumber(totals.sasaranGangsa),
 
-      // Pecahan pencapaian sebenar
-      pencapaianEmas: pencapaianSummary.emas,
-      pencapaianPerak: pencapaianSummary.perak,
-      pencapaianGangsa: pencapaianSummary.gangsa,
+      pencapaianEmas: toNumber(totals.pencapaianEmas),
+      pencapaianPerak: toNumber(totals.pencapaianPerak),
+      pencapaianGangsa: toNumber(totals.pencapaianGangsa),
     })
   }
 
@@ -171,10 +203,10 @@ function Section3Sasaran({
           </div>
 
           <div>
-            • Pingat dikira <strong>mengikut acara</strong>. Bagi acara
-            berpasukan, isi satu baris bagi setiap atlet dengan
-            <strong> nama Acara yang sama</strong> (contoh: FOURS LELAKI)
-            supaya pingat pasukan dikira sekali sahaja.
+            • Isi <strong>Jumlah Acara</strong>, <strong>Jumlah Sasaran</strong> dan
+            <strong> Jumlah Pencapaian</strong> secara manual. Bagi acara
+            berpasukan, satu pingat pasukan dikira sekali sahaja walaupun
+            beberapa atlet disenaraikan.
           </div>
 
           <div>
@@ -191,239 +223,94 @@ function Section3Sasaran({
       </div>
 
       {/* =====================================================
-          RINGKASAN
+          JUMLAH (DIISI MANUAL)
       ====================================================== */}
-      <div
-        className="sasaran-summary-grid"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: '16px',
-          marginBottom: '24px',
-        }}
-      >
+      <div className="sasaran-total-grid">
 
-        {/* SASARAN */}
-        <div
-          style={{
-            border: '1px solid #e5e7eb',
-            borderRadius: '12px',
-            padding: '18px',
-            background: '#fff',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '13px',
-              fontWeight: 700,
-              color: '#777',
-              textTransform: 'uppercase',
-              marginBottom: '14px',
-              letterSpacing: '0.5px',
-            }}
-          >
-            Jumlah Sasaran
+        <div className="sasaran-total-card">
+          <div className="sasaran-total-title">
+            Jumlah Acara
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '10px',
-            }}
-          >
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                EMAS
-              </div>
-
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {sasaranSummary.emas}
-              </strong>
-            </div>
-
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                PERAK
-              </div>
-
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {sasaranSummary.perak}
-              </strong>
-            </div>
-
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                GANGSA
-              </div>
-
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {sasaranSummary.gangsa}
-              </strong>
-            </div>
+          <div className="sasaran-total-medals single">
+            <label>
+              <span>ACARA</span>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                placeholder="0"
+                value={totals.jumlahAcara}
+                onChange={(e) =>
+                  updateTotal('jumlahAcara', e.target.value)
+                }
+              />
+            </label>
           </div>
         </div>
 
-        {/* PENCAPAIAN */}
-        <div
-          style={{
-            border: '1px solid #e5e7eb',
-            borderRadius: '12px',
-            padding: '18px',
-            background: '#fff',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '13px',
-              fontWeight: 700,
-              color: '#777',
-              textTransform: 'uppercase',
-              marginBottom: '14px',
-              letterSpacing: '0.5px',
-            }}
-          >
-            Jumlah Pencapaian
+        <div className="sasaran-total-card">
+          <div className="sasaran-total-title">
+            Jumlah Sasaran
+            <strong>
+              {jumlahSasaran}
+            </strong>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '10px',
-            }}
-          >
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                EMAS
-              </div>
+          <div className="sasaran-total-medals">
+            {[
+              ['sasaranEmas', 'EMAS'],
+              ['sasaranPerak', 'PERAK'],
+              ['sasaranGangsa', 'GANGSA'],
+            ].map(([key, label]) => (
+              <label key={key}>
+                <span>{label}</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="1"
+                  inputMode="numeric"
+                  placeholder="0"
+                  value={totals[key]}
+                  onChange={(e) =>
+                    updateTotal(key, e.target.value)
+                  }
+                />
+              </label>
+            ))}
+          </div>
+        </div>
 
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {pencapaianSummary.emas}
-              </strong>
-            </div>
+        <div className="sasaran-total-card">
+          <div className="sasaran-total-title">
+            Jumlah Pencapaian
+            <strong>
+              {jumlahPencapaian}
+            </strong>
+          </div>
 
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                PERAK
-              </div>
-
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {pencapaianSummary.perak}
-              </strong>
-            </div>
-
-            <div
-              style={{
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                padding: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '12px',
-                  color: '#777',
-                  marginBottom: '4px',
-                }}
-              >
-                GANGSA
-              </div>
-
-              <strong
-                style={{
-                  fontSize: '24px',
-                }}
-              >
-                {pencapaianSummary.gangsa}
-              </strong>
-            </div>
+          <div className="sasaran-total-medals">
+            {[
+              ['pencapaianEmas', 'EMAS'],
+              ['pencapaianPerak', 'PERAK'],
+              ['pencapaianGangsa', 'GANGSA'],
+            ].map(([key, label]) => (
+              <label key={key}>
+                <span>{label}</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="1"
+                  inputMode="numeric"
+                  placeholder="0"
+                  value={totals[key]}
+                  onChange={(e) =>
+                    updateTotal(key, e.target.value)
+                  }
+                />
+              </label>
+            ))}
           </div>
         </div>
 

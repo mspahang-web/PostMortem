@@ -8767,3 +8767,159 @@ button.progress-mini-step:focus-visible span {
   background: #fef3c7;
   color: #b45309;
 }
+
+/* Section 3: totals typed in by the user. */
+.sasaran-total-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sasaran-total-card {
+  padding: 16px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.sasaran-total-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.sasaran-total-title strong {
+  color: #e8891c;
+  font-size: 22px;
+}
+
+.sasaran-total-medals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sasaran-total-medals.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sasaran-total-medals label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sasaran-total-medals span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sasaran-total-medals input {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #d9e1ea;
+  border-radius: 8px;
+  padding: 0 8px;
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.sasaran-total-medals input:focus {
+  border-color: #f28c28;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242, 140, 40, 0.14);
+}
+
+@media (max-width: 900px) {
+  .sasaran-total-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Report page: Cadangan Peralatan and Perbandingan Kewangan cards
+   (components/ReportExtrasPanels.jsx). */
+.report-extra-table th.num,
+.report-extra-table td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.report-extra-table td small {
+  display: block;
+  margin-top: 3px;
+  color: #8995a7;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.report-extra-table tfoot td {
+  border-top: 2px solid #e5e7eb;
+  background: #f8fafc;
+  font-weight: 800;
+}
+
+.report-extra-table .report-total-row td {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.report-change.up {
+  color: #15803d;
+}
+
+.report-change.down {
+  color: #b91c1c;
+}
+
+.report-priority {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.report-priority.high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.report-priority.medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.report-priority.low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.report-extra-note {
+  margin: 12px 0 0;
+  color: #475569;
+  font-size: 13px;
+}
+
+/* Medal breakdown under the Section 3 totals in the report view. */
+.pm-summary-card small {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
