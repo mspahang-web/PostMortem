@@ -1998,3 +1998,86 @@ span {
   width: 100%;
   text-align: center;
 }
+
+
+/* =========================================================
+   SASARAN VS PENCAPAIAN — SASARAN EMAS (ANGKA TETAP)
+   ========================================================= */
+
+.gold-target-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gold-target-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+  background: #fafbfd;
+}
+
+.gold-target-title {
+  color: #26364d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+.gold-target-figures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gold-target-figures small {
+  display: block;
+  margin-bottom: 6px;
+  color: #8794a7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.gold-target-figures strong {
+  color: #26364d;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.gold-target-figures .gold-target-rate {
+  color: #d2872c;
+}
+
+.gold-target-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #edf1f5;
+  overflow: hidden;
+}
+
+.gold-target-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f2b632, #e8891c);
+}
+
+.gold-target-note {
+  color: #65748a;
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .gold-target-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gold-target-figures strong {
+    font-size: 22px;
+  }
+}

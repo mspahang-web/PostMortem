@@ -15,7 +15,6 @@ import {
   TRAINING_RATING_SCORE,
   getTrainingComponents,
 } from '../lib/training'
-import { countMedalsByEvent } from '../lib/medals'
 import { ATHLETE_STATUS_OPTIONS } from '../lib/athleteStatus'
 
 
@@ -113,87 +112,6 @@ function DashboardPanel({
   )
 }
 
-
-// =========================================================
-// SECTION 3
-// =========================================================
-
-function getSection3Rows(report) {
-  const section3 = report?.section_3
-
-  if (!section3) {
-    return []
-  }
-
-  if (Array.isArray(section3)) {
-    return section3
-  }
-
-  if (Array.isArray(section3.acaraList)) {
-    return section3.acaraList
-  }
-
-  return []
-}
-
-
-
-// =========================================================
-// PERFORMANCE ANALYTICS
-// =========================================================
-
-function calculatePerformance(reports) {
-
-  // Counted per event within each report (sport), then summed:
-  // a team event's rows share one Acara name and count once.
-  const totals = {
-    jumlahSasaran: 0,
-    jumlahPencapaian: 0,
-    sasaran: { emas: 0, perak: 0, gangsa: 0, total: 0 },
-    pencapaian: { emas: 0, perak: 0, gangsa: 0, total: 0 },
-  }
-
-  reports.forEach((report) => {
-    const counts = countMedalsByEvent(
-      getSection3Rows(report)
-    )
-
-    totals.jumlahSasaran += counts.targetedEvents
-    totals.jumlahPencapaian += counts.achievedEvents
-
-    for (const key of ['emas', 'perak', 'gangsa', 'total']) {
-      totals.sasaran[key] += counts.sasaran[key]
-      totals.pencapaian[key] += counts.pencapaian[key]
-    }
-  })
-
-  const {
-    jumlahSasaran,
-    jumlahPencapaian,
-    sasaran,
-    pencapaian,
-  } = totals
-
-
-  const kadarPencapaian =
-    jumlahSasaran > 0
-      ? Math.round(
-          (
-            jumlahPencapaian /
-            jumlahSasaran
-          ) * 100
-        )
-      : 0
-
-
-  return {
-    jumlahSasaran,
-    jumlahPencapaian,
-    kadarPencapaian,
-    sasaran,
-    pencapaian,
-  }
-}
 
 
 // =========================================================
@@ -1471,18 +1389,6 @@ function AdminDashboardOverview({
     ])
 
 
-  // =======================================================
-  // PERFORMANCE
-  // =======================================================
-
-  const performance =
-    useMemo(
-      () =>
-        calculatePerformance(
-          filteredReports
-        ),
-      [filteredReports]
-    )
 
 
   // =======================================================
@@ -1574,6 +1480,28 @@ function AdminDashboardOverview({
     gangsa: 13,
     total: 31,
   }
+
+  // Sasaran pingat emas rasmi (angka tetap, tidak dikira dari laporan).
+  const goldTargets = [
+    {
+      key: 'sukma',
+      title: 'SUKMA XXII SELANGOR 2026',
+      target: 35,
+      achieved: sukmaMedals.emas,
+    },
+    {
+      key: 'para',
+      title: 'PARA SUKMA SELANGOR 2026',
+      target: 15,
+      achieved: paraMedals.emas,
+    },
+  ].map((item) => ({
+    ...item,
+    rate:
+      item.target > 0
+        ? Math.round((item.achieved / item.target) * 100)
+        : 0,
+  }))
   
   // =======================================================
 // EQUIPMENT 2028
@@ -1923,177 +1851,59 @@ const equipmentSummary = useMemo(() => {
         <DashboardPanel
           eyebrow="PRESTASI"
           title="Sasaran vs Pencapaian"
-          description="Perbandingan sasaran dan pencapaian daripada Bahagian C."
+          description="Sasaran pingat emas berbanding pencapaian rasmi. Angka tetap, tidak dikira daripada laporan."
           className="large"
         >
 
-          {loadingAnalytics ? (
-
-            <EmptyChart
-              icon="◌"
-              title="Memuatkan analitik"
-              description="Data prestasi sedang diproses."
-            />
-
-          ) : (
-
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '18px',
-              }}
-            >
-
+          <div className="gold-target-grid">
+            {goldTargets.map((item) => (
               <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns:
-                    'repeat(3, minmax(0, 1fr))',
-                  gap: '12px',
-                }}
+                key={item.key}
+                className="gold-target-card"
               >
+                <span className="gold-target-title">
+                  {item.title}
+                </span>
 
-                <div
-                  style={{
-                    border:
-                      '1px solid #e5eaf0',
-                    borderRadius: '13px',
-                    padding: '16px',
-                    background: '#fafbfd',
-                  }}
-                >
+                <div className="gold-target-figures">
+                  <div>
+                    <small>Sasaran Emas</small>
+                    <strong>{item.target}</strong>
+                  </div>
 
-                  <span
-                    style={{
-                      display: 'block',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      color: '#8995a7',
-                      letterSpacing: '.7px',
-                      marginBottom: '7px',
-                    }}
-                  >
-                    JUMLAH SASARAN
-                  </span>
+                  <div>
+                    <small>Pencapaian Emas</small>
+                    <strong>{item.achieved}</strong>
+                  </div>
 
-
-                  <strong
-                    style={{
-                      fontSize: '27px',
-                      color: '#33445c',
-                    }}
-                  >
-                    {performance.jumlahSasaran}
-                  </strong>
-
+                  <div>
+                    <small>Kadar Pencapaian</small>
+                    <strong className="gold-target-rate">
+                      {item.rate}%
+                    </strong>
+                  </div>
                 </div>
 
-
                 <div
-                  style={{
-                    border:
-                      '1px solid #e5eaf0',
-                    borderRadius: '13px',
-                    padding: '16px',
-                    background: '#fafbfd',
-                  }}
+                  className="gold-target-bar"
+                  role="progressbar"
+                  aria-label={`Kadar pencapaian ${item.title}`}
+                  aria-valuenow={item.rate}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
                 >
-
-                  <span
-                    style={{
-                      display: 'block',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      color: '#8995a7',
-                      letterSpacing: '.7px',
-                      marginBottom: '7px',
-                    }}
-                  >
-                    PENCAPAIAN
-                  </span>
-
-
-                  <strong
-                    style={{
-                      fontSize: '27px',
-                      color: '#33445c',
-                    }}
-                  >
-                    {performance.jumlahPencapaian}
-                  </strong>
-
+                  <span style={{ width: `${Math.min(item.rate, 100)}%` }} />
                 </div>
 
-
-                <div
-                  style={{
-                    border:
-                      '1px solid #e5eaf0',
-                    borderRadius: '13px',
-                    padding: '16px',
-                    background: '#fafbfd',
-                  }}
-                >
-
-                  <span
-                    style={{
-                      display: 'block',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      color: '#8995a7',
-                      letterSpacing: '.7px',
-                      marginBottom: '7px',
-                    }}
-                  >
-                    KADAR PENCAPAIAN
-                  </span>
-
-
-                  <strong
-                    style={{
-                      fontSize: '27px',
-                      color: '#d2872c',
-                    }}
-                  >
-                    {performance.kadarPencapaian}%
-                  </strong>
-
-                </div>
-
+                <small className="gold-target-note">
+                  {item.achieved} daripada {item.target} emas
+                  {item.achieved >= item.target
+                    ? ' — sasaran tercapai'
+                    : ` — kurang ${item.target - item.achieved} emas`}
+                </small>
               </div>
-
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns:
-                    'repeat(2, minmax(0, 1fr))',
-                  gap: '12px',
-                }}
-              >
-
-                <MedalSummary
-                  title="Sasaran Pingat"
-                  data={
-                    performance.sasaran
-                  }
-                  tone="silver"
-                />
-
-
-                <MedalSummary
-                  title="Pencapaian Pingat"
-                  data={
-                    performance.pencapaian
-                  }
-                  tone="orange"
-                />
-
-              </div>
-
-            </div>
-          )}
+            ))}
+          </div>
 
         </DashboardPanel>
 
@@ -2620,303 +2430,9 @@ const equipmentSummary = useMemo(() => {
   )}
 </DashboardPanel>
 
-      </div>
-
-      
-
-      {/* =================================================
-          SUKMA 2028
-          ================================================= */}
-
-      <section className="ewcc-dashboard-section-heading">
-
-        <div>
-
-          <span>
-            PERANCANGAN SUKMA 2028
-          </span>
-
-          <h2>
-            Perancangan & Tindakan Susulan
-          </h2>
-
-        </div>
-
-      </section>
-
-
-      <div className="ewcc-dashboard-module-grid">
-
-
-        <button
-          type="button"
-          className="ewcc-dashboard-module-card equipment"
-          onClick={onOpenEquipment}
-        >
-
-          <div className="ewcc-dashboard-module-icon">
-            ⚙
-          </div>
-
-
-          <div>
-
-            <span>
-              MODUL 2028
-            </span>
-
-            <h3>
-              Cadangan Peralatan 2028
-            </h3>
-
-            <p>
-              Rekod dan pantau cadangan
-              keperluan peralatan untuk
-              persediaan SUKMA 2028.
-            </p>
-
-          </div>
-
-
-          <strong>
-            →
-          </strong>
-
-        </button>
-
-
-        <button
-          type="button"
-          className="ewcc-dashboard-module-card statistics"
-          onClick={onOpenReports}
-        >
-
-          <div className="ewcc-dashboard-module-icon">
-            ◫
-          </div>
-
-
-          <div>
-
-            <span>
-              LAPORAN
-            </span>
-
-            <h3>
-              Laporan Post-Mortem
-            </h3>
-
-            <p>
-              Buka dan semak laporan
-              post-mortem bagi setiap sukan.
-            </p>
-
-          </div>
-
-
-          <strong>
-            →
-          </strong>
-
-        </button>
-
-      </div>
-
-      {/* =================================================
-    PENGESAHAN
-    ================================================= */}
-
-<DashboardPanel
-  eyebrow="PENGESAHAN"
-  title="Status Pengesahan Laporan"
-  description="Status pengesahan laporan post-mortem oleh pengurus atau jurulatih."
->
-  {loadingAnalytics ? (
-    <EmptyChart
-      icon="◌"
-      title="Memuatkan status"
-      description="Status pengesahan sedang diproses."
-    />
-  ) : (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '18px',
-      }}
-    >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns:
-            'repeat(3, minmax(0, 1fr))',
-          gap: '12px',
-        }}
-      >
-        <div
-          style={{
-            border:
-              '1px solid #e5eaf0',
-            borderRadius: '13px',
-            padding: '16px',
-            background: '#fafbfd',
-          }}
-        >
-          <span
-            style={{
-              display: 'block',
-              fontSize: '10px',
-              fontWeight: 800,
-              color: '#8995a7',
-              letterSpacing: '.7px',
-              marginBottom: '7px',
-            }}
-          >
-            JUMLAH LAPORAN
-          </span>
-
-          <strong
-            style={{
-              fontSize: '27px',
-              color: '#33445c',
-            }}
-          >
-            {confirmationAnalytics.total}
-          </strong>
-        </div>
-
-        <div
-          style={{
-            border:
-              '1px solid #dceee5',
-            borderRadius: '13px',
-            padding: '16px',
-            background: '#f7fcf9',
-          }}
-        >
-          <span
-            style={{
-              display: 'block',
-              fontSize: '10px',
-              fontWeight: 800,
-              color: '#69927d',
-              letterSpacing: '.7px',
-              marginBottom: '7px',
-            }}
-          >
-            DISAHKAN
-          </span>
-
-          <strong
-            style={{
-              fontSize: '27px',
-              color: '#2f8f68',
-            }}
-          >
-            {
-              confirmationAnalytics
-                .confirmed
-            }
-          </strong>
-        </div>
-
-        <div
-          style={{
-            border:
-              '1px solid #f0e3ce',
-            borderRadius: '13px',
-            padding: '16px',
-            background: '#fffaf2',
-          }}
-        >
-          <span
-            style={{
-              display: 'block',
-              fontSize: '10px',
-              fontWeight: 800,
-              color: '#a47c42',
-              letterSpacing: '.7px',
-              marginBottom: '7px',
-            }}
-          >
-            BELUM DISAHKAN
-          </span>
-
-          <strong
-            style={{
-              fontSize: '27px',
-              color: '#d2872c',
-            }}
-          >
-            {
-              confirmationAnalytics
-                .pending
-            }
-          </strong>
-        </div>
-      </div>
-
-      <div
-        style={{
-          borderTop:
-            '1px solid #edf0f4',
-          paddingTop: '14px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent:
-              'space-between',
-            alignItems: 'center',
-            marginBottom: '8px',
-          }}
-        >
-          <span
-            style={{
-              fontSize: '11px',
-              fontWeight: 800,
-              color: '#66758a',
-              letterSpacing: '.5px',
-            }}
-          >
-            KADAR PENGESAHAN
-          </span>
-
-          <strong
-            style={{
-              fontSize: '14px',
-              color: '#33445c',
-            }}
-          >
-            {
-              confirmationAnalytics
-                .percentage
-            }%
-          </strong>
-        </div>
-
-        <div
-          style={{
-            height: '9px',
-            borderRadius: '999px',
-            background: '#edf1f5',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              height: '100%',
-              width: `${confirmationAnalytics.percentage}%`,
-              borderRadius: '999px',
-              background: '#2f8f68',
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  )}
-</DashboardPanel>
+        {/* =================================================
+            CADANGAN PERALATAN 2028
+            ================================================= */}
 
 <DashboardPanel
   eyebrow="SUKMA 2028"
@@ -3363,6 +2879,308 @@ const equipmentSummary = useMemo(() => {
   )}
 </DashboardPanel>
 
+      </div>
+
+      
+
+      {/* =================================================
+          SUKMA 2028
+          ================================================= */}
+
+      <section className="ewcc-dashboard-section-heading">
+
+        <div>
+
+          <span>
+            PERANCANGAN SUKMA 2028
+          </span>
+
+          <h2>
+            Perancangan & Tindakan Susulan
+          </h2>
+
+        </div>
+
+      </section>
+
+
+      <div className="ewcc-dashboard-module-grid">
+
+
+        <button
+          type="button"
+          className="ewcc-dashboard-module-card equipment"
+          onClick={onOpenEquipment}
+        >
+
+          <div className="ewcc-dashboard-module-icon">
+            ⚙
+          </div>
+
+
+          <div>
+
+            <span>
+              MODUL 2028
+            </span>
+
+            <h3>
+              Cadangan Peralatan 2028
+            </h3>
+
+            <p>
+              Rekod dan pantau cadangan
+              keperluan peralatan untuk
+              persediaan SUKMA 2028.
+            </p>
+
+          </div>
+
+
+          <strong>
+            →
+          </strong>
+
+        </button>
+
+
+        <button
+          type="button"
+          className="ewcc-dashboard-module-card statistics"
+          onClick={onOpenReports}
+        >
+
+          <div className="ewcc-dashboard-module-icon">
+            ◫
+          </div>
+
+
+          <div>
+
+            <span>
+              LAPORAN
+            </span>
+
+            <h3>
+              Laporan Post-Mortem
+            </h3>
+
+            <p>
+              Buka dan semak laporan
+              post-mortem bagi setiap sukan.
+            </p>
+
+          </div>
+
+
+          <strong>
+            →
+          </strong>
+
+        </button>
+
+      </div>
+
+      <div className="ewcc-dashboard-chart-grid">
+
+      {/* =================================================
+    PENGESAHAN
+    ================================================= */}
+
+<DashboardPanel
+  eyebrow="PENGESAHAN"
+  title="Status Pengesahan Laporan"
+  description="Status pengesahan laporan post-mortem oleh pengurus atau jurulatih."
+  className="large"
+>
+  {loadingAnalytics ? (
+    <EmptyChart
+      icon="◌"
+      title="Memuatkan status"
+      description="Status pengesahan sedang diproses."
+    />
+  ) : (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '18px',
+      }}
+    >
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns:
+            'repeat(3, minmax(0, 1fr))',
+          gap: '12px',
+        }}
+      >
+        <div
+          style={{
+            border:
+              '1px solid #e5eaf0',
+            borderRadius: '13px',
+            padding: '16px',
+            background: '#fafbfd',
+          }}
+        >
+          <span
+            style={{
+              display: 'block',
+              fontSize: '10px',
+              fontWeight: 800,
+              color: '#8995a7',
+              letterSpacing: '.7px',
+              marginBottom: '7px',
+            }}
+          >
+            JUMLAH LAPORAN
+          </span>
+
+          <strong
+            style={{
+              fontSize: '27px',
+              color: '#33445c',
+            }}
+          >
+            {confirmationAnalytics.total}
+          </strong>
+        </div>
+
+        <div
+          style={{
+            border:
+              '1px solid #dceee5',
+            borderRadius: '13px',
+            padding: '16px',
+            background: '#f7fcf9',
+          }}
+        >
+          <span
+            style={{
+              display: 'block',
+              fontSize: '10px',
+              fontWeight: 800,
+              color: '#69927d',
+              letterSpacing: '.7px',
+              marginBottom: '7px',
+            }}
+          >
+            DISAHKAN
+          </span>
+
+          <strong
+            style={{
+              fontSize: '27px',
+              color: '#2f8f68',
+            }}
+          >
+            {
+              confirmationAnalytics
+                .confirmed
+            }
+          </strong>
+        </div>
+
+        <div
+          style={{
+            border:
+              '1px solid #f0e3ce',
+            borderRadius: '13px',
+            padding: '16px',
+            background: '#fffaf2',
+          }}
+        >
+          <span
+            style={{
+              display: 'block',
+              fontSize: '10px',
+              fontWeight: 800,
+              color: '#a47c42',
+              letterSpacing: '.7px',
+              marginBottom: '7px',
+            }}
+          >
+            BELUM DISAHKAN
+          </span>
+
+          <strong
+            style={{
+              fontSize: '27px',
+              color: '#d2872c',
+            }}
+          >
+            {
+              confirmationAnalytics
+                .pending
+            }
+          </strong>
+        </div>
+      </div>
+
+      <div
+        style={{
+          borderTop:
+            '1px solid #edf0f4',
+          paddingTop: '14px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent:
+              'space-between',
+            alignItems: 'center',
+            marginBottom: '8px',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '11px',
+              fontWeight: 800,
+              color: '#66758a',
+              letterSpacing: '.5px',
+            }}
+          >
+            KADAR PENGESAHAN
+          </span>
+
+          <strong
+            style={{
+              fontSize: '14px',
+              color: '#33445c',
+            }}
+          >
+            {
+              confirmationAnalytics
+                .percentage
+            }%
+          </strong>
+        </div>
+
+        <div
+          style={{
+            height: '9px',
+            borderRadius: '999px',
+            background: '#edf1f5',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              height: '100%',
+              width: `${confirmationAnalytics.percentage}%`,
+              borderRadius: '999px',
+              background: '#2f8f68',
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  )}
+</DashboardPanel>
+
+
       {/* =================================================
           STATUS SUKAN
           ================================================= */}
@@ -3371,7 +3189,7 @@ const equipmentSummary = useMemo(() => {
         eyebrow="PEMANTAUAN"
         title="Status Pengisian Post-Mortem"
         description="Ringkasan status laporan berdasarkan sukan."
-        className="full"
+        className="large"
       >
 
         {sports.length === 0 ? (
@@ -3460,6 +3278,8 @@ const equipmentSummary = useMemo(() => {
         )}
 
       </DashboardPanel>
+
+      </div>
 
 
       {/* =================================================
