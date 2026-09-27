@@ -459,7 +459,7 @@ function AdminFinance({ onBack }) {
                     letterSpacing:
                       '.8px',
                     color:
-                      '#7d8a9d',
+                      '#111827',
                     marginBottom:
                       '8px',
                   }}
@@ -490,7 +490,7 @@ function AdminFinance({ onBack }) {
                     fontSize:
                       '13px',
                     color:
-                      '#34445c',
+                      '#111827',
                     background:
                       '#ffffff',
                     outline:
@@ -544,7 +544,7 @@ function AdminFinance({ onBack }) {
                     letterSpacing:
                       '.8px',
                     color:
-                      '#7d8a9d',
+                      '#111827',
                     marginBottom:
                       '8px',
                   }}
@@ -577,7 +577,7 @@ function AdminFinance({ onBack }) {
                     fontSize:
                       '13px',
                     color:
-                      '#34445c',
+                      '#111827',
                     outline:
                       'none',
                   }}
@@ -600,7 +600,7 @@ function AdminFinance({ onBack }) {
                 textAlign:
                   'center',
                 color:
-                  '#7d8a9d',
+                  '#111827',
               }}
             >
               Memuatkan laporan...
@@ -619,7 +619,7 @@ function AdminFinance({ onBack }) {
                 textAlign:
                   'center',
                 color:
-                  '#7d8a9d',
+                  '#111827',
               }}
             >
               <strong
@@ -627,7 +627,7 @@ function AdminFinance({ onBack }) {
                   display:
                     'block',
                   color:
-                    '#40516a',
+                    '#111827',
                   marginBottom:
                     '7px',
                 }}
@@ -774,7 +774,7 @@ function AdminFinance({ onBack }) {
                     textAlign:
                       'center',
                     color:
-                      '#7d8a9d',
+                      '#111827',
                   }}
                 >
                   Memuatkan data kewangan...
@@ -830,7 +830,7 @@ function AdminFinance({ onBack }) {
                           fontSize:
                             '18px',
                           color:
-                            '#34445c',
+                            '#111827',
                         }}
                       >
                         2023–2024 vs 2025–2026
@@ -876,7 +876,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             KOMPONEN
@@ -893,7 +893,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             2023–2024
@@ -910,7 +910,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             2025–2026
@@ -927,7 +927,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             PERUBAHAN (RM)
@@ -944,7 +944,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             PERUBAHAN (%)
@@ -961,7 +961,7 @@ function AdminFinance({ onBack }) {
                               fontWeight:
                                 800,
                               color:
-                                '#7d8a9d',
+                                '#111827',
                             }}
                           >
                             CATATAN
@@ -1002,7 +1002,7 @@ function AdminFinance({ onBack }) {
                                     fontSize:
                                       '13px',
                                     color:
-                                      '#40516a',
+                                      '#111827',
                                     lineHeight:
                                       1.35,
                                   }}
@@ -1040,7 +1040,7 @@ function AdminFinance({ onBack }) {
                                       fontSize:
                                         '11px',
                                       color:
-                                        '#8995a7',
+                                        '#111827',
                                       pointerEvents:
                                         'none',
                                     }}
@@ -1100,7 +1100,7 @@ function AdminFinance({ onBack }) {
                                       fontSize:
                                         '12px',
                                       color:
-                                        '#34445c',
+                                        '#111827',
                                       outline:
                                         'none',
                                       background:
@@ -1145,7 +1145,7 @@ function AdminFinance({ onBack }) {
                                       fontSize:
                                         '11px',
                                       color:
-                                        '#8995a7',
+                                        '#111827',
                                       pointerEvents:
                                         'none',
                                     }}
@@ -1205,7 +1205,7 @@ function AdminFinance({ onBack }) {
                                       fontSize:
                                         '12px',
                                       color:
-                                        '#34445c',
+                                        '#111827',
                                       outline:
                                         'none',
                                       background:
@@ -1318,7 +1318,7 @@ function AdminFinance({ onBack }) {
                                     fontSize:
                                       '11px',
                                     color:
-                                      '#34445c',
+                                      '#111827',
                                     outline:
                                       'none',
                                     fontFamily:
@@ -1366,7 +1366,7 @@ function AdminFinance({ onBack }) {
                           fontWeight:
                             800,
                           color:
-                            '#8995a7',
+                            '#111827',
                         }}
                       >
                         2023–2024
@@ -1381,7 +1381,7 @@ function AdminFinance({ onBack }) {
                           fontSize:
                             '19px',
                           color:
-                            '#40516a',
+                            '#111827',
                         }}
                       >
                         RM{' '}
@@ -1410,7 +1410,7 @@ function AdminFinance({ onBack }) {
                           fontWeight:
                             800,
                           color:
-                            '#8995a7',
+                            '#111827',
                         }}
                       >
                         2025–2026
@@ -1454,7 +1454,7 @@ function AdminFinance({ onBack }) {
                           fontWeight:
                             800,
                           color:
-                            '#8995a7',
+                            '#111827',
                         }}
                       >
                         PERUBAHAN
@@ -1515,7 +1515,7 @@ function AdminFinance({ onBack }) {
                         background:
                           '#ffffff',
                         color:
-                          '#596a81',
+                          '#111827',
                         borderRadius:
                           '9px',
                         padding:

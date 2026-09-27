@@ -115,7 +115,7 @@ function Section5Latihan({
         <p
           style={{
             margin: 0,
-            color: '#666',
+            color: '#111827',
             fontSize: '14px',
             lineHeight: '1.7',
           }}
@@ -309,7 +309,7 @@ function Section5Latihan({
           border: '1px solid #e5e7eb',
           borderRadius: '8px',
           fontSize: '13px',
-          color: '#666',
+          color: '#111827',
         }}
       >
         <strong style={{ color: '#333' }}>
@@ -363,7 +363,7 @@ const thStyle = {
   borderRight: '1px solid #e5e7eb',
   fontSize: '12px',
   fontWeight: 700,
-  color: '#555',
+  color: '#111827',
   verticalAlign: 'middle',
 }
 

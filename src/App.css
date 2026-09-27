@@ -175,7 +175,7 @@ input {
 .organization {
   margin: 5px 0 0;
 
-  color: #778398;
+  color: #111827;
 
   font-size: 14px;
 
@@ -185,7 +185,7 @@ input {
 .choose-title {
   margin: 18px 0 0;
 
-  color: #a1a9b7;
+  color: #111827;
 
   font-size: 10px;
 
@@ -281,7 +281,7 @@ input {
 }
 
 .arrow {
-  color: #91a0b4;
+  color: #111827;
 
   font-size: 25px;
 
@@ -305,7 +305,7 @@ input {
 .card-subtitle {
   margin: 3px 0 0;
 
-  color: #66748a;
+  color: #111827;
 
   font-size: 12px;
 
@@ -317,7 +317,7 @@ input {
 
   margin: 14px 0 0;
 
-  color: #778398;
+  color: #111827;
 
   font-size: 13px;
 
@@ -437,7 +437,7 @@ input {
 .footer p {
   margin: 2px 0;
 
-  color: #a5adba;
+  color: #111827;
 
   font-size: 10px;
 }
@@ -615,7 +615,7 @@ input {
 
   margin-bottom: 6px;
 
-  color: #455268;
+  color: #111827;
 
   font-size: 11px;
 
@@ -635,7 +635,7 @@ input {
 
   left: 13px;
 
-  color: #7d8999;
+  color: #111827;
 
   font-size: 13px;
 
@@ -696,7 +696,7 @@ input {
 
   background: transparent;
 
-  color: #78869a;
+  color: #111827;
 
   cursor: pointer;
 
@@ -725,7 +725,7 @@ input {
 
   gap: 7px;
 
-  color: #5e6b7e;
+  color: #111827;
 
   font-size: 10px;
 
@@ -821,7 +821,7 @@ input {
 
   background: transparent;
 
-  color: #778398;
+  color: #111827;
 
   font-size: 10px;
 
@@ -1315,7 +1315,7 @@ input {
 
 .ewcc-kpi-card span {
   display: block;
-  color: #6e7d96;
+  color: #111827;
   font-size: 12px;
   margin-bottom: 3px;
 }
@@ -1327,7 +1327,7 @@ input {
 }
 
 .ewcc-kpi-card small {
-  color: #97a3b7;
+  color: #111827;
   font-size: 10px;
 }
 
@@ -1348,7 +1348,7 @@ input {
 }
 
 .ewcc-section-title > div > span {
-  color: #8895aa;
+  color: #111827;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.3px;
@@ -1428,7 +1428,7 @@ input {
 
 .module-content p {
   margin: 0;
-  color: #7a89a2;
+  color: #111827;
   font-size: 12px;
   line-height: 1.6;
 }
@@ -1437,7 +1437,7 @@ input {
   position: absolute;
   right: 17px;
   top: 24px;
-  color: #91a0b7;
+  color: #111827;
   font-size: 22px;
 }
 
@@ -1456,7 +1456,7 @@ input {
 
 .status-count {
   background: #f1f4f8;
-  color: #6f7e95;
+  color: #111827;
   border-radius: 20px;
   padding: 7px 12px;
   font-size: 11px;
@@ -1491,7 +1491,7 @@ input {
 
 .ewcc-empty-status p {
   margin: 0;
-  color: #8290a5;
+  color: #111827;
   font-size: 12px;
   line-height: 1.6;
 }
@@ -1508,7 +1508,7 @@ input {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
-  color: #7d8ba2;
+  color: #111827;
   font-size: 10px;
 }
 
@@ -2057,7 +2057,7 @@ body {
 
   border-bottom: 1px solid #e2e7ee;
 
-  color: #718097;
+  color: #111827;
 
   font-size: 10px;
   line-height: 1;
@@ -2087,7 +2087,7 @@ body {
 
   border-bottom: 1px solid #edf0f4;
 
-  color: #536178;
+  color: #111827;
 
   font-size: 13px;
 
@@ -2175,7 +2175,7 @@ body {
    ========================================================= */
 
 .user-table tbody td:nth-child(2) {
-  color: #52627a;
+  color: #111827;
 
   font-weight: 400;
 }
@@ -2186,7 +2186,7 @@ body {
    ========================================================= */
 
 .user-table tbody td:nth-child(3) {
-  color: #4d5d75;
+  color: #111827;
 
   font-weight: 500;
 }
@@ -2197,7 +2197,7 @@ body {
    ========================================================= */
 
 .user-table tbody td:nth-child(4) {
-  color: #52627a;
+  color: #111827;
 
   font-weight: 400;
 }
@@ -2292,7 +2292,7 @@ body {
 .user-empty {
   padding: 50px 20px;
 
-  color: #8491a5;
+  color: #111827;
 
   font-size: 12px;
 
@@ -2393,7 +2393,7 @@ body {
 .ewcc-form-group small {
   display: block;
   margin-top: 6px;
-  color: #7a8190;
+  color: #111827;
   font-size: 12px;
 }
 
@@ -2463,7 +2463,7 @@ body {
   padding: 13px 10px;
   background: #f5f7fa;
   border-bottom: 1px solid #dfe3e9;
-  color: #596273;
+  color: #111827;
   font-size: 11px;
   font-weight: 800;
   text-align: left;
@@ -2509,7 +2509,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   background: #eef1f5;
-  color: #687180;
+  color: #111827;
   font-size: 11px;
   font-weight: 800;
 }
@@ -2560,7 +2560,7 @@ body {
 
 .postmortem-summary-card small {
   margin-top: 3px;
-  color: #8a919d;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -2592,7 +2592,7 @@ body {
 
 .postmortem-rating-intro p {
   margin: 5px 0 0;
-  color: #7c8492;
+  color: #111827;
   font-size: 12px;
 }
 
@@ -2644,7 +2644,7 @@ body {
 
 .postmortem-rating-card-header small {
   margin-top: 4px;
-  color: #8a919d;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -2687,7 +2687,7 @@ body {
   border: 1px solid #d9dee7;
   border-radius: 8px;
   background: #fff;
-  color: #697282;
+  color: #111827;
   font-size: 12px;
   font-weight: 600;
   transition: all 0.15s ease;
@@ -2793,7 +2793,7 @@ body {
 
 .postmortem-factor-heading p {
   margin: 4px 0 0;
-  color: #8a919d;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -2822,7 +2822,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   background: #eef1f5;
-  color: #687180;
+  color: #111827;
   font-size: 12px;
   font-weight: 800;
 }
@@ -2892,7 +2892,7 @@ body {
 
 .postmortem-issue-header small {
   margin-top: 3px;
-  color: #8a919d;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -2958,7 +2958,7 @@ body {
 
 .postmortem-coach-header small {
   margin-top: 3px;
-  color: #8a919d;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -3056,7 +3056,7 @@ body {
 
 .postmortem-final-rating-content > p {
   margin: 5px 0 15px;
-  color: #7c8492;
+  color: #111827;
   font-size: 12px;
   line-height: 1.5;
 }
@@ -3112,7 +3112,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   background: #e9edf3;
-  color: #697282;
+  color: #111827;
   font-size: 13px;
   font-weight: 800;
 }
@@ -3125,7 +3125,7 @@ body {
 
 .postmortem-final-note p {
   margin: 4px 0 0;
-  color: #7c8492;
+  color: #111827;
   font-size: 11px;
   line-height: 1.5;
 }
@@ -3183,7 +3183,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   background: #e9edf3;
-  color: #8b929e;
+  color: #111827;
   font-size: 11px;
   font-weight: 800;
 }
@@ -3244,7 +3244,7 @@ body {
 
 .postmortem-review-user span {
   font-size: 11px;
-  color: #8b929e;
+  color: #111827;
   font-weight: 600;
 }
 
@@ -3328,7 +3328,7 @@ body {
 .postmortem-review-field span {
   display: block;
   margin-bottom: 5px;
-  color: #858d9b;
+  color: #111827;
   font-size: 10px;
   font-weight: 600;
 }
@@ -3355,7 +3355,7 @@ body {
 .postmortem-review-subsection > span {
   display: block;
   margin-bottom: 8px;
-  color: #858d9b;
+  color: #111827;
   font-size: 10px;
   font-weight: 700;
 }
@@ -3403,7 +3403,7 @@ body {
 .postmortem-review-text span {
   display: block;
   margin-bottom: 6px;
-  color: #858d9b;
+  color: #111827;
   font-size: 10px;
   font-weight: 700;
 }
@@ -3444,7 +3444,7 @@ body {
 }
 
 .postmortem-rating-title span {
-  color: #858d9b;
+  color: #111827;
   font-size: 11px;
 }
 
@@ -3501,7 +3501,7 @@ body {
 
 .postmortem-factor p {
   margin: 5px 0 0;
-  color: #737c8b;
+  color: #111827;
   font-size: 11px;
   line-height: 1.5;
 }
@@ -3527,7 +3527,7 @@ body {
 .postmortem-review-summary span {
   display: block;
   margin-bottom: 5px;
-  color: #858d9b;
+  color: #111827;
   font-size: 10px;
   font-weight: 600;
 }
@@ -3543,7 +3543,7 @@ body {
 .postmortem-empty {
   padding: 25px 20px;
   text-align: center;
-  color: #8b929e;
+  color: #111827;
   font-size: 12px;
 }
 
@@ -3615,7 +3615,7 @@ body {
   margin-bottom: 5px;
   font-size: 11px;
   font-weight: 700;
-  color: #8b929e;
+  color: #111827;
   text-transform: uppercase;
   letter-spacing: 0.4px;
 }
@@ -3701,7 +3701,7 @@ body {
   margin-bottom: 7px;
   font-size: 11px;
   font-weight: 700;
-  color: #747c89;
+  color: #111827;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
@@ -3755,7 +3755,7 @@ body {
 
 .postmortem-review-empty {
   padding: 20px;
-  color: #8b929e;
+  color: #111827;
   font-size: 13px;
   text-align: center;
 }
@@ -3778,7 +3778,7 @@ body {
 
 .postmortem-review-notice p {
   margin: 0;
-  color: #6f7784;
+  color: #111827;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -4306,7 +4306,7 @@ body {
   border-radius: 50%;
 
   background: #eef1f5;
-  color: #7c8492;
+  color: #111827;
 
   font-size: 11px;
   font-weight: 800;
@@ -4693,7 +4693,7 @@ body {
 
   margin-bottom: 7px;
 
-  color: #344154;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 700;
@@ -4821,7 +4821,7 @@ body {
 
   background: transparent;
 
-  color: #7a8799;
+  color: #111827;
 
   cursor: pointer;
 
@@ -4865,7 +4865,7 @@ body {
 
   gap: 7px;
 
-  color: #65748a;
+  color: #111827;
 
   font-size: 12px;
 
@@ -4991,7 +4991,7 @@ body {
 
   background: #ffffff;
 
-  color: #68758a;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 600;
@@ -6033,7 +6033,7 @@ body {
 
   margin: 0 0 4px;
 
-  color: #7b889e;
+  color: #111827;
 
   font-size: 11px;
 
@@ -6073,7 +6073,7 @@ body {
 
   margin-top: 6px;
 
-  color: #a0aabd;
+  color: #111827;
 
   font-size: 10px;
 
@@ -6195,7 +6195,7 @@ body {
   margin: 0 0 5px;
   padding: 0;
 
-  color: #8895aa;
+  color: #111827;
 
   font-size: 10px;
   line-height: 1.3;
@@ -6240,7 +6240,7 @@ body {
 
   background: #f1f4f8;
 
-  color: #6f7e95;
+  color: #111827;
 
   border-radius: 20px;
 
@@ -6459,7 +6459,7 @@ body {
 
   border-radius: 6px;
 
-  color: #7a879b;
+  color: #111827;
 
   font-size: 10px;
   line-height: 1;
@@ -6545,7 +6545,7 @@ body {
 
 .status-badge.not-started {
   background: #f4f5f7;
-  color: #7b8492;
+  color: #111827;
   border: 1px solid #e5e7eb;
 }
 
@@ -6695,7 +6695,7 @@ body {
 
   margin: 0 0 6px;
 
-  color: #8996aa;
+  color: #111827;
 
   font-size: 10px;
   line-height: 1.2;
@@ -6731,7 +6731,7 @@ body {
 .ewcc-section-description {
   margin: 5px 0 0;
 
-  color: #63728a;
+  color: #111827;
 
   font-size: 14px;
   line-height: 1.5;
@@ -7029,7 +7029,7 @@ body {
 
   letter-spacing: 0.7px;
 
-  color: #64748b;
+  color: #111827;
 
   margin-bottom: 4px;
 }
@@ -7052,7 +7052,7 @@ body {
 
   font-size: 11px;
 
-  color: #94a3b8;
+  color: #111827;
 }
 
 
@@ -7119,7 +7119,7 @@ body {
 
   letter-spacing: 1px;
 
-  color: #94a3b8;
+  color: #111827;
 
   margin-bottom: 5px;
 }
@@ -7146,7 +7146,7 @@ body {
 
   background: #f1f5f9;
 
-  color: #475569 !important;
+  color: #111827 !important;
 
   font-size: 10px !important;
 
@@ -7197,7 +7197,7 @@ body {
 
 
 .performance-bar-label span {
-  color: #64748b;
+  color: #111827;
 }
 
 
@@ -7263,7 +7263,7 @@ body {
 
   font-weight: 700;
 
-  color: #94a3b8;
+  color: #111827;
 
   letter-spacing: 0.7px;
 }
@@ -7285,7 +7285,7 @@ body {
 
   text-align: right;
 
-  color: #94a3b8;
+  color: #111827;
 
   font-size: 11px;
 
@@ -7325,7 +7325,7 @@ body {
 
   font-weight: 700;
 
-  color: #334155;
+  color: #111827;
 }
 
 
@@ -7336,7 +7336,7 @@ body {
 
   font-size: 10px;
 
-  color: #94a3b8;
+  color: #111827;
 }
 
 
@@ -7407,7 +7407,7 @@ body {
 
   font-weight: 700;
 
-  color: #94a3b8;
+  color: #111827;
 
   text-transform: uppercase;
 
@@ -7462,7 +7462,7 @@ body {
 
   font-weight: 800;
 
-  color: #64748b;
+  color: #111827;
 
   text-transform: uppercase;
 
@@ -7478,7 +7478,7 @@ body {
 
   font-size: 12px;
 
-  color: #475569;
+  color: #111827;
 
   vertical-align: middle;
 }
@@ -7535,7 +7535,7 @@ body {
 .performance-status.pending {
   background: #f8fafc;
 
-  color: #64748b;
+  color: #111827;
 }
 
 
@@ -7601,7 +7601,7 @@ body {
 
   font-weight: 700;
 
-  color: #94a3b8;
+  color: #111827;
 
   letter-spacing: 0.8px;
 }
@@ -7634,7 +7634,7 @@ body {
 
   background: #f8fafc;
 
-  color: #94a3b8;
+  color: #111827;
 
   font-size: 12px;
 }
@@ -7743,7 +7743,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.4px;
-  color: #94a3b8;
+  color: #111827;
 }
 
 .postmortem-sections-header h3 {
@@ -7756,14 +7756,14 @@ body {
 .postmortem-sections-header p {
   margin: 6px 0 0;
   font-size: 13px;
-  color: #64748b;
+  color: #111827;
 }
 
 .postmortem-section-count {
   padding: 8px 13px;
   border-radius: 8px;
   background: #f1f5f9;
-  color: #475569;
+  color: #111827;
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -7852,7 +7852,7 @@ body {
   border-radius: 10px;
 
   background: #f1f5f9;
-  color: #475569;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 800;
@@ -7884,7 +7884,7 @@ body {
   font-weight: 800;
   letter-spacing: 1.2px;
 
-  color: #94a3b8;
+  color: #111827;
 }
 
 .postmortem-accordion-title strong {
@@ -7900,7 +7900,7 @@ body {
   font-size: 12px;
   line-height: 1.4;
 
-  color: #64748b;
+  color: #111827;
 }
 
 
@@ -7921,7 +7921,7 @@ body {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
 
-  color: #64748b;
+  color: #111827;
   background: #ffffff;
 
   font-size: 20px;
@@ -7958,7 +7958,7 @@ body {
   padding: 35px 20px;
 
   text-align: center;
-  color: #94a3b8;
+  color: #111827;
 }
 
 .postmortem-section-empty > div {
@@ -7972,14 +7972,14 @@ body {
   display: block;
 
   font-size: 14px;
-  color: #475569;
+  color: #111827;
 }
 
 .postmortem-section-empty p {
   margin: 5px 0 0;
 
   font-size: 12px;
-  color: #94a3b8;
+  color: #111827;
 }
 
 
@@ -8069,7 +8069,7 @@ body {
   place-items: center;
   gap: 16px;
   padding: 24px;
-  color: #64748b;
+  color: #111827;
   font-size: 15px;
   font-weight: 600;
   text-align: center;
@@ -8130,7 +8130,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: #111827;
 }
 
 .pm-report-field-value {
@@ -8164,7 +8164,7 @@ body {
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1.2px;
-  color: #94a3b8;
+  color: #111827;
 }
 
 .pm-report-block-header h4 {
@@ -8198,7 +8198,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: #64748b;
+  color: #111827;
   white-space: nowrap;
 }
 
@@ -8208,7 +8208,7 @@ body {
   vertical-align: top;
   font-size: 13px;
   line-height: 1.5;
-  color: #334155;
+  color: #111827;
 }
 
 .pm-report-table tbody tr:last-child td {
@@ -8221,7 +8221,7 @@ body {
 
 .pm-report-number {
   font-weight: 800 !important;
-  color: #94a3b8 !important;
+  color: #111827 !important;
 }
 
 /* ---------------------------------------------------------
@@ -8294,7 +8294,7 @@ body {
   padding: 4px 9px;
   border-radius: 6px;
   background: #f8fafc;
-  color: #475569 !important;
+  color: #111827 !important;
   font-weight: 700;
 }
 
@@ -8327,7 +8327,7 @@ body {
 .pm-report-empty {
   padding: 28px 20px;
   text-align: center;
-  color: #94a3b8;
+  color: #111827;
   font-size: 13px;
 }
 
@@ -8386,7 +8386,7 @@ body {
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.8px;
-  color: #94a3b8;
+  color: #111827;
 }
 
 .pm-summary-card strong {
@@ -8427,7 +8427,7 @@ body {
   flex: 0 0 auto;
   font-size: 10px;
   font-weight: 800;
-  color: #94a3b8;
+  color: #111827;
   padding-top: 2px;
 }
 
@@ -8447,7 +8447,7 @@ body {
   margin-top: 4px;
   font-size: 12px;
   line-height: 1.45;
-  color: #64748b;
+  color: #111827;
 }
 
 .pm-rating-value {
@@ -8455,7 +8455,7 @@ body {
   padding: 6px 11px;
   border-radius: 7px;
   background: #f1f5f9;
-  color: #475569;
+  color: #111827;
   font-size: 11px;
   font-weight: 800;
 }
@@ -8681,7 +8681,7 @@ button.progress-mini-step:focus-visible span {
   padding: 10px 12px;
   border-radius: 8px;
   background: #f1f5f9;
-  color: #334155;
+  color: #111827;
   font-size: 13px;
 }
 
@@ -8696,7 +8696,7 @@ button.progress-mini-step:focus-visible span {
   align-items: flex-start;
   margin: 0 0 16px;
   font-size: 13px;
-  color: #334155;
+  color: #111827;
   cursor: pointer;
 }
 
@@ -8726,7 +8726,7 @@ button.progress-mini-step:focus-visible span {
 
 .import-summary th {
   background: #f8fafc;
-  color: #64748b;
+  color: #111827;
   font-size: 11px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -8737,7 +8737,7 @@ button.progress-mini-step:focus-visible span {
 }
 
 .import-summary td:first-child {
-  color: #334155;
+  color: #111827;
   font-weight: 600;
   width: 55%;
 }
@@ -8789,7 +8789,7 @@ button.progress-mini-step:focus-visible span {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 12px;
-  color: #334155;
+  color: #111827;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.3px;
@@ -8818,7 +8818,7 @@ button.progress-mini-step:focus-visible span {
 }
 
 .sasaran-total-medals span {
-  color: #64748b;
+  color: #111827;
   font-size: 11px;
   font-weight: 700;
   text-align: center;
@@ -8860,7 +8860,7 @@ button.progress-mini-step:focus-visible span {
 .report-extra-table td small {
   display: block;
   margin-top: 3px;
-  color: #8995a7;
+  color: #111827;
   font-size: 11px;
   line-height: 1.4;
 }
@@ -8889,7 +8889,7 @@ button.progress-mini-step:focus-visible span {
   padding: 3px 9px;
   border-radius: 999px;
   background: #f1f5f9;
-  color: #475569;
+  color: #111827;
   font-size: 11px;
   font-weight: 700;
 }
@@ -8911,7 +8911,7 @@ button.progress-mini-step:focus-visible span {
 
 .report-extra-note {
   margin: 12px 0 0;
-  color: #475569;
+  color: #111827;
   font-size: 13px;
 }
 
@@ -8919,7 +8919,7 @@ button.progress-mini-step:focus-visible span {
 .pm-summary-card small {
   display: block;
   margin-top: 6px;
-  color: #64748b;
+  color: #111827;
   font-size: 11px;
   font-weight: 600;
 }
@@ -8934,7 +8934,7 @@ button.progress-mini-step:focus-visible span {
 
 .pm-summary-card strong em {
   margin-left: 6px;
-  color: #64748b;
+  color: #111827;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
@@ -8987,7 +8987,7 @@ button.progress-mini-step:focus-visible span {
 
 .pm-medal-compare-head {
   background: #f8fafc;
-  color: #94a3b8;
+  color: #111827;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.8px;
@@ -9046,7 +9046,7 @@ button.progress-mini-step:focus-visible span {
 .pm-medal-result.partial { background: #fef3c7; color: #b45309; }
 .pm-medal-result.missed { background: #fee2e2; color: #b91c1c; }
 .pm-medal-result.extra { background: #e0f2fe; color: #0369a1; }
-.pm-medal-result.none { background: transparent; color: #94a3b8; }
+.pm-medal-result.none { background: transparent; color: #111827; }
 
 @media (max-width: 700px) {
   .pm-summary-cards.pm-summary-cards-two {
@@ -9076,7 +9076,7 @@ button.progress-mini-step:focus-visible span {
     content: attr(data-label);
     display: block;
     margin-bottom: 4px;
-    color: #94a3b8;
+    color: #111827;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.6px;
@@ -9171,7 +9171,7 @@ button.progress-mini-step:focus-visible span {
   margin: 0;
   padding: 0;
   list-style: none;
-  color: #52514e;
+  color: #111827;
   font-size: 12px;
 }
 
@@ -9258,13 +9258,13 @@ button.progress-mini-step:focus-visible span {
 }
 
 .report-bar-value.muted {
-  color: #898781;
+  color: #111827;
   font-weight: 600;
 }
 
 .report-bar-value em {
   margin-left: 6px;
-  color: #898781;
+  color: #111827;
   font-style: normal;
   font-weight: 600;
 }
@@ -9282,7 +9282,7 @@ button.progress-mini-step:focus-visible span {
 
 .report-status-letter.unset {
   background: #eeede7;
-  color: #52514e;
+  color: #111827;
 }
 
 /* Axis under the Section 5 bars: Lemah..Sangat Baik at the quarter ticks. */
@@ -9296,7 +9296,7 @@ button.progress-mini-step:focus-visible span {
 .report-axis-scale {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  color: #898781;
+  color: #111827;
   font-size: 10px;
   font-weight: 700;
 }
@@ -9366,3 +9366,9 @@ button.progress-mini-step:focus-visible span {
 .pm-rating-value.rating-medium { background: #fef3c7; color: #a16207; }
 .pm-rating-value.rating-low,
 .pm-rating-value.rating-poor { background: #fee2e2; color: #b91c1c; }
+
+/* KPI cards without an icon: the content takes the full width instead of
+   squeezing into the 52px icon column (label broke as "Penggun/a"). */
+.ewcc-kpi-card > div:only-child {
+  grid-column: 1 / -1;
+}

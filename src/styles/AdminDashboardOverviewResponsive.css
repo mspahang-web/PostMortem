@@ -14,7 +14,7 @@
   padding: 5px 12px;
   border-radius: 999px;
   background: #f1f4f9;
-  color: #40516a;
+  color: #111827;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .3px;
@@ -134,13 +134,13 @@
   align-items: baseline;
   gap: 8px 12px;
   margin-bottom: 12px;
-  color: #40516a;
+  color: #111827;
   font-size: 12px;
   font-weight: 800;
 }
 
 .sukma-2028-responses-heading span {
-  color: #8995a7;
+  color: #111827;
   font-size: 11px;
   font-weight: 500;
 }
@@ -166,12 +166,12 @@
   justify-content: space-between;
   gap: 6px;
   margin-bottom: 8px;
-  color: #40516a;
+  color: #111827;
   font-size: 11px;
 }
 
 .sukma-2028-response-title span {
-  color: #8a97aa;
+  color: #111827;
   font-size: 10px;
   white-space: nowrap;
 }
@@ -188,13 +188,13 @@
   display: grid;
   gap: 3px;
   min-width: 0;
-  color: #64748b;
+  color: #111827;
   font-size: 10px;
   line-height: 1.45;
 }
 
 .sukma-2028-response-card li b {
-  color: #40516a;
+  color: #111827;
   font-size: 10px;
 }
 
@@ -211,7 +211,7 @@
   padding: 14px;
   border: 1px dashed #d9e1eb;
   border-radius: 10px;
-  color: #8995a7;
+  color: #111827;
   font-size: 11px;
   text-align: center;
 }
@@ -224,7 +224,7 @@
 .ewcc-dashboard-report-empty {
   width: 122px;
   min-width: 122px;
-  color: #9aa6b7;
+  color: #111827;
   text-align: center;
 }
 

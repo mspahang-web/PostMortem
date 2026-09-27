@@ -212,7 +212,7 @@
 }
 
 .ewcc-dashboard-filter > div > span {
-  color: #8a97aa;
+  color: #111827;
 
   font-size: 10px;
   font-weight: 800;
@@ -375,7 +375,7 @@
 
   margin-bottom: 5px;
 
-  color: #6f7f96;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 750;
@@ -399,7 +399,7 @@
 
   margin-top: 6px;
 
-  color: #96a2b3;
+  color: #111827;
 
   font-size: 10px;
   font-weight: 500;
@@ -457,12 +457,12 @@
 }
 
 .ewcc-dashboard-kpi.silver {
-  color: #738096;
+  color: #111827;
 }
 
 .ewcc-dashboard-kpi.silver .ewcc-dashboard-kpi-icon {
   background: #edf0f4;
-  color: #667388;
+  color: #111827;
 }
 
 .ewcc-dashboard-kpi.bronze {
@@ -568,7 +568,7 @@
 
   margin: 7px 0 0;
 
-  color: #8b98aa;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 400;
@@ -618,7 +618,7 @@
   border-radius: 14px;
 
   background: #edf1f6;
-  color: #718096;
+  color: #111827;
 
   display: flex;
   align-items: center;
@@ -631,7 +631,7 @@
 .ewcc-dashboard-empty strong {
   display: block;
 
-  color: #46566d;
+  color: #111827;
 
   font-size: 14px;
   font-weight: 750;
@@ -643,7 +643,7 @@
 
   margin-top: 6px;
 
-  color: #97a3b4;
+  color: #111827;
 
   font-size: 11px;
   font-weight: 400;
@@ -692,7 +692,7 @@
 .ewcc-finance-row span {
   padding: 0 15px;
 
-  color: #68768a;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 500;
@@ -701,7 +701,7 @@
 }
 
 .ewcc-finance-row.header span {
-  color: #7c899b;
+  color: #111827;
 
   font-size: 10px;
   font-weight: 850;
@@ -711,7 +711,7 @@
 }
 
 .ewcc-finance-row:not(.header) span:first-child {
-  color: #3c4c63;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 650;
@@ -720,7 +720,7 @@
 .ewcc-finance-row:not(.header) span:not(:first-child) {
   text-align: right;
 
-  color: #8793a4;
+  color: #111827;
 
   font-size: 12px;
 }
@@ -935,7 +935,7 @@
 .ewcc-dashboard-module-card p {
   margin: 0;
 
-  color: #7d8ba0;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 400;
@@ -949,7 +949,7 @@
   top: 24px;
   right: 22px;
 
-  color: #9aa5b5;
+  color: #111827;
 
   font-size: 23px;
   font-weight: 400;
@@ -1027,7 +1027,7 @@
 
   overflow: hidden;
 
-  color: #34445c;
+  color: #111827;
 
   font-size: 14px;
   font-weight: 750;
@@ -1042,7 +1042,7 @@
 > span {
   display: block;
 
-  color: #9aa6b7;
+  color: #111827;
 
   font-size: 10px;
   font-weight: 600;
@@ -1091,7 +1091,7 @@
 .ewcc-dashboard-status.not_started {
   border: 1px solid #e1e5eb;
   background: #f3f5f8;
-  color: #7c8797;
+  color: #111827;
 }
 
 
@@ -1127,7 +1127,7 @@
 .ewcc-dashboard-note p {
   margin: 0;
 
-  color: #8996a8;
+  color: #111827;
 
   font-size: 11px;
   font-weight: 400;
@@ -1544,7 +1544,7 @@
 
   padding: 0 20px;
 
-  color: #7d8a9d;
+  color: #111827;
 
   font-size: 11px;
   font-weight: 850;
@@ -1600,7 +1600,7 @@ span:first-child {
 
   padding: 0 20px;
 
-  color: #40516a;
+  color: #111827;
 
   font-size: 13px;
   font-weight: 650;
@@ -1630,7 +1630,7 @@ span:nth-child(4) {
 
   padding: 0 20px;
 
-  color: #8794a7;
+  color: #111827;
 
   font-size: 13px;
   font-weight: 500;
@@ -1651,7 +1651,7 @@ span:nth-child(4) {
 .ewcc-dashboard-overview
 .ewcc-finance-row:last-child
 span {
-  color: #34445c;
+  color: #111827;
   font-weight: 800;
 }
 
@@ -1799,7 +1799,7 @@ span {
 .ewcc-performance-summary-item small {
   width: 100%;
 
-  color: #8996a8;
+  color: #111827;
 
   font-size: 9px;
   font-weight: 850;
@@ -1815,7 +1815,7 @@ span {
 }
 
 .ewcc-performance-summary-item span:not(.ewcc-performance-dot) {
-  color: #9aa6b6;
+  color: #111827;
 
   font-size: 10px;
 }
@@ -1844,7 +1844,7 @@ span {
 
   padding: 3px 0 26px;
 
-  color: #a0abba;
+  color: #111827;
 
   font-size: 9px;
   font-weight: 600;
@@ -1944,14 +1944,14 @@ span {
 
   top: -25px;
 
-  color: #34445c;
+  color: #111827;
 
   font-size: 12px;
   font-weight: 800;
 }
 
 .ewcc-performance-group > span {
-  color: #6f7e92;
+  color: #111827;
 
   font-size: 10px;
   font-weight: 700;
@@ -2036,7 +2036,7 @@ span {
 .gold-target-figures small {
   display: block;
   margin-bottom: 6px;
-  color: #8794a7;
+  color: #111827;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -2068,7 +2068,7 @@ span {
 }
 
 .gold-target-note {
-  color: #65748a;
+  color: #111827;
   font-size: 12px;
 }
 

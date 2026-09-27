@@ -24,7 +24,7 @@ const inputStyle = {
   padding: '0 9px 0 31px',
   textAlign: 'right',
   fontSize: 13,
-  color: '#34445c',
+  color: '#111827',
   outline: 'none',
   background: '#fff',
 }
@@ -296,7 +296,7 @@ export default function UserFinance({
                   style={{
                     padding: 50,
                     textAlign: 'center',
-                    color: '#8995a7',
+                    color: '#111827',
                   }}
                 >
                   Memuatkan data kewangan...
@@ -357,7 +357,7 @@ export default function UserFinance({
                             <td>
                               <strong
                                 style={{
-                                  color: '#40516a',
+                                  color: '#111827',
                                   fontWeight: isTotal ? 800 : 600,
                                 }}
                               >
@@ -367,7 +367,7 @@ export default function UserFinance({
                                 <small
                                   style={{
                                     display: 'block',
-                                    color: '#8995a7',
+                                    color: '#111827',
                                     marginTop: 4,
                                   }}
                                 >
@@ -386,7 +386,7 @@ export default function UserFinance({
                                       top: '50%',
                                       transform: 'translateY(-50%)',
                                       fontSize: 11,
-                                      color: '#8995a7',
+                                      color: '#111827',
                                       pointerEvents: 'none',
                                     }}
                                   >
@@ -467,7 +467,7 @@ export default function UserFinance({
                                   borderRadius: 8,
                                   padding: '8px 10px',
                                   fontSize: 12,
-                                  color: '#34445c',
+                                  color: '#111827',
                                   outline: 'none',
                                   fontFamily: 'inherit',
                                 }}

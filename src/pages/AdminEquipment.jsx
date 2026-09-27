@@ -302,7 +302,7 @@ export default function AdminEquipment({
                   style={{
                     padding: 50,
                     textAlign: 'center',
-                    color: '#8995a7',
+                    color: '#111827',
                   }}
                 >
                   Memuatkan data
@@ -331,7 +331,7 @@ export default function AdminEquipment({
                   <h3
                     style={{
                       margin: 0,
-                      color: '#34445c',
+                      color: '#111827',
                     }}
                   >
                     Belum ada cadangan
@@ -341,7 +341,7 @@ export default function AdminEquipment({
                   <p
                     style={{
                       marginTop: 8,
-                      color: '#8995a7',
+                      color: '#111827',
                     }}
                   >
                     Tiada sukan yang
@@ -399,7 +399,7 @@ export default function AdminEquipment({
                               display:
                                 'block',
                               color:
-                                '#34445c',
+                                '#111827',
                               fontSize: 15,
                               marginBottom: 4,
                             }}
@@ -412,7 +412,7 @@ export default function AdminEquipment({
                           <small
                             style={{
                               color:
-                                '#8995a7',
+                                '#111827',
                             }}
                           >
                             {
@@ -436,7 +436,7 @@ export default function AdminEquipment({
                               display:
                                 'block',
                               color:
-                                '#8995a7',
+                                '#111827',
                               fontSize: 10,
                               fontWeight:
                                 800,
@@ -448,7 +448,7 @@ export default function AdminEquipment({
                           <strong
                             style={{
                               color:
-                                '#34445c',
+                                '#111827',
                             }}
                           >
                             RM{' '}
@@ -471,7 +471,7 @@ export default function AdminEquipment({
                               display:
                                 'block',
                               color:
-                                '#8995a7',
+                                '#111827',
                               fontSize: 10,
                               fontWeight:
                                 800,
@@ -515,7 +515,7 @@ export default function AdminEquipment({
                           style={{
                             fontSize: 20,
                             color:
-                              '#8995a7',
+                              '#111827',
                           }}
                         >
                           →

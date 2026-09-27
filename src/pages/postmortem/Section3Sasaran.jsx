@@ -189,7 +189,7 @@ function Section3Sasaran({
           style={{
             fontSize: '14px',
             lineHeight: '1.7',
-            color: '#555',
+            color: '#111827',
           }}
         >
           <div>
@@ -351,7 +351,7 @@ function Section3Sasaran({
             <p
               style={{
                 margin: '5px 0 0',
-                color: '#777',
+                color: '#111827',
                 fontSize: '13px',
               }}
             >
@@ -678,7 +678,7 @@ const thStyle = {
   textAlign: 'left',
   fontSize: '12px',
   fontWeight: 700,
-  color: '#555',
+  color: '#111827',
   whiteSpace: 'nowrap',
 }
 

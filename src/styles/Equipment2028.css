@@ -52,14 +52,14 @@
   top: 0;
   z-index: 1;
   background: #f5f7fa;
-  color: #475569;
+  color: #111827;
   font-size: 0.75rem;
   font-weight: 750;
   white-space: nowrap;
 }
 
 .equipment-page .equipment-table td {
-  color: #34445c;
+  color: #111827;
   font-size: 0.875rem;
   overflow-wrap: anywhere;
 }

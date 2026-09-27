@@ -617,7 +617,7 @@ export default function Equipment2028({
                   style={{
                     padding: 50,
                     textAlign: 'center',
-                    color: '#8995a7',
+                    color: '#111827',
                   }}
                 >
                   Memuatkan data
@@ -646,7 +646,7 @@ export default function Equipment2028({
                   <h3
                     style={{
                       margin: 0,
-                      color: '#34445c',
+                      color: '#111827',
                     }}
                   >
                     Belum ada
@@ -655,7 +655,7 @@ export default function Equipment2028({
 
                   <p
                     style={{
-                      color: '#8995a7',
+                      color: '#111827',
                       marginTop: 8,
                     }}
                   >
@@ -1193,7 +1193,7 @@ export default function Equipment2028({
                             'block',
                           fontSize: 11,
                           fontWeight: 800,
-                          color: '#7d8a9d',
+                          color: '#111827',
                           marginBottom: 5,
                         }}
                       >
@@ -1216,7 +1216,7 @@ export default function Equipment2028({
                         style={{
                           display:
                             'block',
-                          color: '#8995a7',
+                          color: '#111827',
                           marginTop: 5,
                         }}
                       >

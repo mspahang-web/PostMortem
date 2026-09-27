@@ -71,7 +71,7 @@ const Section10StatusAtlet = ({
         <div
           style={{
             fontSize: '14px',
-            color: '#64748b',
+            color: '#111827',
             marginBottom: '6px',
             fontWeight: 600,
           }}
@@ -145,7 +145,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'center',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Bil.
@@ -157,7 +157,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'left',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Nama Atlet
@@ -169,7 +169,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'left',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Status
@@ -181,7 +181,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'left',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Cadangan
@@ -193,7 +193,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'left',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Catatan
@@ -205,7 +205,7 @@ const Section10StatusAtlet = ({
                     padding: '16px',
                     textAlign: 'center',
                     fontSize: '13px',
-                    color: '#475569',
+                    color: '#111827',
                   }}
                 >
                   Tindakan
@@ -232,7 +232,7 @@ const Section10StatusAtlet = ({
                         padding: '14px 16px',
                         textAlign: 'center',
                         verticalAlign: 'top',
-                        color: '#64748b',
+                        color: '#111827',
                         fontWeight: 600,
                       }}
                     >
@@ -299,7 +299,7 @@ const Section10StatusAtlet = ({
                           background:
                             '#ffffff',
                           color:
-                            '#334155',
+                            '#111827',
                         }}
                       >
 

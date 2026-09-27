@@ -106,7 +106,7 @@ function Section6Faktor({
         <p
           style={{
             margin: 0,
-            color: '#666',
+            color: '#111827',
             fontSize: '14px',
             lineHeight: '1.7',
           }}
@@ -169,7 +169,7 @@ function Section6Faktor({
             <p
               style={{
                 margin: '5px 0 0',
-                color: '#777',
+                color: '#111827',
                 fontSize: '13px',
                 lineHeight: '1.6',
               }}
@@ -221,7 +221,7 @@ function Section6Faktor({
                     justifyContent: 'center',
                     fontSize: '13px',
                     fontWeight: 700,
-                    color: '#555',
+                    color: '#111827',
                     flexShrink: 0,
                   }}
                 >
@@ -240,7 +240,7 @@ function Section6Faktor({
                       display: 'block',
                       fontSize: '13px',
                       fontWeight: 600,
-                      color: '#444',
+                      color: '#111827',
                       marginBottom: '7px',
                     }}
                   >
@@ -275,7 +275,7 @@ function Section6Faktor({
                     style={{
                       marginTop: '5px',
                       fontSize: '11px',
-                      color: '#999',
+                      color: '#111827',
                       textAlign: 'right',
                     }}
                   >
@@ -340,7 +340,7 @@ function Section6Faktor({
             <p
               style={{
                 margin: '5px 0 0',
-                color: '#777',
+                color: '#111827',
                 fontSize: '13px',
                 lineHeight: '1.6',
               }}
@@ -393,7 +393,7 @@ function Section6Faktor({
                     justifyContent: 'center',
                     fontSize: '13px',
                     fontWeight: 700,
-                    color: '#555',
+                    color: '#111827',
                     flexShrink: 0,
                   }}
                 >
@@ -412,7 +412,7 @@ function Section6Faktor({
                       display: 'block',
                       fontSize: '13px',
                       fontWeight: 600,
-                      color: '#444',
+                      color: '#111827',
                       marginBottom: '7px',
                     }}
                   >
@@ -447,7 +447,7 @@ function Section6Faktor({
                     style={{
                       marginTop: '5px',
                       fontSize: '11px',
-                      color: '#999',
+                      color: '#111827',
                       textAlign: 'right',
                     }}
                   >

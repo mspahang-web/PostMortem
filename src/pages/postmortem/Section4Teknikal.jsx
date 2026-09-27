@@ -135,7 +135,7 @@ function Section4Teknikal({
         <p
           style={{
             margin: 0,
-            color: '#666',
+            color: '#111827',
             fontSize: '14px',
             lineHeight: '1.7',
           }}
@@ -214,7 +214,7 @@ function Section4Teknikal({
                     display: 'block',
                     fontSize: '13px',
                     lineHeight: '1.6',
-                    color: '#777',
+                    color: '#111827',
                   }}
                 >
                   {question.description}
@@ -259,7 +259,7 @@ function Section4Teknikal({
                 style={{
                   marginTop: '7px',
                   fontSize: '12px',
-                  color: '#999',
+                  color: '#111827',
                   textAlign: 'right',
                 }}
               >

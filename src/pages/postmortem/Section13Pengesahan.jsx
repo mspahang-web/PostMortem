@@ -38,7 +38,7 @@ const Section13Pengesahan = ({
         <div
           style={{
             fontSize: '14px',
-            color: '#64748b',
+            color: '#111827',
             marginBottom: '6px',
             fontWeight: 600,
           }}
@@ -74,14 +74,14 @@ const Section13Pengesahan = ({
             borderRadius: '10px',
             padding: '22px',
             lineHeight: '1.7',
-            color: '#334155',
+            color: '#111827',
           }}
         >
 
           <div
             style={{
               fontSize: '13px',
-              color: '#64748b',
+              color: '#111827',
               fontWeight: 600,
               marginBottom: '8px',
             }}
@@ -146,7 +146,7 @@ const Section13Pengesahan = ({
 
           <span
             style={{
-              color: '#334155',
+              color: '#111827',
               fontWeight: 500,
             }}
           >

@@ -104,7 +104,7 @@ const Section11Sukma2028 = ({
         <div
           style={{
             fontSize: '14px',
-            color: '#64748b',
+            color: '#111827',
             marginBottom: '6px',
             fontWeight: 600,
           }}

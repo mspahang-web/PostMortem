@@ -328,7 +328,7 @@ function TrainingAnalytics({
               fontSize: '11px',
               fontWeight: 800,
               letterSpacing: '.7px',
-              color: '#8794a7',
+              color: '#111827',
               marginBottom: '8px',
             }}
           >
@@ -348,7 +348,7 @@ function TrainingAnalytics({
             <small
               style={{
                 fontSize: '14px',
-                color: '#8794a7',
+                color: '#111827',
                 marginLeft: '4px',
               }}
             >
@@ -373,7 +373,7 @@ function TrainingAnalytics({
               fontSize: '11px',
               fontWeight: 800,
               letterSpacing: '.7px',
-              color: '#8794a7',
+              color: '#111827',
               marginBottom: '8px',
             }}
           >
@@ -403,7 +403,7 @@ function TrainingAnalytics({
           style={{
             fontSize: '12px',
             fontWeight: 800,
-            color: '#40516a',
+            color: '#111827',
             marginBottom: '14px',
           }}
         >
@@ -449,7 +449,7 @@ function TrainingAnalytics({
                   <span
                     style={{
                       fontSize: '12px',
-                      color: '#65748a',
+                      color: '#111827',
                       fontWeight: 600,
                     }}
                   >
@@ -480,7 +480,7 @@ function TrainingAnalytics({
                   <strong
                     style={{
                       fontSize: '12px',
-                      color: '#40516a',
+                      color: '#111827',
                       textAlign: 'right',
                     }}
                   >
@@ -505,7 +505,7 @@ function TrainingAnalytics({
           style={{
             fontSize: '12px',
             fontWeight: 800,
-            color: '#40516a',
+            color: '#111827',
             marginBottom: '12px',
           }}
         >
@@ -526,7 +526,7 @@ function TrainingAnalytics({
 
             <span
               style={{
-                color: '#8794a7',
+                color: '#111827',
                 fontSize: '12px',
               }}
             >
@@ -563,7 +563,7 @@ function TrainingAnalytics({
                   <span
                     style={{
                       fontSize: '12px',
-                      color: '#52627a',
+                      color: '#111827',
                       fontWeight: 600,
                     }}
                   >
@@ -592,7 +592,7 @@ function TrainingAnalytics({
                           textAlign: 'right',
                           fontSize: '10px',
                           fontWeight: 600,
-                          color: '#9aa5b4',
+                          color: '#111827',
                           marginTop: '2px',
                         }}
                       >
@@ -651,7 +651,7 @@ function MedalSummary({
         <strong
           style={{
             fontSize: '13px',
-            color: '#40516a',
+            color: '#111827',
           }}
         >
           {title}
@@ -709,7 +709,7 @@ function MedalSummary({
 
           <small
             style={{
-              color: '#8c7b59',
+              color: '#111827',
               fontSize: '10px',
             }}
           >
@@ -736,7 +736,7 @@ function MedalSummary({
               width: '100%',
               textAlign: 'center',
               fontSize: '20px',
-              color: '#6d7784',
+              color: '#111827',
             }}
           >
             {data.perak}
@@ -744,7 +744,7 @@ function MedalSummary({
 
           <small
             style={{
-              color: '#7f8995',
+              color: '#111827',
               fontSize: '10px',
             }}
           >
@@ -779,7 +779,7 @@ function MedalSummary({
 
           <small
             style={{
-              color: '#96715b',
+              color: '#111827',
               fontSize: '10px',
             }}
           >
@@ -1925,7 +1925,7 @@ const equipmentSummary = useMemo(() => {
                   '1px solid #edf0f4',
                 paddingTop: '14px',
                 fontSize: '11px',
-                color: '#8995a7',
+                color: '#111827',
                 lineHeight: 1.6,
               }}
             >
@@ -2008,7 +2008,7 @@ const equipmentSummary = useMemo(() => {
                           display: 'block',
                           fontSize: '10px',
                           fontWeight: 800,
-                          color: '#8995a7',
+                          color: '#111827',
                           letterSpacing: '.7px',
                           marginBottom: '7px',
                         }}
@@ -2019,7 +2019,7 @@ const equipmentSummary = useMemo(() => {
                       <strong
                         style={{
                           fontSize: '27px',
-                          color: '#33445c',
+                          color: '#111827',
                         }}
                       >
                         {athleteAnalytics.total}
@@ -2039,7 +2039,7 @@ const equipmentSummary = useMemo(() => {
                           display: 'block',
                           fontSize: '10px',
                           fontWeight: 800,
-                          color: '#69927d',
+                          color: '#111827',
                           letterSpacing: '.7px',
                           marginBottom: '7px',
                         }}
@@ -2070,7 +2070,7 @@ const equipmentSummary = useMemo(() => {
                           display: 'block',
                           fontSize: '10px',
                           fontWeight: 800,
-                          color: '#8995a7',
+                          color: '#111827',
                           letterSpacing: '.7px',
                           marginBottom: '7px',
                         }}
@@ -2081,7 +2081,7 @@ const equipmentSummary = useMemo(() => {
                       <strong
                         style={{
                           fontSize: '27px',
-                          color: '#33445c',
+                          color: '#111827',
                         }}
                       >
                         {athleteAnalytics.distribution.B || 0}
@@ -2095,7 +2095,7 @@ const equipmentSummary = useMemo(() => {
                       style={{
                         fontSize: '12px',
                         fontWeight: 800,
-                        color: '#40516a',
+                        color: '#111827',
                         marginBottom: '14px',
                       }}
                     >
@@ -2128,7 +2128,7 @@ const equipmentSummary = useMemo(() => {
                               <span
                                 style={{
                                   fontSize: '12px',
-                                  color: '#596a81',
+                                  color: '#111827',
                                   fontWeight: 600,
                                 }}
                               >
@@ -2157,7 +2157,7 @@ const equipmentSummary = useMemo(() => {
                               <strong
                                 style={{
                                   fontSize: '11px',
-                                  color: '#40516a',
+                                  color: '#111827',
                                   textAlign: 'right',
                                 }}
                               >
@@ -2200,7 +2200,7 @@ const equipmentSummary = useMemo(() => {
                               style={{
                                 display: 'block',
                                 fontSize: '10px',
-                                color: '#8995a7',
+                                color: '#111827',
                                 fontWeight: 800,
                                 letterSpacing: '.5px',
                                 marginBottom: '3px',
@@ -2212,7 +2212,7 @@ const equipmentSummary = useMemo(() => {
                             <strong
                               style={{
                                 fontSize: '12px',
-                                color: '#52627a',
+                                color: '#111827',
                               }}
                             >
                               {item.label.replace(
@@ -2225,7 +2225,7 @@ const equipmentSummary = useMemo(() => {
                           <strong
                             style={{
                               fontSize: '18px',
-                              color: '#33445c',
+                              color: '#111827',
                             }}
                           >
                             {item.count}
@@ -2241,7 +2241,7 @@ const equipmentSummary = useMemo(() => {
                         '1px solid #edf0f4',
                       paddingTop: '13px',
                       fontSize: '11px',
-                      color: '#8995a7',
+                      color: '#111827',
                       lineHeight: 1.55,
                     }}
                   >
@@ -2361,7 +2361,7 @@ const equipmentSummary = useMemo(() => {
               <small
                 style={{
                   fontSize: '10px',
-                  color: '#8995a7',
+                  color: '#111827',
                 }}
               >
                 {item.percentage ===
@@ -2388,7 +2388,7 @@ const equipmentSummary = useMemo(() => {
           borderTop:
             '1px solid #edf0f4',
           fontSize: '10px',
-          color: '#8995a7',
+          color: '#111827',
           lineHeight: 1.5,
         }}
       >
@@ -2449,7 +2449,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#8995a7',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -2460,7 +2460,7 @@ const equipmentSummary = useMemo(() => {
           <strong
             style={{
               fontSize: '27px',
-              color: '#33445c',
+              color: '#111827',
             }}
           >
             {equipmentSummary.sportsWithEquipment}
@@ -2470,7 +2470,7 @@ const equipmentSummary = useMemo(() => {
             style={{
               display: 'block',
               marginTop: '5px',
-              color: '#8995a7',
+              color: '#111827',
             }}
           >
             Daripada {sports.length} sukan
@@ -2490,7 +2490,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#8995a7',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -2501,7 +2501,7 @@ const equipmentSummary = useMemo(() => {
           <strong
             style={{
               fontSize: '27px',
-              color: '#33445c',
+              color: '#111827',
             }}
           >
             {equipmentSummary.totalItems}
@@ -2511,7 +2511,7 @@ const equipmentSummary = useMemo(() => {
             style={{
               display: 'block',
               marginTop: '5px',
-              color: '#8995a7',
+              color: '#111827',
             }}
           >
             Cadangan peralatan
@@ -2531,7 +2531,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#8995a7',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -2559,7 +2559,7 @@ const equipmentSummary = useMemo(() => {
             style={{
               display: 'block',
               marginTop: '5px',
-              color: '#8995a7',
+              color: '#111827',
             }}
           >
             Jumlah anggaran
@@ -2579,7 +2579,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#a47872',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -2600,7 +2600,7 @@ const equipmentSummary = useMemo(() => {
             style={{
               display: 'block',
               marginTop: '5px',
-              color: '#8995a7',
+              color: '#111827',
             }}
           >
             Cadangan segera
@@ -2617,7 +2617,7 @@ const equipmentSummary = useMemo(() => {
           style={{
             fontSize: '12px',
             fontWeight: 800,
-            color: '#40516a',
+            color: '#111827',
             marginBottom: '13px',
           }}
         >
@@ -2673,7 +2673,7 @@ const equipmentSummary = useMemo(() => {
                         style={{
                           display: 'block',
                           fontSize: '12px',
-                          color: '#40516a',
+                          color: '#111827',
                         }}
                       >
                         {sportName}
@@ -2683,7 +2683,7 @@ const equipmentSummary = useMemo(() => {
                     <strong
                       style={{
                         fontSize: '12px',
-                        color: '#596a81',
+                        color: '#111827',
                         textAlign: 'center',
                       }}
                     >
@@ -2742,7 +2742,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '9px',
               fontWeight: 800,
-              color: '#a47872',
+              color: '#111827',
             }}
           >
             TINGGI
@@ -2800,7 +2800,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '9px',
               fontWeight: 800,
-              color: '#69927d',
+              color: '#111827',
             }}
           >
             RENDAH
@@ -3000,7 +3000,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#8995a7',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -3011,7 +3011,7 @@ const equipmentSummary = useMemo(() => {
           <strong
             style={{
               fontSize: '27px',
-              color: '#33445c',
+              color: '#111827',
             }}
           >
             {confirmationAnalytics.total}
@@ -3032,7 +3032,7 @@ const equipmentSummary = useMemo(() => {
               display: 'block',
               fontSize: '10px',
               fontWeight: 800,
-              color: '#69927d',
+              color: '#111827',
               letterSpacing: '.7px',
               marginBottom: '7px',
             }}
@@ -3109,7 +3109,7 @@ const equipmentSummary = useMemo(() => {
             style={{
               fontSize: '11px',
               fontWeight: 800,
-              color: '#66758a',
+              color: '#111827',
               letterSpacing: '.5px',
             }}
           >
@@ -3119,7 +3119,7 @@ const equipmentSummary = useMemo(() => {
           <strong
             style={{
               fontSize: '14px',
-              color: '#33445c',
+              color: '#111827',
             }}
           >
             {

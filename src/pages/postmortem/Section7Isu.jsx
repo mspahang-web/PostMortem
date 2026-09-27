@@ -130,7 +130,7 @@ function Section7Isu({
         <p
           style={{
             margin: 0,
-            color: '#666',
+            color: '#111827',
             fontSize: '14px',
             lineHeight: '1.7',
           }}
@@ -182,7 +182,7 @@ function Section7Isu({
             <p
               style={{
                 margin: '5px 0 0',
-                color: '#777',
+                color: '#111827',
                 fontSize: '13px',
               }}
             >
@@ -553,7 +553,7 @@ const thStyle = {
   borderRight: '1px solid #e5e7eb',
   fontSize: '12px',
   fontWeight: 700,
-  color: '#555',
+  color: '#111827',
   textAlign: 'left',
   verticalAlign: 'middle',
   whiteSpace: 'normal',
