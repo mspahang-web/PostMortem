@@ -496,21 +496,16 @@ const getReportMetrics = (report) => {
 
 
 
+  // Only targets met with the same medal count (see lib/medals.js).
+  const jumlahTercapai =
+
+    section3Totals.tercapai.total
+
+
+
   const kadarPencapaian =
 
-    jumlahSasaran > 0
-
-      ? Math.round(
-
-          (jumlahPencapaian /
-
-            jumlahSasaran) *
-
-            100
-
-        )
-
-      : 0
+    section3Totals.kadarPencapaian
 
 
 
@@ -571,6 +566,10 @@ const getReportMetrics = (report) => {
     jumlahPencapaian,
 
     kadarPencapaian,
+
+    jumlahTercapai,
+
+    section3Totals,
 
     acaraList,
 
@@ -2004,22 +2003,12 @@ const handleMarkReviewed = async () => {
 
                         <div>
 
-                          <span>PENCAPAIAN</span>
-
-
-
+                          <span>SASARAN DICAPAI</span>
                           <strong>
-
-                            {metrics.jumlahPencapaian}
-
+                            {metrics.jumlahTercapai}
                           </strong>
-
-
-
                           <small>
-
-                            {metrics.kadarPencapaian}% daripada sasaran
-
+                            {metrics.kadarPencapaian}% daripada {metrics.jumlahSasaran} sasaran
                           </small>
 
                         </div>
@@ -2153,17 +2142,10 @@ const handleMarkReviewed = async () => {
                             <div className="performance-bar-label">
 
                               <span>
-
-                                Pencapaian
-
+                                Sasaran Dicapai
                               </span>
-
-
-
                               <strong>
-
-                                {metrics.jumlahPencapaian}
-
+                                {metrics.jumlahTercapai}
                               </strong>
 
                             </div>
@@ -2235,11 +2217,12 @@ const handleMarkReviewed = async () => {
 
 
                           <small>
-
-                            Berdasarkan jumlah sasaran dan
-
-                            pencapaian yang direkodkan.
-
+                            Hanya pingat yang sama dengan sasaran dikira
+                            (contoh: sasaran Emas tercapai dengan Emas sahaja).
+                            Pingat diperoleh: {metrics.jumlahPencapaian} (Emas{' '}
+                            {metrics.section3Totals.pencapaian.emas} · Perak{' '}
+                            {metrics.section3Totals.pencapaian.perak} · Gangsa{' '}
+                            {metrics.section3Totals.pencapaian.gangsa}).
                           </small>
 
 

@@ -100,10 +100,25 @@ export function getSection3Totals(section3) {
   }
   pencapaian.total = pencapaian.emas + pencapaian.perak + pencapaian.gangsa
 
+  // A target counts as met only by a medal of the same kind: aiming for
+  // gold and winning silver meets no target. Per medal: min(target, won).
+  const tercapai = {
+    emas: Math.min(sasaran.emas, pencapaian.emas),
+    perak: Math.min(sasaran.perak, pencapaian.perak),
+    gangsa: Math.min(sasaran.gangsa, pencapaian.gangsa),
+  }
+  tercapai.total = tercapai.emas + tercapai.perak + tercapai.gangsa
+
   return {
     jumlahAcara: pick('jumlahAcara', counts.events),
     sasaran,
     pencapaian,
+    tercapai,
+    // Share of targets met, in % (0 when there is no target).
+    kadarPencapaian:
+      sasaran.total > 0
+        ? Math.round((tercapai.total / sasaran.total) * 100)
+        : 0,
   }
 }
 
