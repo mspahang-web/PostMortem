@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { adminManage } from '../lib/adminApi'
+import { supabase } from '../lib/supabase'
+import { MEDAL_EDITIONS, getContingentRank } from '../lib/contingentMedals'
 import { parsePostMortemWorkbook } from '../lib/postmortemImport'
 import { getSportName } from '../lib/sports'
 
@@ -60,7 +62,9 @@ export default function ImportExcelModal({
     existingReport && existingReport.status !== 'draft'
 
   const totalWarnings = result
-    ? result.summary.reduce((n, s) => n + s.warnings.length, 0) + result.equipmentWarnings.length
+    ? result.summary.reduce((n, s) => n + s.warnings.length, 0) +
+      result.equipmentWarnings.length +
+      result.contingentMedalWarnings.length
     : 0
 
   const handleFile = async (event) => {
@@ -121,10 +125,27 @@ export default function ImportExcelModal({
         overwriteSubmitted: isLocked ? confirmOverwrite : false,
       })
 
+      // Contingent medals go straight onto the report (admins may update
+      // postmortem_reports), so the edge function needs no change.
+      let medalLine = '• Pencapaian Pingat Kontinjen tidak dijumpai dalam fail.'
+      if (result.contingentMedals && data.reportId) {
+        const { data: saved, error: medalError } = await supabase
+          .from('postmortem_reports')
+          .update({ contingent_medals: result.contingentMedals })
+          .eq('id', data.reportId)
+          .select('id')
+
+        if (medalError) console.error('IMPORT CONTINGENT MEDALS ERROR:', medalError)
+        medalLine = medalError || !saved?.length
+          ? `• Pencapaian Pingat Kontinjen GAGAL disimpan: ${medalError?.message || 'tiada kebenaran mengemas kini laporan.'}`
+          : `• Pencapaian Pingat Kontinjen (${result.contingentMedals.kejohanan} ${MEDAL_EDITIONS.map((e) => e.label).join(' & ')}) disimpan.`
+      }
+
       alert(
         `Import berjaya untuk ${selectedUser.login_id}.\n\n` +
         `• 13 bahagian borang disimpan sebagai draf.\n` +
-        `• ${data.equipmentCount || 0} item cadangan peralatan ${replaceEquipment ? 'menggantikan senarai lama' : 'ditambah'}.\n\n` +
+        `• ${data.equipmentCount || 0} item cadangan peralatan ${replaceEquipment ? 'menggantikan senarai lama' : 'ditambah'}.\n` +
+        `${medalLine}\n\n` +
         'Minta pengguna menyemak setiap bahagian dan menghantar laporan.'
       )
 
@@ -258,6 +279,23 @@ export default function ImportExcelModal({
                           ))}
                         </td>
                       </tr>
+                      <tr>
+                        <td>Pencapaian Pingat Kontinjen</td>
+                        <td>
+                          <span className={result.contingentMedalWarnings.length ? 'import-warn' : 'import-ok'}>
+                            {result.contingentMedals
+                              ? `${result.contingentMedals.kejohanan} · ` +
+                                MEDAL_EDITIONS.map((edition) => {
+                                  const home = getContingentRank(result.contingentMedals[edition.key])
+                                  return `Pahang ${edition.label}: ${home.emas} Emas, ${home.perak} Perak, ${home.gangsa} Gangsa`
+                                }).join(' · ')
+                              : 'Tidak dijumpai'}
+                          </span>
+                          {result.contingentMedalWarnings.map((warning) => (
+                            <small key={warning}>⚠ {warning}</small>
+                          ))}
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -265,7 +303,8 @@ export default function ImportExcelModal({
                   {totalWarnings === 0
                     ? 'Semua bahagian dibaca tanpa amaran.'
                     : `${totalWarnings} amaran. Medan berkaitan boleh dibetulkan dalam borang selepas import.`}
-                  {' '}Helaian "Statistik Postmortem" tidak diimport.
+                  {' '}Dari helaian "Statistik Postmortem", hanya jadual Pencapaian Pingat Kontinjen diimport
+                  {result.contingentMedals ? ' (menggantikan data pingat sedia ada)' : ''}.
                 </small>
               </div>
 

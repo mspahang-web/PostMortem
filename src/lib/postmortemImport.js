@@ -4,6 +4,7 @@
 // labels, not fixed cells, so tables of any length still line up.
 import { columnIndex, columnLetters, readXlsx } from './xlsxReader'
 import { TRAINING_COMPONENTS, TRAINING_RATINGS } from './training'
+import { CONTINGENTS, MEDAL_EDITIONS, normaliseContingentMedals } from './contingentMedals'
 
 const SECTION_TITLES = {
   A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7,
@@ -627,6 +628,119 @@ function parseEquipment(sheet, warnings) {
   return items
 }
 
+// ---------- contingent medals ("Statistik Postmortem" sheet) ----------
+
+const MEDAL_TABLE_TITLE = /pencapaian pingat\s+kontinjen\s+(para\s+sukma|sukma)\s+(\d{4})/
+
+const CONTINGENT_ALIASES = [
+  [/^(burnei|brunei)/, 'BRUNEI'],
+  [/^(w\.?\s*p\.?|wilayah)/, 'WILAYAH PERSEKUTUAN'],
+  [/^(n\.?\s*sembilan|negeri sembilan|n9)/, 'NEGERI SEMBILAN'],
+  [/^(p\.?\s*pinang|pulau pinang|penang)/, 'PULAU PINANG'],
+]
+
+function matchContingent(value) {
+  const name = norm(value)
+  if (!name) return ''
+  const alias = CONTINGENT_ALIASES.find(([pattern]) => pattern.test(name))
+  if (alias) return alias[1]
+  return CONTINGENTS.find((contingent) => norm(contingent) === name) || null
+}
+
+// Every "PENCAPAIAN PINGAT KONTINJEN <SUKMA|PARA SUKMA> <year>" table in
+// the workbook. The latest year fills the 2026 table, the one before it
+// the 2024 table.
+function parseContingentMedals(sheets, warnings) {
+  const tables = []
+
+  for (const sheet of sheets) {
+    const grid = makeGrid(sheet)
+
+    for (let r = 1; r <= grid.maxRow; r++) {
+      for (let c = 1; c <= grid.maxCol; c++) {
+        const title = norm(grid.get(c, r)).match(MEDAL_TABLE_TITLE)
+        if (!title) continue
+
+        let header = -1
+        for (let h = r + 1; h <= Math.min(r + 3, grid.maxRow) && header < 0; h++) {
+          if ([...Array(grid.maxCol).keys()].some((i) => norm(grid.get(i + 1, h)) === 'negeri')) header = h
+        }
+        if (header < 0) {
+          warnings.push(`Jadual "${grid.get(c, r)}": baris tajuk NEGERI tidak dijumpai.`)
+          continue
+        }
+
+        const cols = headerColumns(grid, header, {
+          negeri: /^negeri$/,
+          emas: /^emas$/,
+          perak: /^perak$/,
+          gangsa: /^gangsa$/,
+          rekod: /rekod/,
+        })
+
+        const rows = {}
+        let blanks = 0
+        for (let d = header + 1; d <= grid.maxRow && blanks < 2; d++) {
+          if ([...Array(grid.maxCol).keys()].some((i) => MEDAL_TABLE_TITLE.test(norm(grid.get(i + 1, d))))) break
+          const nameText = cols.negeri ? grid.get(cols.negeri, d) : ''
+          if (!nameText) {
+            blanks++
+            continue
+          }
+          blanks = 0
+
+          const name = matchContingent(nameText)
+          if (!name) {
+            warnings.push(`Pingat Kontinjen: negeri "${nameText}" tidak dikenali; diabaikan.`)
+            continue
+          }
+
+          const count = (key) => (cols[key] ? Math.max(0, Math.trunc(Number(grid.raw(cols[key], d)) || 0)) : 0)
+          rows[name] = {
+            emas: count('emas'),
+            perak: count('perak'),
+            gangsa: count('gangsa'),
+            rekod: cols.rekod ? grid.get(cols.rekod, d) : '',
+          }
+        }
+
+        tables.push({
+          games: /para/.test(title[1]) ? 'PARA SUKMA' : 'SUKMA',
+          year: Number(title[2]),
+          rows,
+        })
+      }
+    }
+  }
+
+  if (tables.length === 0) {
+    warnings.push('Jadual "Pencapaian Pingat Kontinjen" tidak dijumpai.')
+    return null
+  }
+
+  const years = [...new Set(tables.map((table) => table.year))].sort((a, b) => b - a)
+  const editionFor = Object.fromEntries(
+    years.slice(0, MEDAL_EDITIONS.length).map((year, index) => [year, MEDAL_EDITIONS[index].key])
+  )
+  years.slice(MEDAL_EDITIONS.length).forEach((year) =>
+    warnings.push(`Pingat Kontinjen: jadual tahun ${year} diabaikan (hanya ${MEDAL_EDITIONS.map((e) => e.label).join(' & ')} disimpan).`)
+  )
+  years.forEach((year) => {
+    const key = editionFor[year]
+    if (key && String(year) !== key) {
+      warnings.push(`Pingat Kontinjen: jadual tahun ${year} disimpan sebagai edisi ${key}.`)
+    }
+  })
+
+  const data = { kejohanan: tables.some((table) => table.games === 'PARA SUKMA') ? 'PARA SUKMA' : 'SUKMA' }
+  tables.forEach((table) => {
+    const key = editionFor[table.year]
+    if (key) data[key] = { ...(data[key] || {}), ...table.rows }
+  })
+
+  return normaliseContingentMedals(data)
+}
+
 // ---------- entry point ----------
 
 export async function parsePostMortemWorkbook(buffer) {
@@ -679,12 +793,17 @@ export async function parsePostMortemWorkbook(buffer) {
   const equipment = equipmentSheet ? parseEquipment(equipmentSheet, equipmentWarnings) : []
   if (!equipmentSheet) equipmentWarnings.push('Helaian "Cadangan Peralatan" tidak dijumpai.')
 
+  const contingentMedalWarnings = []
+  const contingentMedals = parseContingentMedals(sheets, contingentMedalWarnings)
+
   return {
     sportName,
     sections,
     summary,
     equipment,
     equipmentWarnings,
+    contingentMedals,
+    contingentMedalWarnings,
     sheetNames: sheets.map((sheet) => sheet.name),
   }
 }
