@@ -8923,3 +8923,163 @@ button.progress-mini-step:focus-visible span {
   font-size: 11px;
   font-weight: 600;
 }
+
+/* =========================================================
+   SECTION 3 REPORT VIEW — SASARAN vs DIPEROLEH (per pingat)
+   ========================================================= */
+
+.pm-summary-cards.pm-summary-cards-two {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.pm-summary-card strong em {
+  margin-left: 6px;
+  color: #64748b;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.pm-target-rate {
+  border-width: 2px;
+}
+
+.pm-target-rate.met {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.pm-target-rate.partial {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+
+.pm-target-rate.missed {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.pm-target-rate.met small { color: #15803d; }
+.pm-target-rate.partial small { color: #b45309; }
+.pm-target-rate.missed small { color: #b91c1c; }
+
+.pm-target-rate small {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pm-medal-compare {
+  margin-bottom: 22px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.pm-medal-compare-head,
+.pm-medal-compare-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 1.1fr) minmax(90px, 0.7fr) minmax(90px, 0.7fr) minmax(200px, 1.6fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+}
+
+.pm-medal-compare-head {
+  background: #f8fafc;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.pm-medal-compare-head span:nth-child(2),
+.pm-medal-compare-head span:nth-child(3) {
+  text-align: center;
+}
+
+.pm-medal-compare-row {
+  border-top: 1px solid #edf1f5;
+  border-left: 5px solid transparent;
+}
+
+.pm-medal-compare-row.emas { border-left-color: #eab308; }
+.pm-medal-compare-row.perak { border-left-color: #94a3b8; }
+.pm-medal-compare-row.gangsa { border-left-color: #c2733a; }
+
+.pm-medal-compare-row.total {
+  border-left-color: #334155;
+  background: #f8fafc;
+}
+
+.pm-medal-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.pm-medal-name i {
+  font-size: 22px;
+  font-style: normal;
+}
+
+.pm-medal-number {
+  color: #0f172a;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.pm-medal-result {
+  justify-self: start;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.pm-medal-result.met { background: #dcfce7; color: #15803d; }
+.pm-medal-result.partial { background: #fef3c7; color: #b45309; }
+.pm-medal-result.missed { background: #fee2e2; color: #b91c1c; }
+.pm-medal-result.extra { background: #e0f2fe; color: #0369a1; }
+.pm-medal-result.none { background: transparent; color: #94a3b8; }
+
+@media (max-width: 700px) {
+  .pm-summary-cards.pm-summary-cards-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pm-medal-compare-head {
+    display: none;
+  }
+
+  .pm-medal-compare-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 10px;
+  }
+
+  .pm-medal-name,
+  .pm-medal-result {
+    grid-column: 1 / -1;
+  }
+
+  .pm-medal-number {
+    text-align: left;
+    font-size: 26px;
+  }
+
+  .pm-medal-number::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+}

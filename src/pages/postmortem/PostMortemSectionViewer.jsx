@@ -438,13 +438,42 @@ const renderSection3 = (data) => {
 
   // Totals typed in by the user (older reports: counted per event).
   const totals = getSection3Totals(data)
-  const breakdown = (medals) =>
-    `Emas ${medals.emas} · Perak ${medals.perak} · Gangsa ${medals.gangsa}`
+
+  const medalRows = [
+    { key: 'emas', label: 'Emas', icon: '🥇' },
+    { key: 'perak', label: 'Perak', icon: '🥈' },
+    { key: 'gangsa', label: 'Gangsa', icon: '🥉' },
+  ].map((medal) => {
+    const target = totals.sasaran[medal.key]
+    const won = totals.pencapaian[medal.key]
+
+    let result
+    if (target === 0 && won === 0) result = { tone: 'none', text: '—' }
+    else if (target === 0) result = { tone: 'extra', text: `Tiada sasaran (+${won})` }
+    else if (won >= target) {
+      result = won > target
+        ? { tone: 'met', text: `✓ Tercapai, melebihi +${won - target}` }
+        : { tone: 'met', text: '✓ Tercapai' }
+    } else {
+      result = { tone: 'missed', text: `✗ Tidak tercapai (kurang ${target - won})` }
+    }
+
+    return { ...medal, target, won, result }
+  })
+
+  const rateTone =
+    totals.sasaran.total === 0
+      ? 'none'
+      : totals.kadarPencapaian >= 100
+        ? 'met'
+        : totals.kadarPencapaian > 0
+          ? 'partial'
+          : 'missed'
 
   return (
     <div className="pm-report-special">
 
-      <div className="pm-summary-cards">
+      <div className="pm-summary-cards pm-summary-cards-two">
 
         <div className="pm-summary-card">
           <span>
@@ -456,32 +485,88 @@ const renderSection3 = (data) => {
           </strong>
         </div>
 
-        <div className="pm-summary-card">
+        <div className={`pm-summary-card pm-target-rate ${rateTone}`}>
           <span>
-            JUMLAH SASARAN
+            SASARAN DICAPAI
           </span>
 
           <strong>
-            {totals.sasaran.total}
+            {totals.tercapai.total}
+            <em> daripada {totals.sasaran.total}</em>
           </strong>
 
           <small>
-            {breakdown(totals.sasaran)}
+            {totals.sasaran.total > 0
+              ? `${totals.kadarPencapaian}% sasaran pingat tercapai`
+              : 'Tiada sasaran pingat ditetapkan'}
           </small>
         </div>
 
-        <div className="pm-summary-card">
-          <span>
-            JUMLAH PENCAPAIAN
+      </div>
+
+      <div className="pm-medal-compare">
+
+        <div className="pm-medal-compare-head">
+          <span>PINGAT</span>
+          <span>SASARAN</span>
+          <span>DIPEROLEH</span>
+          <span>KEPUTUSAN</span>
+        </div>
+
+        {medalRows.map((row) => (
+          <div
+            key={row.key}
+            className={`pm-medal-compare-row ${row.key}`}
+          >
+            <span className="pm-medal-name">
+              <i aria-hidden="true">{row.icon}</i>
+              {row.label}
+            </span>
+
+            <strong
+              className="pm-medal-number"
+              data-label="Sasaran"
+            >
+              {row.target}
+            </strong>
+
+            <strong
+              className="pm-medal-number"
+              data-label="Diperoleh"
+            >
+              {row.won}
+            </strong>
+
+            <span className={`pm-medal-result ${row.result.tone}`}>
+              {row.result.text}
+            </span>
+          </div>
+        ))}
+
+        <div className="pm-medal-compare-row total">
+          <span className="pm-medal-name">
+            Jumlah
           </span>
 
-          <strong>
+          <strong
+            className="pm-medal-number"
+            data-label="Sasaran"
+          >
+            {totals.sasaran.total}
+          </strong>
+
+          <strong
+            className="pm-medal-number"
+            data-label="Diperoleh"
+          >
             {totals.pencapaian.total}
           </strong>
 
-          <small>
-            {breakdown(totals.pencapaian)}
-          </small>
+          <span className={`pm-medal-result ${rateTone}`}>
+            {totals.sasaran.total > 0
+              ? `${totals.tercapai.total} / ${totals.sasaran.total} sasaran (${totals.kadarPencapaian}%)`
+              : '—'}
+          </span>
         </div>
 
       </div>
