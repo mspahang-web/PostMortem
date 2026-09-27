@@ -9358,3 +9358,11 @@ button.progress-mini-step:focus-visible span {
     display: none;
   }
 }
+
+/* Rating badges in the Bahagian 5 list use the same colours as the chart
+   (Sangat Baik green, Baik blue, Sederhana yellow, Lemah red). */
+.pm-rating-value.rating-excellent { background: #dcfce7; color: #15803d; }
+.pm-rating-value.rating-good { background: #dbeafe; color: #1d4ed8; }
+.pm-rating-value.rating-medium { background: #fef3c7; color: #a16207; }
+.pm-rating-value.rating-low,
+.pm-rating-value.rating-poor { background: #fee2e2; color: #b91c1c; }

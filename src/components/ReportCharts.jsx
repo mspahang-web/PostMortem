@@ -1,35 +1,22 @@
 // Charts for the report view: Section 5 (Penilaian Program Latihan) and
-// Section 10 (Status Atlet). Both scales are ordinal, so each uses one blue
-// ramp, darker = better (validated with the dataviz palette script,
-// --ordinal, on the white report surface). Text stays in ink colours; the
-// tables below the charts keep every detail from the form.
-import { ATHLETE_STATUS_OPTIONS } from '../lib/athleteStatus'
+// Section 10 (Status Atlet). Colours carry meaning (e.g. Sangat Baik green,
+// Lemah red) and come from lib/training.js and lib/athleteStatus.js. Text
+// stays in ink colours; the tables below keep every detail from the form.
+import { ATHLETE_STATUS_COLORS, ATHLETE_STATUS_OPTIONS } from '../lib/athleteStatus'
 import {
   TRAINING_MAX_SCORE,
   TRAINING_RATINGS,
+  TRAINING_RATING_COLORS,
   TRAINING_RATING_SCORE,
 } from '../lib/training'
 
-// Lemah -> Sangat Baik (light -> dark).
-const RATING_COLORS = {
-  Lemah: '#86b6ef',
-  Sederhana: '#3987e5',
-  Baik: '#1c5cab',
-  'Sangat Baik': '#0d366b',
-}
+const RATING_COLORS = TRAINING_RATING_COLORS
+const STATUS_COLORS = ATHLETE_STATUS_COLORS
 
-// E -> A (light -> dark).
-const STATUS_COLORS = {
-  E: '#86b6ef',
-  D: '#5598e7',
-  C: '#2a78d6',
-  B: '#1c5cab',
-  A: '#0d366b',
-}
-
-// Light fills need dark text inside the bar; dark fills need white.
+// Light fills (green, yellow, magenta) take dark text; the rest white.
+const LIGHT_FILLS = ['#22c55e', '#ca8a04', '#e879f9']
 const insideText = (color) =>
-  ['#86b6ef', '#5598e7'].includes(color) ? '#0b0b0b' : '#ffffff'
+  LIGHT_FILLS.includes(color) ? '#0b0b0b' : '#ffffff'
 
 const percent = (part, whole) =>
   whole > 0 ? Math.round((part / whole) * 100) : 0

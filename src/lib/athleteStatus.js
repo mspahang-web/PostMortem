@@ -13,3 +13,14 @@ export function getAthleteStatusLabel(value) {
   const code = String(value ?? '').trim().toUpperCase()
   return ATHLETE_STATUS_OPTIONS.find((option) => option.value === code)?.label || value || ''
 }
+
+// Status colours (validated with the dataviz palette script on white):
+// A green, B blue, C magenta, D yellow, E red. Each bar also shows its
+// letter and meaning, so colour is never the only cue.
+export const ATHLETE_STATUS_COLORS = {
+  A: '#22c55e',
+  B: '#1d4ed8',
+  C: '#e879f9',
+  D: '#ca8a04',
+  E: '#991b1b',
+}

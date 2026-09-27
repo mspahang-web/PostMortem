@@ -12,10 +12,12 @@ import {
 import {
   TRAINING_MAX_SCORE,
   TRAINING_RATINGS,
+  TRAINING_RATING_COLORS,
   TRAINING_RATING_SCORE,
+  TRAINING_RATING_TEXT_COLORS,
   getTrainingComponents,
 } from '../lib/training'
-import { ATHLETE_STATUS_OPTIONS } from '../lib/athleteStatus'
+import { ATHLETE_STATUS_COLORS, ATHLETE_STATUS_OPTIONS } from '../lib/athleteStatus'
 
 
 // =========================================================
@@ -469,19 +471,7 @@ function TrainingAnalytics({
                         width: `${width}%`,
                         borderRadius: '999px',
                         background:
-                          rating ===
-                          'Sangat Baik'
-                            ? '#2f8f68'
-                            : rating ===
-                              'Baik'
-                              ? '#5a9f7e'
-                              : rating ===
-                                'Sederhana'
-                                ? '#d69a32'
-                                : rating ===
-                                  'Kurang Baik'
-                                  ? '#d47a43'
-                                  : '#c95c5c',
+                          TRAINING_RATING_COLORS[rating] || '#c9c7be',
                       }}
                     />
                   </div>
@@ -586,18 +576,7 @@ function TrainingAnalytics({
                     style={{
                       fontSize: '11px',
                       color:
-                        item?.rating ===
-                        'Sangat Baik'
-                          ? '#2f8f68'
-                          : item?.rating ===
-                            'Baik'
-                            ? '#4f8e70'
-                            : item?.rating ===
-                              'Sederhana'
-                              ? '#c58a2a'
-                              : item?.rating
-                              ? '#c85e50'
-                              : '#9aa5b4',
+                        TRAINING_RATING_TEXT_COLORS[item?.rating] || '#9aa5b4',
                       whiteSpace:
                         'nowrap',
                     }}
@@ -2170,15 +2149,7 @@ const equipmentSummary = useMemo(() => {
                                     width: `${width}%`,
                                     borderRadius: '999px',
                                     background:
-                                      item.value === 'A'
-                                        ? '#2f8f68'
-                                        : item.value === 'B'
-                                        ? '#5d718c'
-                                        : item.value === 'C'
-                                        ? '#d2872c'
-                                        : item.value === 'D'
-                                        ? '#d47a43'
-                                        : '#c95c5c',
+                                      ATHLETE_STATUS_COLORS[item.value] || '#c9c7be',
                                   }}
                                 />
                               </div>

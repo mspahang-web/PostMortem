@@ -43,3 +43,21 @@ export const TRAINING_COMPONENTS = [
   { id: 'pemulihan', title: 'Pemulihan' },
   { id: 'sainsSukan', title: 'Sains sukan' },
 ]
+
+// Rating colours (validated with the dataviz palette script on white):
+// Sangat Baik green, Baik blue, Sederhana yellow, Lemah red. Every bar
+// also carries its rating as text, so colour is never the only cue.
+export const TRAINING_RATING_COLORS = {
+  'Sangat Baik': '#22c55e',
+  Baik: '#2563eb',
+  Sederhana: '#ca8a04',
+  Lemah: '#b91c1c',
+}
+
+// Darker shades of the same hues for rating text on white.
+export const TRAINING_RATING_TEXT_COLORS = {
+  'Sangat Baik': '#15803d',
+  Baik: '#1d4ed8',
+  Sederhana: '#a16207',
+  Lemah: '#b91c1c',
+}

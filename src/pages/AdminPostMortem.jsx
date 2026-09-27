@@ -4,7 +4,9 @@ import { getSportName } from '../lib/sports'
 import { getSection3Totals } from '../lib/medals'
 import {
   TRAINING_MAX_SCORE,
+  TRAINING_RATING_COLORS,
   TRAINING_RATING_SCORE,
+  TRAINING_RATING_TEXT_COLORS,
   getTrainingComponents,
 } from '../lib/training'
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
@@ -2317,10 +2319,14 @@ const handleMarkReviewed = async () => {
 
 
 
-                                    <small>
-
+                                    <small
+                                      style={{
+                                        color:
+                                          TRAINING_RATING_TEXT_COLORS[item.label] || undefined,
+                                        fontWeight: 700,
+                                      }}
+                                    >
                                       {item.label}
-
                                     </small>
 
 
@@ -2338,17 +2344,14 @@ const handleMarkReviewed = async () => {
                                     <div
 
                                       className="training-rating-fill"
-
                                       style={{
-
                                         width: `${
-
                                           (item.rating /
                                             TRAINING_MAX_SCORE) *
                                           100
-
                                         }%`,
-
+                                        background:
+                                          TRAINING_RATING_COLORS[item.label] || undefined,
                                       }}
 
                                     />

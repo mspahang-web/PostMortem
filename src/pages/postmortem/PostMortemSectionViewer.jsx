@@ -47,6 +47,10 @@ const getRatingClass = (value) => {
     return 'rating-poor'
   }
 
+  if (rating === 'lemah') {
+    return 'rating-poor'
+  }
+
   return ''
 }
 
