@@ -12,7 +12,7 @@ import {
 import PostMortemSectionViewer from './postmortem/PostMortemSectionViewer'
 import PageHero from '../components/PageHero'
 import ImportExcelModal from '../components/ImportExcelModal'
-import { ReportEquipmentPanel, ReportFinancePanel } from '../components/ReportExtrasPanels'
+import { ReportContingentMedalsPanel, ReportEquipmentPanel, ReportFinancePanel } from '../components/ReportExtrasPanels'
 
 function AdminPostMortem({
 
@@ -2765,7 +2765,7 @@ const handleMarkReviewed = async () => {
 
 
 
-                    {/* PERALATAN & KEWANGAN SUKAN INI */}
+                    {/* PERALATAN, KEWANGAN & PINGAT KONTINJEN SUKAN INI */}
 
                     <ReportEquipmentPanel
                       sport={selectedReport.sport}
@@ -2773,6 +2773,10 @@ const handleMarkReviewed = async () => {
 
                     <ReportFinancePanel
                       financeData={selectedReport.finance_data}
+                    />
+
+                    <ReportContingentMedalsPanel
+                      reportId={selectedReport.id}
                     />
 
                   </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Equipment2028 from './Equipment2028'
 import UserFinance from './UserFinance'
+import UserContingentMedals from './UserContingentMedals'
 import PostMortem from './postmortem/PostMortem'
 import UserLayout from '../components/UserLayout'
 import PageHero from '../components/PageHero'
@@ -19,7 +20,7 @@ function UserDashboard({
   const [report, setReport] = useState(null)
   const [loadingReport, setLoadingReport] = useState(true)
   const [reportLoadError, setReportLoadError] = useState(false)
-  // dashboard | postmortem | equipment | finance
+  // dashboard | postmortem | equipment | finance | medals
   const [view, setView] = useState('dashboard')
 
   const loadReportStatus = async () => {
@@ -244,7 +245,7 @@ function UserDashboard({
   // ==========================================
 
 const layoutClassName =
-  view === 'equipment' || view === 'finance'
+  view === 'equipment' || view === 'finance' || view === 'medals'
     ? 'equipment-page equipment-applicant'
     : ''
 
@@ -267,6 +268,13 @@ if (view === 'postmortem') {
 } else if (view === 'finance') {
   content = (
     <UserFinance
+      userProfile={userProfile}
+      onBack={backToDashboard}
+    />
+  )
+} else if (view === 'medals') {
+  content = (
+    <UserContingentMedals
       userProfile={userProfile}
       onBack={backToDashboard}
     />
@@ -620,6 +628,37 @@ if (content) {
                   <p>
                     Masukkan kelulusan perbelanjaan sukan anda
                     bagi tempoh 2023–2024 dan 2025–2026.
+                  </p>
+
+                </div>
+
+                <span className="module-arrow">
+                  →
+                </span>
+
+              </button>
+
+
+              {/* PINGAT KONTINJEN */}
+
+              <button
+                className="ewcc-module-card"
+                onClick={() => setView('medals')}
+              >
+
+                <div className="module-icon module-orange">
+                  🏅
+                </div>
+
+                <div className="module-content">
+
+                  <h3>
+                    Pencapaian Pingat Kontinjen
+                  </h3>
+
+                  <p>
+                    Masukkan jadual pingat semua kontinjen
+                    bagi SUKMA / PARA SUKMA 2026 dan 2024.
                   </p>
 
                 </div>

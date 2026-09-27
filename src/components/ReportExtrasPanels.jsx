@@ -1,5 +1,6 @@
 // Extra cards on the admin report page so the whole sport can be read in
-// one place: its Cadangan Peralatan 2028 and its finance comparison.
+// one place: its Cadangan Peralatan 2028, its finance comparison and its
+// contingent medal table.
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getEquipmentAmount } from '../lib/equipment'
@@ -11,6 +12,15 @@ import {
   formatPercent,
   normaliseFinanceData,
 } from '../lib/finance'
+import {
+  HOME_CONTINGENT,
+  MEDAL_EDITIONS,
+  MEDAL_KINDS,
+  hasContingentMedalData,
+  normaliseContingentMedals,
+  rankContingents,
+} from '../lib/contingentMedals'
+import '../styles/ContingentMedals.css'
 
 const PRIORITY_CLASS = {
   Tinggi: 'high',
@@ -216,6 +226,170 @@ export function ReportFinancePanel({ financeData }) {
             </strong>
           </p>
         </div>
+      )}
+    </div>
+  )
+}
+
+const rankClass = (row) =>
+  row.rank <= 3 && row.jumlah > 0 ? `top-${row.rank}` : ''
+
+// Loaded on its own (not with the report list) so the report page keeps
+// working even before the contingent_medals column is added.
+export function ReportContingentMedalsPanel({ reportId }) {
+  const [loaded, setLoaded] = useState(null)
+
+  useEffect(() => {
+    if (!reportId) return undefined
+
+    let active = true
+
+    supabase
+      .from('postmortem_reports')
+      .select('contingent_medals')
+      .eq('id', reportId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) console.error('LOAD REPORT CONTINGENT MEDALS ERROR:', error)
+        setLoaded({ reportId, data: data?.contingent_medals, error: Boolean(error) })
+      })
+
+    return () => {
+      active = false
+    }
+  }, [reportId])
+
+  const isLoading = Boolean(reportId) && loaded?.reportId !== reportId
+  const failed = loaded?.reportId === reportId && loaded.error
+  const medals = normaliseContingentMedals(
+    loaded?.reportId === reportId ? loaded.data : null
+  )
+  const hasData = hasContingentMedalData(medals)
+
+  const editions = MEDAL_EDITIONS.map((edition) => {
+    const standings = rankContingents(medals[edition.key])
+
+    return {
+      ...edition,
+      standings,
+      home: standings.find((row) => row.name === HOME_CONTINGENT),
+      records: standings.filter((row) => row.rekod),
+    }
+  })
+
+  const current = editions[0]
+
+  return (
+    <div className="postmortem-overview-panel report-extra-panel">
+      <PanelHeader
+        kicker={`PINGAT KONTINJEN · ${medals.kejohanan}`}
+        title="Pencapaian Pingat Kontinjen"
+        badge={
+          hasData && current.home.jumlah > 0
+            ? `Pahang #${current.home.rank} · ${medals.kejohanan} ${current.label}`
+            : null
+        }
+      />
+
+      {isLoading ? (
+        <div className="overview-empty">Memuatkan pencapaian pingat...</div>
+      ) : failed ? (
+        <div className="overview-empty">Pencapaian pingat kontinjen tidak dapat dimuatkan.</div>
+      ) : !hasData ? (
+        <div className="overview-empty">Sukan ini belum mengisi pencapaian pingat kontinjen.</div>
+      ) : (
+        <>
+          <div className="cm-report-summary">
+            {editions.map((edition, index) => (
+              <div
+                key={edition.key}
+                className={`cm-summary-card ${index > 0 ? 'previous' : ''}`}
+              >
+                <div className="cm-summary-rank">
+                  <small>Kedudukan</small>
+                  <strong>{edition.home.jumlah > 0 ? `#${edition.home.rank}` : '-'}</strong>
+                </div>
+
+                <div className="cm-summary-body">
+                  <span>PAHANG · {medals.kejohanan} {edition.label}</span>
+
+                  <div className="cm-summary-medals">
+                    <b className="emas">🥇 {edition.home.emas} Emas</b>
+                    <b className="perak">🥈 {edition.home.perak} Perak</b>
+                    <b className="gangsa">🥉 {edition.home.gangsa} Gangsa</b>
+                    <b className="jumlah">Jumlah {edition.home.jumlah}</b>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="cm-report-tables">
+            {editions.map((edition) => (
+              <div key={edition.key} className="cm-report-block">
+                <h4>PENCAPAIAN PINGAT KONTINJEN {medals.kejohanan} {edition.label}</h4>
+
+                <div className="cm-table-scroll">
+                  <table className="cm-table">
+                    <thead>
+                      <tr>
+                        <th className="cm-col-no">Bil.</th>
+                        <th>Negeri</th>
+                        {MEDAL_KINDS.map((kind) => (
+                          <th key={kind.key} className="cm-col-medal">
+                            <span className={`cm-medal-dot ${kind.key}`} />
+                            {kind.label}
+                          </th>
+                        ))}
+                        <th className="cm-col-num">Jumlah</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {edition.standings.map((row) => (
+                        <tr
+                          key={row.name}
+                          className={`${row.name === HOME_CONTINGENT ? 'cm-home' : ''} ${row.jumlah === 0 ? 'cm-none' : ''}`}
+                        >
+                          <td className="cm-col-no">
+                            <span className={`cm-rank ${rankClass(row)}`}>
+                              {row.rank}
+                            </span>
+                          </td>
+                          <td className="cm-name">{row.name}</td>
+                          {MEDAL_KINDS.map((kind) => (
+                            <td key={kind.key} className="cm-col-medal">
+                              <span className={`cm-medal-count ${row[kind.key] ? kind.key : 'zero'}`}>
+                                {row[kind.key]}
+                              </span>
+                            </td>
+                          ))}
+                          <td className="cm-col-num">
+                            <strong>{row.jumlah}</strong>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {edition.records.length > 0 && (
+                  <div className="cm-report-records">
+                    <strong>Rekod {edition.label}</strong>
+                    <ul>
+                      {edition.records.map((row) => (
+                        <li key={row.name}>
+                          <b>{row.name}:</b> {row.rekod}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   )

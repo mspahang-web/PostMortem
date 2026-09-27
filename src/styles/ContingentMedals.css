@@ -1,0 +1,557 @@
+/* Pencapaian Pingat Kontinjen: the sport-user form
+   (pages/UserContingentMedals.jsx) and the admin report card
+   (components/ReportExtrasPanels.jsx). */
+
+:root {
+  --cm-gold: #d4a017;
+  --cm-gold-soft: #fef6d8;
+  --cm-silver: #8a94a6;
+  --cm-silver-soft: #eef1f5;
+  --cm-bronze: #b8692e;
+  --cm-bronze-soft: #fbeadc;
+  --cm-home: #fff4ea;
+  --cm-home-edge: #f28c28;
+  --cm-line: #e5e7eb;
+  --cm-ink: #111827;
+}
+
+/* ---------- Alert ---------- */
+
+.cm-alert {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 14px 18px;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #dc2626;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #7f1d1d;
+  font-size: 13px;
+}
+
+/* ---------- Toolbar ---------- */
+
+.cm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  padding: 0 0 18px;
+}
+
+.cm-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cm-toolbar-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--cm-ink);
+}
+
+.cm-segment {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  gap: 4px;
+}
+
+.cm-segment button {
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--cm-ink);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.cm-segment button:hover {
+  background: #e2e8f0;
+}
+
+.cm-segment button.active {
+  background: #ffffff;
+  color: #c2410c;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.14);
+}
+
+/* ---------- Layout ---------- */
+
+.cm-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  padding: 0;
+  align-items: start;
+}
+
+.cm-table-card {
+  min-width: 0;
+}
+
+.cm-table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--cm-line);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.cm-empty {
+  padding: 50px;
+  text-align: center;
+  color: var(--cm-ink);
+}
+
+.cm-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 0 0;
+}
+
+.cm-hint {
+  margin: 10px 2px 0;
+  font-size: 12px;
+  color: var(--cm-ink);
+}
+
+/* ---------- Table ---------- */
+
+.cm-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: var(--cm-ink);
+}
+
+.cm-table thead th {
+  position: sticky;
+  top: 0;
+  padding: 12px 10px;
+  background: linear-gradient(180deg, #1e3a5f, #172e4d);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cm-table td {
+  padding: 7px 10px;
+  border-top: 1px solid var(--cm-line);
+  vertical-align: middle;
+}
+
+.cm-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.cm-table .cm-col-no {
+  width: 44px;
+  text-align: center;
+}
+
+.cm-table .cm-col-medal {
+  width: 96px;
+  text-align: center;
+}
+
+.cm-table .cm-col-num {
+  width: 84px;
+  text-align: center;
+}
+
+.cm-name {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cm-home-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--cm-home-edge);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+
+.cm-table tr.cm-home td {
+  background: var(--cm-home);
+}
+
+.cm-table tr.cm-home td:first-child {
+  box-shadow: inset 4px 0 0 var(--cm-home-edge);
+}
+
+.cm-table tfoot td {
+  padding: 11px 10px;
+  border-top: 2px solid #cbd5e1;
+  background: #f8fafc;
+  font-weight: 800;
+}
+
+.cm-medal-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: -1px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.cm-medal-dot.emas { background: var(--cm-gold); }
+.cm-medal-dot.perak { background: #c8ced8; }
+.cm-medal-dot.gangsa { background: var(--cm-bronze); }
+
+/* ---------- Inputs ---------- */
+
+.cm-input {
+  width: 100%;
+  max-width: 78px;
+  min-height: 36px;
+  box-sizing: border-box;
+  border: 1px solid #d9e1ea;
+  border-radius: 9px;
+  padding: 0 6px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--cm-ink);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cm-input.emas { background: var(--cm-gold-soft); }
+.cm-input.perak { background: var(--cm-silver-soft); }
+.cm-input.gangsa { background: var(--cm-bronze-soft); }
+
+.cm-input:focus,
+.cm-record:focus {
+  border-color: #f28c28;
+  box-shadow: 0 0 0 3px rgba(242, 140, 40, 0.16);
+}
+
+.cm-record {
+  width: 100%;
+  min-width: 200px;
+  min-height: 36px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #d9e1ea;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--cm-ink);
+  outline: none;
+  background: #ffffff;
+}
+
+/* ---------- Rank badge ---------- */
+
+.cm-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--cm-ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cm-rank.top-1 { background: var(--cm-gold); color: #ffffff; }
+.cm-rank.top-2 { background: var(--cm-silver); color: #ffffff; }
+.cm-rank.top-3 { background: var(--cm-bronze); color: #ffffff; }
+
+/* ---------- Live standings ---------- */
+
+.cm-standings {
+  position: sticky;
+  top: 16px;
+  overflow: hidden;
+  border: 1px solid var(--cm-line);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.cm-standings-head {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #f28c28, #e85d16);
+  color: #ffffff;
+}
+
+.cm-standings-head span {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.cm-standings-head strong {
+  font-size: 16px;
+}
+
+.cm-standings ol {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+}
+
+.cm-standings li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--cm-ink);
+}
+
+.cm-standings li.cm-home {
+  background: var(--cm-home);
+  box-shadow: inset 3px 0 0 var(--cm-home-edge);
+  font-weight: 800;
+}
+
+.cm-standings li.cm-none {
+  opacity: 0.55;
+}
+
+.cm-standings .cm-rank {
+  min-width: 24px;
+  height: 24px;
+  font-size: 11px;
+}
+
+.cm-standings-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.cm-pills {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cm-pills b {
+  min-width: 22px;
+  padding: 2px 5px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.cm-pills .emas { background: var(--cm-gold-soft); color: #8a6100; }
+.cm-pills .perak { background: var(--cm-silver-soft); color: #374151; }
+.cm-pills .gangsa { background: var(--cm-bronze-soft); color: #8a4414; }
+
+.cm-change.up { color: #15803d; }
+.cm-change.down { color: #b91c1c; }
+
+@media (max-width: 1400px) {
+  .cm-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cm-standings {
+    position: static;
+  }
+}
+
+/* =========================================================
+   ADMIN REPORT CARD
+   ========================================================= */
+
+.cm-report-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.cm-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fff7ed, #ffffff 70%);
+}
+
+.cm-summary-card.previous {
+  border-color: #dbe3ee;
+  background: linear-gradient(135deg, #f1f5f9, #ffffff 70%);
+}
+
+.cm-summary-rank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #e85d16;
+  color: #ffffff;
+}
+
+.cm-summary-card.previous .cm-summary-rank {
+  background: #1e3a5f;
+}
+
+.cm-summary-rank small {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.cm-summary-rank strong {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.cm-summary-body {
+  min-width: 0;
+  color: var(--cm-ink);
+}
+
+.cm-summary-body > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.cm-summary-medals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cm-summary-medals b {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.cm-summary-medals .emas { background: var(--cm-gold-soft); color: #8a6100; }
+.cm-summary-medals .perak { background: var(--cm-silver-soft); color: #374151; }
+.cm-summary-medals .gangsa { background: var(--cm-bronze-soft); color: #8a4414; }
+.cm-summary-medals .jumlah { background: #f1f5f9; color: var(--cm-ink); }
+
+.cm-report-tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cm-report-block h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--cm-ink);
+}
+
+.cm-report-block .cm-table {
+  min-width: 460px;
+}
+
+.cm-report-block .cm-table td {
+  padding: 8px 10px;
+}
+
+.cm-report-block .cm-table .cm-col-medal {
+  width: 64px;
+}
+
+.cm-report-block .cm-table .cm-col-num {
+  width: 60px;
+}
+
+.cm-report-block tr.cm-none td {
+  color: #6b7280;
+}
+
+.cm-medal-count {
+  display: inline-block;
+  min-width: 30px;
+  padding: 3px 6px;
+  border-radius: 7px;
+  font-weight: 800;
+}
+
+.cm-medal-count.emas { background: var(--cm-gold-soft); color: #8a6100; }
+.cm-medal-count.perak { background: var(--cm-silver-soft); color: #374151; }
+.cm-medal-count.gangsa { background: var(--cm-bronze-soft); color: #8a4414; }
+.cm-medal-count.zero { background: transparent; color: #9ca3af; font-weight: 600; }
+
+.cm-report-records {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px dashed #fdba74;
+  border-radius: 12px;
+  background: #fffbf5;
+  color: var(--cm-ink);
+  font-size: 13px;
+}
+
+.cm-report-records strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.cm-report-records ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.cm-report-records li + li {
+  margin-top: 4px;
+}
+
+@media (max-width: 1100px) {
+  .cm-report-summary,
+  .cm-report-tables {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

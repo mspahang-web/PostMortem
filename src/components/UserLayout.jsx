@@ -8,6 +8,7 @@ const USER_MENU = [
   { key: 'postmortem', icon: '▤', label: 'Post-Mortem' },
   { key: 'equipment', icon: '⚙', label: 'Peralatan 2028' },
   { key: 'finance', icon: 'RM', label: 'Kewangan' },
+  { key: 'medals', icon: '🏅', label: 'Pingat Kontinjen' },
 ]
 
 export default function UserLayout({
